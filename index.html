@@ -6,7 +6,7 @@
   <title>Swire RGM Assessment Portal</title>
   <meta
     name="description"
-    content="A premium red, white, and silver portal that explains the Swire RGM assessment architecture, operating logic, questionnaire, and results."
+    content="A shorter, more visual home for the Swire RGM assessment portal with a clearer model, logic, and entry into the assessment."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,669 +17,245 @@
   <link rel="stylesheet" href="./assets/css/styles.css" />
   <script src="./assets/js/site-config.js"></script>
 </head>
-<body>
+<body class="page-home">
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="#hero">
+      <a class="brand" href="./index.html">
         <span class="brand-mark">S</span>
         <span class="brand-copy">
           <strong>Swire Coca-Cola</strong>
           <span>RGM Enterprise Assessment Portal</span>
         </span>
       </a>
+
       <nav class="topnav" aria-label="Primary">
-        <a href="#overview">Purpose</a>
-        <a href="#framework">Model</a>
-        <a href="#logic">Logic</a>
-        <a href="#assessment">Assessment</a>
-        <a href="#results">Results</a>
+        <a href="./index.html" aria-current="page">Home</a>
+        <a href="./framework.html">Framework</a>
+        <a href="./logic.html">Logic</a>
+        <a href="./assessment.html">Assessment</a>
       </nav>
-      <a class="button button-primary topbar-cta" href="#assessment">Start Assessment</a>
+
+      <a class="button button-primary topbar-cta" href="./assessment.html#questionnaire">Start Assessment</a>
     </div>
   </header>
 
   <main class="site-shell">
-    <section id="hero" class="hero">
+    <section class="hero-home">
       <div class="hero-copy">
-        <p class="eyebrow">Swire Coca-Cola RGM Enterprise Assessment</p>
-        <h1>A clearer view of how RGM capability turns into profitable growth.</h1>
+        <p class="eyebrow">Enterprise Revenue Growth Management</p>
+        <h1>See the assessment model in a single glance.</h1>
         <p class="hero-lede">
-          This portal explains the assessment model, converts the maturity workbook into an online
-          experience, and turns answers into an immediate view of gaps, priorities, and operating actions.
+          This portal explains the Swire RGM assessment, shows how the scoring logic works,
+          and turns the workbook into a cleaner digital experience for respondents and reviewers.
         </p>
 
         <div class="hero-actions">
-          <a class="button button-primary" href="#assessment">Launch Questionnaire</a>
-          <a class="button button-secondary" href="#framework">Explore Assessment Model</a>
+          <a class="button button-primary" href="./assessment.html#questionnaire">Launch Assessment</a>
+          <a class="button button-secondary" href="./framework.html">Explore the Model</a>
         </div>
 
-        <div class="hero-proofline">
-          <span class="proof-pill">Enterprise methodology</span>
-          <span class="proof-pill">Evidence-backed maturity scoring</span>
-          <span class="proof-pill">Live dashboard interpretation</span>
-        </div>
-
-        <div class="hero-stats">
-          <article class="hero-stat">
-            <span class="hero-stat-label">Pillars</span>
+        <div class="stat-strip">
+          <article class="stat-card">
+            <span>Pillars</span>
             <strong id="hero-pillar-count">4</strong>
-            <p>Core business levers being assessed</p>
+            <p>Core business levers</p>
           </article>
-          <article class="hero-stat">
-            <span class="hero-stat-label">Stages</span>
+          <article class="stat-card">
+            <span>Stages</span>
             <strong id="hero-stage-count">5</strong>
-            <p>Common capability progression from diagnosis to sustainability</p>
+            <p>Shared capability flow</p>
           </article>
-          <article class="hero-stat">
-            <span class="hero-stat-label">Questions</span>
+          <article class="stat-card">
+            <span>Questions</span>
             <strong id="hero-question-count">48</strong>
-            <p>Core maturity questions across the four pillar modules</p>
+            <p>Core maturity questions</p>
           </article>
-          <article class="hero-stat">
-            <span class="hero-stat-label">Enablers</span>
+          <article class="stat-card">
+            <span>Enablers</span>
             <strong id="hero-enabler-count">4</strong>
-            <p>Cross-cutting conditions required to sustain improvement</p>
+            <p>Sustainability conditions</p>
           </article>
         </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
+      <div class="hero-visual">
         <div class="hero-window">
           <div class="window-chrome">
             <span></span>
             <span></span>
             <span></span>
           </div>
+
           <div class="window-body">
             <div class="window-scorecard">
               <span>Management Question</span>
-              <strong>Where does the operating chain break?</strong>
-              <p>Read maturity by pillar, by stage, and by enabling system.</p>
+              <strong>Where is RGM capability strong enough to scale, and where is it breaking?</strong>
+              <p>Read answers through one model, three views, and a clear priority logic.</p>
             </div>
 
             <div class="window-model">
               <div class="window-layer">
                 <div class="window-layer-head">
-                  <span>4 Pillars</span>
-                  <strong>Business levers</strong>
+                  <span>Layer 1</span>
+                  <strong>Business pillars</strong>
                 </div>
                 <div id="hero-pillar-stack" class="hero-chip-row"></div>
               </div>
 
               <div class="window-layer window-layer-stage">
                 <div class="window-layer-head">
-                  <span>5 Stages</span>
-                  <strong>Capability flow</strong>
+                  <span>Layer 2</span>
+                  <strong>Capability stages</strong>
                 </div>
                 <div id="hero-stage-track" class="hero-stage-track"></div>
               </div>
 
               <div class="window-layer">
                 <div class="window-layer-head">
-                  <span>4 Enablers</span>
-                  <strong>Sustainability conditions</strong>
+                  <span>Layer 3</span>
+                  <strong>Cross-cutting enablers</strong>
                 </div>
-                <div id="hero-enabler-stack" class="hero-chip-row hero-chip-row-silver"></div>
+                <div id="hero-enabler-stack" class="hero-chip-row"></div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <article class="hero-aside-card">
-          <span>Assessment Output</span>
-          <strong>Scoring, gap to target, and priority index</strong>
-          <p>Built to move from evidence-backed answers to a clear roadmap for action.</p>
+    <section class="panel">
+      <div class="section-head compact-head">
+        <div>
+          <p class="eyebrow">Why It Matters</p>
+          <h2>Less like a survey. More like a management instrument.</h2>
+        </div>
+      </div>
+
+      <div class="icon-grid icon-grid-3">
+        <article class="icon-card">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 18h16M7 15l4-4 3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Show where value creation is blocked</h3>
+          <p>Separate business performance symptoms from capability maturity causes.</p>
+        </article>
+
+        <article class="icon-card">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="5" width="16" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 9h8M8 13h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Make the model understandable</h3>
+          <p>Turn a large workbook into a clearer architecture, flow, and scoring story.</p>
+        </article>
+
+        <article class="icon-card">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 17h12M8 13h8M10 9h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="18" cy="17" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </span>
+          <h3>Move directly into action</h3>
+          <p>Translate answers into gap-to-target logic and a ranked priority list.</p>
         </article>
       </div>
     </section>
 
-    <section id="overview" class="story-grid">
-      <article class="panel story-panel story-panel-primary">
-        <p class="eyebrow">Why This Exists</p>
-        <h2>One enterprise assessment that explains both maturity and management action.</h2>
-        <p class="story-copy">
-          The methodology deck, workbook, and assessment manual all point to one executive question:
-          can each market systematically convert RGM opportunity into sustained value creation?
-        </p>
-        <ul class="purpose-list">
-          <li>Connect market assessment to strategic ambition and profitable growth.</li>
-          <li>Separate business performance diagnosis from capability maturity diagnosis.</li>
-          <li>Expose whether the bottleneck sits in insight, strategy, policy, execution, or sustainability.</li>
-          <li>Create a repeatable cycle for reassessment, calibration, and action planning.</li>
-        </ul>
-      </article>
-
-      <article class="panel story-panel">
-        <p class="eyebrow">What This Portal Delivers</p>
-        <h2>A guided digital product, not just a transferred spreadsheet.</h2>
-        <div class="signal-grid">
-          <article class="signal-tile">
-            <strong>Purpose and architecture</strong>
-            <p>Explain why the assessment exists, what it measures, and how the scoring logic is structured.</p>
-          </article>
-          <article class="signal-tile">
-            <strong>Guided assessment flow</strong>
-            <p>Turn the workbook into a cleaner respondent experience organized by pillar and capability stage.</p>
-          </article>
-          <article class="signal-tile">
-            <strong>Interpretation by lens</strong>
-            <p>Show live maturity views by pillar, stage, and enabler so results are immediately actionable.</p>
-          </article>
-          <article class="signal-tile">
-            <strong>Operational follow-through</strong>
-            <p>Store every submitted session and rebuild a lightweight assessment history through Google Sheets.</p>
-          </article>
-        </div>
-      </article>
-    </section>
-
-    <section class="panel panel-large">
-      <div class="section-head">
+    <section class="panel">
+      <div class="section-head compact-head">
         <div>
-          <p class="eyebrow">Executive Readout</p>
-          <h2>The assessment is designed to make three things visible.</h2>
+          <p class="eyebrow">Three Short Paths</p>
+          <h2>Use the site the same way a leadership team would.</h2>
         </div>
-        <p class="section-copy">
-          It should tell leadership where value creation is blocked, what type of operating weakness is driving the issue,
-          and which changes deserve priority before the next cycle.
-        </p>
       </div>
 
-      <div class="outcome-grid">
-        <article class="outcome-item">
+      <div class="route-grid">
+        <a class="route-card" href="./framework.html">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="5" width="6" height="6" rx="1.7" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <rect x="14" y="5" width="6" height="6" rx="1.7" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <rect x="9" y="14" width="6" height="6" rx="1.7" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </span>
+          <h3>Understand the framework</h3>
+          <p>See the 4 pillars, 5 stages, 4 enablers, and operating cycle.</p>
+          <span class="route-link">Open Framework</span>
+        </a>
+
+        <a class="route-card" href="./logic.html">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h5M14 12h5M10 12l2-2 2 2-2 2-2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Understand the logic</h3>
+          <p>See how answers become scores, scores become gaps, and gaps become priorities.</p>
+          <span class="route-link">Open Logic</span>
+        </a>
+
+        <a class="route-card" href="./assessment.html">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 5h10a2 2 0 0 1 2 2v12l-3-2-3 2-3-2-3 2V7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M9 9h6M9 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Run the assessment</h3>
+          <p>Enter a market session, score the maturity anchors, and review live results.</p>
+          <span class="route-link">Open Assessment</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="panel panel-soft">
+      <div class="section-head compact-head">
+        <div>
+          <p class="eyebrow">How It Works</p>
+          <h2>One short operating chain from answer to priority.</h2>
+        </div>
+      </div>
+
+      <div class="flow-strip">
+        <article class="flow-step">
           <span>01</span>
-          <strong>Where to intervene</strong>
-          <p>See which pillar has the largest exposure and where the commercial model is weakest.</p>
+          <strong>Answer</strong>
+          <p>Score each question against maturity anchors.</p>
         </article>
-        <article class="outcome-item">
+        <article class="flow-step">
           <span>02</span>
-          <strong>Why it is breaking</strong>
-          <p>Read results by stage to understand whether the issue is diagnosis, strategy, policy, execution, or sustainability.</p>
+          <strong>Score</strong>
+          <p>Aggregate by pillar, stage, and enabler.</p>
         </article>
-        <article class="outcome-item">
+        <article class="flow-step">
           <span>03</span>
-          <strong>What to build next</strong>
-          <p>Read results by enabler to decide whether governance, digital tooling, people capability, or future readiness must improve.</p>
+          <strong>Compare</strong>
+          <p>Read actual maturity against target state.</p>
         </article>
-      </div>
-    </section>
-
-    <section id="framework" class="panel panel-large">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Assessment Model</p>
-          <h2>The architecture is built from three connected layers.</h2>
-        </div>
-        <p class="section-copy">
-          The portal keeps the original workbook logic intact while making the structure easier to understand visually.
-          Business levers sit on top, capability progression runs through the center, and enabling systems support the whole model.
-        </p>
-      </div>
-
-      <div class="framework-orchestrator">
-        <div class="framework-scene">
-          <article class="framework-band">
-            <span>Top Layer</span>
-            <strong>4 Core business pillars</strong>
-            <p>Each pillar measures a different route to value creation and commercial control.</p>
-          </article>
-          <div class="framework-divider">
-            <span>Assessment logic flows through the same maturity ladder</span>
-          </div>
-          <article class="framework-band framework-band-silver">
-            <span>Foundation Layer</span>
-            <strong>4 cross-cutting enablers</strong>
-            <p>Governance, digital support, people capability, and future readiness determine whether performance improvements can last.</p>
-          </article>
-        </div>
-
-        <div class="framework-layers">
-          <div class="framework-layer">
-            <div class="framework-layer-head">
-              <h3 class="section-subtitle">Pillar Layer</h3>
-              <p>Business levers where RGM capability is assessed directly.</p>
-            </div>
-            <div id="pillar-cards" class="pillar-grid"></div>
-          </div>
-
-          <div class="framework-layer">
-            <div class="framework-layer-head">
-              <h3 class="section-subtitle">Stage Layer</h3>
-              <p>The shared operating sequence that turns insight into sustained execution.</p>
-            </div>
-            <div id="stage-cards" class="stage-grid"></div>
-          </div>
-
-          <div class="framework-layer">
-            <div class="framework-layer-head">
-              <h3 class="section-subtitle">Enabler Layer</h3>
-              <p>Capabilities that support consistency, scalability, and future-readiness.</p>
-            </div>
-            <div id="enabler-cards" class="enabler-grid"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel panel-large">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Source Foundation</p>
-          <h2>Four reference models integrated into one Swire-specific design.</h2>
-        </div>
-      </div>
-      <div class="source-grid">
-        <article class="source-card">
-          <span>01</span>
-          <h3>RGM 2.0 playbook</h3>
-          <p>Provides the end-to-end profitable-growth logic and the backbone for the five-stage capability flow.</p>
-        </article>
-        <article class="source-card">
-          <span>02</span>
-          <h3>HK / TW online questionnaire</h3>
-          <p>Contributes detailed lever-level content and confidence or knowledge assessment concepts.</p>
-        </article>
-        <article class="source-card">
-          <span>03</span>
-          <h3>China enterprise certification</h3>
-          <p>Shapes the health-check lens, interview logic, recurring cycle, and calibration mindset.</p>
-        </article>
-        <article class="source-card">
+        <article class="flow-step">
           <span>04</span>
-          <h3>CDE E2E playbook</h3>
-          <p>Improves coherence through module, process, maturity progression, and improvement-path structure.</p>
+          <strong>Prioritize</strong>
+          <p>Rank weighted gaps for follow-through.</p>
         </article>
       </div>
     </section>
 
-    <section id="logic" class="panel panel-large logic-section">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Assessment Logic</p>
-          <h2>Answers become priorities through a very explicit scoring chain.</h2>
-        </div>
-        <p class="section-copy">
-          This should feel more like a management system than a survey. Each question feeds a score,
-          each score is read against a target, and each gap contributes to the final priority list.
+    <section class="cta-panel">
+      <div>
+        <p class="eyebrow">Ready To Use</p>
+        <h2>Start with the assessment, then use the other pages as decision support.</h2>
+        <p class="cta-copy">
+          The site is intentionally short at the top level. Framework and logic are separated, and the full working experience lives in the assessment page.
         </p>
       </div>
-
-      <div class="logic-flow">
-        <article class="logic-step">
-          <span>01</span>
-          <h3>Respond</h3>
-          <p>Complete the maturity questions by pillar and anchor each score with evidence notes or comments.</p>
-        </article>
-        <article class="logic-step">
-          <span>02</span>
-          <h3>Score</h3>
-          <p>Each answer is translated into a maturity score that rolls into pillar, stage, and enabler averages.</p>
-        </article>
-        <article class="logic-step">
-          <span>03</span>
-          <h3>Compare</h3>
-          <p>Actual maturity is read against target state so the system can show where the largest gaps sit.</p>
-        </article>
-        <article class="logic-step">
-          <span>04</span>
-          <h3>Prioritize</h3>
-          <p>Weighted gap-to-target logic produces a ranked list of issues that matter most for follow-through.</p>
-        </article>
-      </div>
-
-      <div class="logic-bottom">
-        <div>
-          <h3 class="section-subtitle">How Results Should Be Read</h3>
-          <div class="dashboard-logic">
-            <article>
-              <strong>By pillar</strong>
-              <p>Shows which business lever is most exposed across Pricing, OBPPC, Promotion Spend, and DFR / Trade Investment.</p>
-            </article>
-            <article>
-              <strong>By stage</strong>
-              <p>Shows whether the operating chain is weakest in diagnosis, strategy, policy, execution, or capability sustainability.</p>
-            </article>
-            <article>
-              <strong>By enabler</strong>
-              <p>Shows whether the fix is mainly about governance, digital support, people capability, or stronger forward planning.</p>
-            </article>
-          </div>
-        </div>
-
-        <aside class="logic-callout">
-          <p class="eyebrow">Decision Principle</p>
-          <h3>Not every low score becomes a top priority.</h3>
-          <p>
-            Priority is driven by weighted maturity gap to target, so the portal highlights where shortfalls are both meaningful
-            and strategically important instead of simply listing every weak answer.
-          </p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="panel panel-large cycle-panel">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Operating Cycle</p>
-          <h2>Designed as a recurring management rhythm, not a one-off survey.</h2>
-        </div>
-        <p class="section-copy">
-          The assessment is only useful if it can be repeated, calibrated, and translated into action. The cycle below shows how the tool fits into that broader operating model.
-        </p>
-      </div>
-
-      <div class="cycle-rail">
-        <article class="cycle-step">
-          <span>1</span>
-          <strong>Fact base and pre-read</strong>
-          <p>Build the market context and prepare evidence before self-scoring begins.</p>
-        </article>
-        <article class="cycle-step">
-          <span>2</span>
-          <strong>Market self-assessment</strong>
-          <p>Score the detailed pillar questions with evidence-backed maturity anchors.</p>
-        </article>
-        <article class="cycle-step">
-          <span>3</span>
-          <strong>Interview and validation</strong>
-          <p>Test whether the self-scores match actual decisions, routines, and governance quality.</p>
-        </article>
-        <article class="cycle-step">
-          <span>4</span>
-          <strong>Calibration</strong>
-          <p>Moderate scores, align evidence standards, and confirm the final maturity picture.</p>
-        </article>
-        <article class="cycle-step">
-          <span>5</span>
-          <strong>Report and roadmap</strong>
-          <p>Translate the dashboard into priorities, ownership, and an action roadmap.</p>
-        </article>
-        <article class="cycle-step">
-          <span>6</span>
-          <strong>Pulse and follow-up</strong>
-          <p>Use lighter annual reviews and quarterly tracking to keep progress visible between full cycles.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="assessment" class="assessment-section">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Assessment Experience</p>
-          <h2>Complete the core maturity assessment online.</h2>
-        </div>
-        <p class="section-copy">
-          This release covers the four pillar sheets that feed the main dashboard. The experience is designed
-          to make a long enterprise questionnaire feel structured, guided, and reviewable.
-        </p>
-      </div>
-
-      <div class="assessment-intro-grid">
-        <article class="assessment-intro-card">
-          <span>01</span>
-          <strong>Set context</strong>
-          <p>Capture market, role, business unit, and cycle details before scoring starts.</p>
-        </article>
-        <article class="assessment-intro-card">
-          <span>02</span>
-          <strong>Score by pillar</strong>
-          <p>Move through Pricing, OBPPC, Promotion Spend, and DFR / Trade Investment with stage grouping preserved.</p>
-        </article>
-        <article class="assessment-intro-card">
-          <span>03</span>
-          <strong>Read live results</strong>
-          <p>See the dashboard build in real time so respondents understand the implications of their answers.</p>
-        </article>
-        <article class="assessment-intro-card">
-          <span>04</span>
-          <strong>Submit and record</strong>
-          <p>Send the completed session to Google Sheets for follow-up, calibration, and longitudinal tracking.</p>
-        </article>
-      </div>
-
-      <div class="assessment-layout">
-        <aside class="panel assessment-sidebar">
-          <div class="sidebar-block">
-            <p class="eyebrow">Respondent Setup</p>
-            <h3>Assessment session details</h3>
-            <form id="respondent-form" class="meta-form">
-              <label>
-                <span>Market</span>
-                <input type="text" name="market" placeholder="e.g. Hong Kong" />
-              </label>
-              <label>
-                <span>Cluster</span>
-                <input type="text" name="cluster" placeholder="e.g. Greater China" />
-              </label>
-              <label>
-                <span>Business Unit</span>
-                <input type="text" name="businessUnit" placeholder="e.g. RGM / Commercial" />
-              </label>
-              <label>
-                <span>Respondent Name</span>
-                <input type="text" name="respondentName" placeholder="Full name" />
-              </label>
-              <label>
-                <span>Email</span>
-                <input type="email" name="respondentEmail" placeholder="name@company.com" />
-              </label>
-              <label>
-                <span>Role</span>
-                <input type="text" name="role" placeholder="e.g. Market RGM Lead" />
-              </label>
-              <label>
-                <span>Assessment Cycle</span>
-                <input type="text" name="assessmentCycle" placeholder="e.g. 2026 Full Assessment" />
-              </label>
-            </form>
-          </div>
-
-          <div class="sidebar-block">
-            <p class="eyebrow">Pillar Navigation</p>
-            <div id="questionnaire-nav" class="pillar-nav" aria-label="Assessment pillars"></div>
-          </div>
-
-          <div class="sidebar-block">
-            <p class="eyebrow">Session Controls</p>
-            <div class="sidebar-actions">
-              <button id="save-draft" class="button button-secondary" type="button">Save Draft</button>
-              <button id="download-json" class="button button-secondary" type="button">Download JSON</button>
-              <button id="reset-assessment" class="button button-ghost" type="button">Reset All</button>
-              <button id="submit-assessment" class="button button-primary" type="button">Submit Assessment</button>
-            </div>
-            <div id="save-status" class="status-panel">Draft storage is ready.</div>
-          </div>
-        </aside>
-
-        <div class="panel assessment-main">
-          <div class="assessment-main-head">
-            <div>
-              <p class="eyebrow">Questionnaire Flow</p>
-              <h3 id="current-pillar-title">Loading assessment...</h3>
-              <p id="current-pillar-description" class="section-copy"></p>
-            </div>
-            <div class="progress-panel">
-              <div class="progress-stat">
-                <span>Answered</span>
-                <strong id="answered-count">0 / 48</strong>
-              </div>
-              <div class="progress-stat">
-                <span>Completion</span>
-                <strong id="completion-rate">0%</strong>
-              </div>
-            </div>
-          </div>
-
-          <div id="current-stage-summary" class="stage-summary"></div>
-          <div id="questionnaire-panels" class="question-list"></div>
-
-          <div class="assessment-footer-nav">
-            <button id="previous-pillar" class="button button-secondary" type="button">Previous Pillar</button>
-            <button id="next-pillar" class="button button-primary" type="button">Next Pillar</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="results" class="results-section">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Results Dashboard</p>
-          <h2>Live interpretation from the web assessment.</h2>
-        </div>
-        <p class="section-copy">
-          The dashboard is intended to move users from raw scores to a clear management conversation:
-          what is weak, why it is weak, and what should be prioritized next.
-        </p>
-      </div>
-
-      <div class="results-storyboard">
-        <article class="storyboard-card">
-          <span>Pillar view</span>
-          <strong>Which business lever is most exposed?</strong>
-          <p>Compare maturity across the four commercial pillars.</p>
-        </article>
-        <article class="storyboard-card">
-          <span>Stage view</span>
-          <strong>Where does the operating chain break?</strong>
-          <p>Read the shared capability sequence from diagnosis to sustainability.</p>
-        </article>
-        <article class="storyboard-card">
-          <span>Enabler view</span>
-          <strong>What must be strengthened to make progress stick?</strong>
-          <p>Interpret whether governance, tooling, people, or future planning is the real constraint.</p>
-        </article>
-      </div>
-
-      <div id="results-empty" class="panel results-empty">
-        Start filling the questionnaire to see the dashboard build in real time.
-      </div>
-
-      <div id="results-content" class="results-content" hidden>
-        <div id="results-summary" class="summary-grid"></div>
-
-        <div class="results-grid">
-          <article class="panel">
-            <div class="mini-head">
-              <h3>By Pillar</h3>
-              <p>Core business lever maturity</p>
-            </div>
-            <div id="pillar-results" class="metric-list"></div>
-          </article>
-
-          <article class="panel">
-            <div class="mini-head">
-              <h3>By Stage</h3>
-              <p>Where the operating chain breaks</p>
-            </div>
-            <div id="stage-results" class="metric-list"></div>
-          </article>
-
-          <article class="panel">
-            <div class="mini-head">
-              <h3>By Enabler</h3>
-              <p>What must be strengthened to sustain improvement</p>
-            </div>
-            <div id="enabler-results" class="metric-list"></div>
-          </article>
-        </div>
-
-        <article class="panel">
-          <div class="mini-head">
-            <h3>Priority List</h3>
-            <p>Weighted gap-to-target view for action planning</p>
-          </div>
-          <div class="table-wrap">
-            <table class="priority-table">
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Q Code</th>
-                  <th>Pillar</th>
-                  <th>Stage</th>
-                  <th>Enabler</th>
-                  <th>Score</th>
-                  <th>Target</th>
-                  <th>Priority Index</th>
-                </tr>
-              </thead>
-              <tbody id="priority-body"></tbody>
-            </table>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="admin" class="panel panel-large">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Delivery Architecture</p>
-          <h2>Simple web delivery in front, lightweight assessment logging behind.</h2>
-        </div>
-        <p class="section-copy">
-          The admin layer stays intentionally lightweight. GitHub Pages hosts the experience,
-          Apps Script handles submission, and Google Sheets becomes the working admin console.
-        </p>
-      </div>
-
-      <div class="admin-grid">
-        <article class="admin-card">
-          <strong>1. GitHub Pages</strong>
-          <p>Hosts the narrative site, assessment experience, scoring logic, and results dashboard.</p>
-        </article>
-        <article class="admin-card">
-          <strong>2. Apps Script web app</strong>
-          <p>Receives the browser submission payload and writes the structured output into Sheets.</p>
-        </article>
-        <article class="admin-card">
-          <strong>3. Google Sheets</strong>
-          <p>Acts as a lightweight admin environment for sessions, question responses, and priority outputs.</p>
-        </article>
-      </div>
-
-      <div class="sheet-schema">
-        <div>
-          <h3>Recommended sheet tabs</h3>
-          <ul class="detail-list">
-            <li><strong>Assessment_Sessions</strong>: one row per completed assessment with summary metrics.</li>
-            <li><strong>Assessment_Responses</strong>: one row per question response with score, evidence, and comment.</li>
-            <li><strong>Assessment_Priority</strong>: top priorities for each submitted session.</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Current release scope</h3>
-          <ul class="detail-list">
-            <li>Core maturity questionnaire from the four pillar sheets</li>
-            <li>Live scoring and result dashboard</li>
-            <li>Google Sheets logging pattern</li>
-            <li>Knowledge, interview, and case modules reserved for later expansion</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="endpoint-config">
-        <div>
-          <h3>Browser-side endpoint setup</h3>
-          <p>
-            Paste the deployed Google Apps Script Web App URL here to test submissions in this browser.
-            Once confirmed, you can also hard-code the same URL into <code>assets/js/site-config.js</code> for all users.
-          </p>
-        </div>
-        <div class="endpoint-form meta-form">
-          <label>
-            <span>Apps Script Web App URL</span>
-            <input
-              id="apps-script-url"
-              type="url"
-              placeholder="https://script.google.com/macros/s/DEPLOYMENT_ID/exec"
-            />
-          </label>
-          <div class="endpoint-actions">
-            <button id="save-endpoint" class="button button-primary" type="button">Save in this browser</button>
-            <button id="clear-endpoint" class="button button-secondary" type="button">Clear local endpoint</button>
-          </div>
-          <p id="endpoint-status" class="endpoint-status">No Apps Script endpoint configured yet.</p>
-        </div>
+      <div class="hero-actions">
+        <a class="button button-primary" href="./assessment.html#questionnaire">Go to Questionnaire</a>
+        <a class="button button-secondary" href="./logic.html">Review the Logic</a>
       </div>
     </section>
   </main>
@@ -688,11 +264,11 @@
     <div class="footer-inner">
       <div>
         <strong>Swire RGM Assessment Portal</strong>
-        <p>Professional web edition built from the methodology deck, workbook, and assessment manual.</p>
+        <p>Shorter pages, clearer model, and a more visual entry into the assessment.</p>
       </div>
       <div class="footer-actions">
-        <a class="button button-secondary" href="#admin">Admin Setup</a>
-        <a class="button button-secondary" href="#hero">Back to top</a>
+        <a class="button button-secondary" href="./framework.html">Framework</a>
+        <a class="button button-secondary" href="./assessment.html">Assessment</a>
       </div>
     </div>
   </footer>

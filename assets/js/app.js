@@ -113,6 +113,10 @@ function hydrateFromStorage() {
 }
 
 function syncFormFromState() {
+  if (!dom.respondentForm) {
+    return;
+  }
+
   const fields = Object.keys(createDefaultMeta());
   for (const key of fields) {
     if (dom.respondentForm.elements[key]) {
@@ -122,19 +126,19 @@ function syncFormFromState() {
 }
 
 function bindEvents() {
-  dom.respondentForm.addEventListener("input", handleMetaInput);
-  dom.questionnaireNav.addEventListener("click", handlePillarNavClick);
-  dom.questionnairePanels.addEventListener("click", handleScoreClick);
-  dom.questionnairePanels.addEventListener("input", handleQuestionNoteInput);
-  dom.prevPillar.addEventListener("click", () => shiftPillar(-1));
-  dom.nextPillar.addEventListener("click", () => shiftPillar(1));
-  dom.saveDraft.addEventListener("click", () => {
+  dom.respondentForm?.addEventListener("input", handleMetaInput);
+  dom.questionnaireNav?.addEventListener("click", handlePillarNavClick);
+  dom.questionnairePanels?.addEventListener("click", handleScoreClick);
+  dom.questionnairePanels?.addEventListener("input", handleQuestionNoteInput);
+  dom.prevPillar?.addEventListener("click", () => shiftPillar(-1));
+  dom.nextPillar?.addEventListener("click", () => shiftPillar(1));
+  dom.saveDraft?.addEventListener("click", () => {
     persistDraft();
     setStatus("Draft saved locally in this browser.", "success");
   });
-  dom.downloadJson.addEventListener("click", handleDownloadJson);
-  dom.resetAssessment.addEventListener("click", handleResetAssessment);
-  dom.submitAssessment.addEventListener("click", handleSubmitAssessment);
+  dom.downloadJson?.addEventListener("click", handleDownloadJson);
+  dom.resetAssessment?.addEventListener("click", handleResetAssessment);
+  dom.submitAssessment?.addEventListener("click", handleSubmitAssessment);
   dom.saveEndpoint?.addEventListener("click", handleSaveEndpoint);
   dom.clearEndpoint?.addEventListener("click", handleClearEndpoint);
 }
@@ -298,44 +302,61 @@ function shiftPillar(direction) {
 }
 
 function renderFramework() {
-  dom.pillarCards.innerHTML = state.config.pillars
-    .map(
-      (pillar) => `
-        <article class="pillar-card">
-          <span>${pillar.questionCount}</span>
-          <h3>${pillar.label}</h3>
-          <p>${pillar.description}</p>
-          <div class="pillar-meta">
-            <span class="meta-chip">Target ${formatScore(pillar.target)}</span>
-            <span class="meta-chip">Threshold ${formatScore(pillar.threshold)}</span>
-            <span class="meta-chip">Weight ${formatPercent(pillar.weight)}</span>
-          </div>
-        </article>
-      `,
-    )
-    .join("");
-
-  if (dom.heroPillarStack) {
-    dom.heroPillarStack.innerHTML = state.config.pillars
-      .map((pillar) => `<span class="hero-chip is-pillar">${pillar.label}</span>`)
+  if (dom.pillarCards) {
+    dom.pillarCards.innerHTML = state.config.pillars
+      .map(
+        (pillar) => `
+          <article class="pillar-card">
+            <div class="card-head">
+              <span class="icon-badge">${iconMarkup("pillar", pillar.label)}</span>
+              <span class="count-badge">${pillar.questionCount}</span>
+            </div>
+            <h3>${pillar.label}</h3>
+            <p>${pillar.description}</p>
+            <div class="pillar-meta">
+              <span class="meta-chip">Target ${formatScore(pillar.target)}</span>
+              <span class="meta-chip">Threshold ${formatScore(pillar.threshold)}</span>
+              <span class="meta-chip">Weight ${formatPercent(pillar.weight)}</span>
+            </div>
+          </article>
+        `,
+      )
       .join("");
   }
 
-  dom.stageCards.innerHTML = state.config.stages
-    .map(
-      (stage) => `
-        <article class="stage-card">
-          <span>${stage.order}</span>
-          <h3>${stage.label.replace(/^\d+\.\s*/, "")}</h3>
-          <p>${stage.description}</p>
-          <div class="pillar-meta">
-            <span class="meta-chip">${stage.questionCount} questions</span>
-            <span class="meta-chip">Target ${formatScore(stage.target)}</span>
-          </div>
-        </article>
-      `,
-    )
-    .join("");
+  if (dom.heroPillarStack) {
+    dom.heroPillarStack.innerHTML = state.config.pillars
+      .map(
+        (pillar) => `
+          <span class="hero-chip is-pillar">
+            <span class="hero-chip-icon">${iconMarkup("pillar", pillar.label)}</span>
+            <span>${pillar.label}</span>
+          </span>
+        `,
+      )
+      .join("");
+  }
+
+  if (dom.stageCards) {
+    dom.stageCards.innerHTML = state.config.stages
+      .map(
+        (stage) => `
+          <article class="stage-card">
+            <div class="card-head">
+              <span class="icon-badge">${iconMarkup("stage", stage.label)}</span>
+              <span class="count-badge">${stage.order}</span>
+            </div>
+            <h3>${stage.label.replace(/^\d+\.\s*/, "")}</h3>
+            <p>${stage.description}</p>
+            <div class="pillar-meta">
+              <span class="meta-chip">${stage.questionCount} questions</span>
+              <span class="meta-chip">Target ${formatScore(stage.target)}</span>
+            </div>
+          </article>
+        `,
+      )
+      .join("");
+  }
 
   if (dom.heroStageTrack) {
     dom.heroStageTrack.innerHTML = state.config.stages
@@ -350,37 +371,61 @@ function renderFramework() {
       .join("");
   }
 
-  dom.enablerCards.innerHTML = state.config.enablers
-    .map(
-      (enabler, index) => `
-        <article class="enabler-card">
-          <span>${index + 1}</span>
-          <h3>${enabler.label}</h3>
-          <p>${enabler.description}</p>
-          <div class="pillar-meta">
-            <span class="meta-chip">${enabler.questionCount} linked questions</span>
-            <span class="meta-chip">Target ${formatScore(enabler.target)}</span>
-          </div>
-        </article>
-      `,
-    )
-    .join("");
+  if (dom.enablerCards) {
+    dom.enablerCards.innerHTML = state.config.enablers
+      .map(
+        (enabler, index) => `
+          <article class="enabler-card">
+            <div class="card-head">
+              <span class="icon-badge">${iconMarkup("enabler", enabler.label)}</span>
+              <span class="count-badge">${index + 1}</span>
+            </div>
+            <h3>${enabler.label}</h3>
+            <p>${enabler.description}</p>
+            <div class="pillar-meta">
+              <span class="meta-chip">${enabler.questionCount} linked questions</span>
+              <span class="meta-chip">Target ${formatScore(enabler.target)}</span>
+            </div>
+          </article>
+        `,
+      )
+      .join("");
+  }
 
   if (dom.heroEnablerStack) {
     dom.heroEnablerStack.innerHTML = state.config.enablers
-      .map((enabler) => `<span class="hero-chip is-enabler">${enabler.label}</span>`)
+      .map(
+        (enabler) => `
+          <span class="hero-chip is-enabler">
+            <span class="hero-chip-icon">${iconMarkup("enabler", enabler.label)}</span>
+            <span>${enabler.label}</span>
+          </span>
+        `,
+      )
       .join("");
   }
 }
 
 function syncHeroCounts() {
-  dom.heroPillarCount.textContent = String(state.config.meta.pillarCount);
-  dom.heroStageCount.textContent = String(state.config.meta.stageCount);
-  dom.heroQuestionCount.textContent = String(state.config.meta.questionCount);
-  dom.heroEnablerCount.textContent = String(state.config.meta.enablerCount);
+  if (dom.heroPillarCount) {
+    dom.heroPillarCount.textContent = String(state.config.meta.pillarCount);
+  }
+  if (dom.heroStageCount) {
+    dom.heroStageCount.textContent = String(state.config.meta.stageCount);
+  }
+  if (dom.heroQuestionCount) {
+    dom.heroQuestionCount.textContent = String(state.config.meta.questionCount);
+  }
+  if (dom.heroEnablerCount) {
+    dom.heroEnablerCount.textContent = String(state.config.meta.enablerCount);
+  }
 }
 
 function renderPillarNav() {
+  if (!dom.questionnaireNav) {
+    return;
+  }
+
   dom.questionnaireNav.innerHTML = state.config.pillars
     .map((pillar, index) => {
       const pillarQuestions = getQuestionsForPillar(pillar.label);
@@ -405,6 +450,10 @@ function renderPillarNav() {
 }
 
 function renderActivePillar() {
+  if (!dom.currentPillarTitle || !dom.currentPillarDescription || !dom.currentStageSummary || !dom.questionnairePanels) {
+    return;
+  }
+
   const pillar = state.config.pillars[state.activePillarIndex];
   const questions = getQuestionsForPillar(pillar.label);
   const grouped = groupQuestionsByStage(questions);
@@ -430,8 +479,12 @@ function renderActivePillar() {
     )
     .join("");
 
-  dom.prevPillar.disabled = state.activePillarIndex === 0;
-  dom.nextPillar.disabled = state.activePillarIndex === state.config.pillars.length - 1;
+  if (dom.prevPillar) {
+    dom.prevPillar.disabled = state.activePillarIndex === 0;
+  }
+  if (dom.nextPillar) {
+    dom.nextPillar.disabled = state.activePillarIndex === state.config.pillars.length - 1;
+  }
 }
 
 function renderQuestionCard(question) {
@@ -508,6 +561,10 @@ function updateQuestionSelection(questionId, score) {
 }
 
 function recomputeResults() {
+  if (!dom.answeredCount || !dom.completionRate || !dom.resultsEmpty || !dom.resultsContent) {
+    return;
+  }
+
   state.results = computeResults();
   const answered = getAnsweredQuestionsCount();
   const total = state.config.questions.length;
@@ -526,6 +583,10 @@ function recomputeResults() {
 }
 
 function renderResults() {
+  if (!dom.resultsSummary || !dom.pillarResults || !dom.stageResults || !dom.enablerResults || !dom.priorityBody) {
+    return;
+  }
+
   const { summary, pillarResults, stageResults, enablerResults, priorityList } = state.results;
 
   dom.resultsSummary.innerHTML = `
@@ -792,15 +853,19 @@ function persistEndpoint(endpoint) {
 }
 
 function persistDraft() {
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify({
-      meta: state.meta,
-      responses: state.responses,
-      activePillarIndex: state.activePillarIndex,
-      updatedAt: new Date().toISOString(),
-    }),
-  );
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        meta: state.meta,
+        responses: state.responses,
+        activePillarIndex: state.activePillarIndex,
+        updatedAt: new Date().toISOString(),
+      }),
+    );
+  } catch (error) {
+    console.warn("Unable to persist assessment draft locally.", error);
+  }
 }
 
 function getActiveEndpoint() {
@@ -817,6 +882,10 @@ function getActiveEndpoint() {
 }
 
 function setStatus(message, tone = "") {
+  if (!dom.saveStatus) {
+    return;
+  }
+
   dom.saveStatus.textContent = message;
   dom.saveStatus.className = "status-panel";
   if (tone) {
@@ -891,4 +960,114 @@ function escapeHtml(value) {
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
+}
+
+function iconMarkup(type, label) {
+  const normalized = String(label || "").toLowerCase();
+
+  if (type === "pillar") {
+    if (normalized.includes("pricing")) {
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 7h12M6 12h12M6 17h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="18" cy="17" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      `;
+    }
+    if (normalized.includes("obppc")) {
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4" y="5" width="6" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <rect x="14" y="5" width="6" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <rect x="9" y="14" width="6" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      `;
+    }
+    if (normalized.includes("promotion")) {
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 14V9l8-3v12l-8-4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M13 9h3a3 3 0 0 1 0 6h-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M7.5 15.5 9 19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 18V6l7 4 7-4v12l-7 4-7-4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M12 10v12" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      </svg>
+    `;
+  }
+
+  if (type === "enabler") {
+    if (normalized.includes("governance")) {
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 4 5 7v5c0 4.1 2.7 7.8 7 9 4.3-1.2 7-4.9 7-9V7l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M9.5 12 11 13.5 14.5 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+    }
+    if (normalized.includes("tool") || normalized.includes("digital")) {
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4" y="5" width="16" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M8 9h8M8 13h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+    if (normalized.includes("people")) {
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="9" cy="9" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="16.5" cy="10.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M4.5 18c1.3-2.2 3-3.3 5-3.3s3.7 1.1 5 3.3M14 17.4c.7-1.2 1.8-1.9 3.2-1.9 1.3 0 2.4.6 3.3 1.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      </svg>
+    `;
+  }
+
+  const stageNumber = Number(String(label).match(/\d+/)?.[0] || 0);
+  if (stageNumber === 1) {
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 18h14M7 14l4-4 3 3 4-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `;
+  }
+  if (stageNumber === 2) {
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 17h12M7 13h10M9 9h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    `;
+  }
+  if (stageNumber === 3) {
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 17h14M7 15V8m5 7V5m5 10v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    `;
+  }
+  if (stageNumber === 4) {
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 16c2.2-3.8 4.4-5.7 6.5-5.7 2.1 0 3.9 1.5 5.5 4.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M16 8h3v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    `;
+  }
+  return `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 5 19 12 12 19 5 12 12 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12 9v6M9 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  `;
 }

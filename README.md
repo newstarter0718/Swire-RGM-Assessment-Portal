@@ -46,7 +46,8 @@ Then open `http://localhost:8765/output/web/swire-rgm-assessment-portal/`
 4. Create a Google Sheet and bind an Apps Script project to it.
 5. Paste the sample `apps-script/Code.gs` into the Apps Script editor.
 6. Deploy the Apps Script as a Web App.
-7. Update `assets/js/site-config.js` with the deployed Apps Script URL.
+7. Paste the deployed Apps Script URL into the Admin Setup section of the live site to test it immediately in your own browser.
+8. After validation, update `assets/js/site-config.js` with the same deployed Apps Script URL if you want every user to submit without local setup.
 
 If connector-based Google Sheet creation is unavailable, use the files in `google-sheet-template/` to import the three required tabs manually.
 

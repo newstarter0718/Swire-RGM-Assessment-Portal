@@ -1,6 +1,7 @@
 import { submitToGoogleSheets } from "./google-sheets.js";
 
 const STORAGE_KEY = "swire-rgm-assessment-draft-v1";
+const ENDPOINT_STORAGE_KEY = "swire-rgm-apps-script-url";
 
 const state = {
   config: null,
@@ -18,9 +19,11 @@ if (typeof document !== "undefined") {
 
 async function init() {
   cacheDom();
+  hydrateEndpointFromQuery();
   state.config = await loadConfig();
   hydrateFromStorage();
   bindEvents();
+  syncEndpointUi();
   renderFramework();
   syncHeroCounts();
   renderPillarNav();
@@ -34,6 +37,9 @@ function cacheDom() {
   dom.heroStageCount = document.getElementById("hero-stage-count");
   dom.heroQuestionCount = document.getElementById("hero-question-count");
   dom.heroEnablerCount = document.getElementById("hero-enabler-count");
+  dom.heroPillarStack = document.getElementById("hero-pillar-stack");
+  dom.heroStageTrack = document.getElementById("hero-stage-track");
+  dom.heroEnablerStack = document.getElementById("hero-enabler-stack");
   dom.pillarCards = document.getElementById("pillar-cards");
   dom.stageCards = document.getElementById("stage-cards");
   dom.enablerCards = document.getElementById("enabler-cards");
@@ -58,6 +64,10 @@ function cacheDom() {
   dom.stageResults = document.getElementById("stage-results");
   dom.enablerResults = document.getElementById("enabler-results");
   dom.priorityBody = document.getElementById("priority-body");
+  dom.endpointInput = document.getElementById("apps-script-url");
+  dom.saveEndpoint = document.getElementById("save-endpoint");
+  dom.clearEndpoint = document.getElementById("clear-endpoint");
+  dom.endpointStatus = document.getElementById("endpoint-status");
 }
 
 async function loadConfig() {
@@ -125,6 +135,17 @@ function bindEvents() {
   dom.downloadJson.addEventListener("click", handleDownloadJson);
   dom.resetAssessment.addEventListener("click", handleResetAssessment);
   dom.submitAssessment.addEventListener("click", handleSubmitAssessment);
+  dom.saveEndpoint?.addEventListener("click", handleSaveEndpoint);
+  dom.clearEndpoint?.addEventListener("click", handleClearEndpoint);
+}
+
+function hydrateEndpointFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const queryEndpoint = (params.get("appsScriptUrl") || "").trim();
+  if (!queryEndpoint) {
+    return;
+  }
+  persistEndpoint(queryEndpoint);
 }
 
 function handleMetaInput(event) {
@@ -195,6 +216,22 @@ function handleDownloadJson() {
   link.click();
   URL.revokeObjectURL(url);
   setStatus("Current assessment state downloaded as JSON.", "success");
+}
+
+function handleSaveEndpoint() {
+  const endpoint = (dom.endpointInput?.value || "").trim();
+  if (!endpoint) {
+    setEndpointStatus("Paste a deployed Apps Script Web App URL first.", "warn");
+    return;
+  }
+
+  persistEndpoint(endpoint);
+  syncEndpointUi("Apps Script endpoint saved in this browser.", "success");
+}
+
+function handleClearEndpoint() {
+  persistEndpoint("");
+  syncEndpointUi("Apps Script endpoint cleared from this browser.", "warn");
 }
 
 function handleResetAssessment() {
@@ -278,6 +315,12 @@ function renderFramework() {
     )
     .join("");
 
+  if (dom.heroPillarStack) {
+    dom.heroPillarStack.innerHTML = state.config.pillars
+      .map((pillar) => `<span class="hero-chip is-pillar">${pillar.label}</span>`)
+      .join("");
+  }
+
   dom.stageCards.innerHTML = state.config.stages
     .map(
       (stage) => `
@@ -294,6 +337,19 @@ function renderFramework() {
     )
     .join("");
 
+  if (dom.heroStageTrack) {
+    dom.heroStageTrack.innerHTML = state.config.stages
+      .map(
+        (stage) => `
+          <div class="hero-stage-node">
+            <strong>${stage.order}</strong>
+            <span>${stage.label.replace(/^\d+\.\s*/, "")}</span>
+          </div>
+        `,
+      )
+      .join("");
+  }
+
   dom.enablerCards.innerHTML = state.config.enablers
     .map(
       (enabler, index) => `
@@ -309,6 +365,12 @@ function renderFramework() {
       `,
     )
     .join("");
+
+  if (dom.heroEnablerStack) {
+    dom.heroEnablerStack.innerHTML = state.config.enablers
+      .map((enabler) => `<span class="hero-chip is-enabler">${enabler.label}</span>`)
+      .join("");
+  }
 }
 
 function syncHeroCounts() {
@@ -711,6 +773,24 @@ function buildSessionId() {
   return `RGM-${stamp}-${suffix}`;
 }
 
+function persistEndpoint(endpoint) {
+  const trimmed = (endpoint || "").trim();
+  window.RGM_SITE_CONFIG = {
+    ...(window.RGM_SITE_CONFIG || {}),
+    appsScriptUrl: trimmed,
+  };
+
+  try {
+    if (trimmed) {
+      localStorage.setItem(ENDPOINT_STORAGE_KEY, trimmed);
+    } else {
+      localStorage.removeItem(ENDPOINT_STORAGE_KEY);
+    }
+  } catch (error) {
+    console.warn("Unable to persist Apps Script endpoint locally.", error);
+  }
+}
+
 function persistDraft() {
   localStorage.setItem(
     STORAGE_KEY,
@@ -723,11 +803,57 @@ function persistDraft() {
   );
 }
 
+function getActiveEndpoint() {
+  const configured = (window.RGM_SITE_CONFIG?.appsScriptUrl || "").trim();
+  if (configured) {
+    return configured;
+  }
+
+  try {
+    return (localStorage.getItem(ENDPOINT_STORAGE_KEY) || "").trim();
+  } catch {
+    return "";
+  }
+}
+
 function setStatus(message, tone = "") {
   dom.saveStatus.textContent = message;
   dom.saveStatus.className = "status-panel";
   if (tone) {
     dom.saveStatus.classList.add(`is-${tone}`);
+  }
+}
+
+function syncEndpointUi(message = "", tone = "") {
+  if (!dom.endpointInput || !dom.endpointStatus) {
+    return;
+  }
+
+  const endpoint = getActiveEndpoint();
+  dom.endpointInput.value = endpoint;
+
+  if (message) {
+    setEndpointStatus(message, tone);
+    return;
+  }
+
+  setEndpointStatus(
+    endpoint
+      ? "Apps Script endpoint is configured for this browser."
+      : "No Apps Script endpoint configured yet.",
+    endpoint ? "success" : "warn",
+  );
+}
+
+function setEndpointStatus(message, tone = "") {
+  if (!dom.endpointStatus) {
+    return;
+  }
+
+  dom.endpointStatus.textContent = message;
+  dom.endpointStatus.className = "endpoint-status";
+  if (tone) {
+    dom.endpointStatus.classList.add(`is-${tone}`);
   }
 }
 

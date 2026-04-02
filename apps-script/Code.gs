@@ -1,3 +1,7 @@
+// Optional: paste a standalone spreadsheet ID here if you deploy this script
+// from script.google.com instead of binding it directly to the target sheet.
+var SPREADSHEET_ID = "";
+
 function doGet() {
   return jsonOutput_({
     ok: true,
@@ -12,7 +16,7 @@ function doPost(e) {
 
   try {
     var payload = JSON.parse((e && e.postData && e.postData.contents) || "{}");
-    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var spreadsheet = getTargetSpreadsheet_();
     ensureSheets_(spreadsheet);
 
     writeSession_(spreadsheet.getSheetByName("Assessment_Sessions"), payload);
@@ -32,6 +36,13 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+function getTargetSpreadsheet_() {
+  if (SPREADSHEET_ID) {
+    return SpreadsheetApp.openById(SPREADSHEET_ID);
+  }
+  return SpreadsheetApp.getActiveSpreadsheet();
 }
 
 function ensureSheets_(spreadsheet) {

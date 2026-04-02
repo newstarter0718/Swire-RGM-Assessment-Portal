@@ -4,19 +4,23 @@ Use a Google Sheet as the lightweight backend for the portal.
 
 ## Recommended setup
 
-1. Create a new Google Sheet.
-2. Open `Extensions -> Apps Script`.
+1. Open the target Google Sheet that will store responses.
+2. Open `Extensions -> Apps Script` from that sheet.
 3. Replace the default code with the contents of `Code.gs`.
 4. Save the project.
 5. Deploy as `Web app`.
 6. Set access to `Anyone with the link`.
 7. Copy the deployment URL into `assets/js/site-config.js` as `appsScriptUrl`.
 
+This bound-script flow is preferred because it does not require manually copying a spreadsheet ID.
+
 ## What the script writes
 
 - `Assessment_Sessions`: one summary row per submitted assessment
 - `Assessment_Responses`: one row per question response
 - `Assessment_Priority`: top-priority list for each session
+
+The script will create these tabs and headers automatically if they do not already exist.
 
 ## Notes
 

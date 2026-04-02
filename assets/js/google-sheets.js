@@ -1,6 +1,21 @@
+const ENDPOINT_STORAGE_KEY = "swire-rgm-apps-script-url";
+
+function getStoredEndpoint() {
+  try {
+    return (localStorage.getItem(ENDPOINT_STORAGE_KEY) || "").trim();
+  } catch {
+    return "";
+  }
+}
+
+function resolveEndpoint() {
+  const config = window.RGM_SITE_CONFIG || {};
+  return (config.appsScriptUrl || "").trim() || getStoredEndpoint();
+}
+
 export async function submitToGoogleSheets(payload) {
   const config = window.RGM_SITE_CONFIG || {};
-  const endpoint = (config.appsScriptUrl || "").trim();
+  const endpoint = resolveEndpoint();
 
   if (!endpoint) {
     return {

@@ -1,1 +1,1150 @@
-{"meta":{"title":"Swire RGM Enterprise Assessment","version":"v1-web-core","sourceWorkbook":"Swire_RGM_Assessment_Integrated_v6_nav_flow_prohome.xlsx","questionCount":48,"pillarCount":4,"stageCount":5,"enablerCount":4,"assessmentFocus":"Core maturity assessment with dashboard outputs by pillar, stage, and enabler."},"pillars":[{"id":"Pricing","label":"Pricing","weight":0.18,"questionCount":13,"target":4.0,"threshold":3.0,"description":"Price realization, architecture, ex-factory discipline, P&L impact, and long-term price direction."},{"id":"OBPPC","label":"OBPPC","weight":0.14,"questionCount":12,"target":3.8,"threshold":3.0,"description":"Revenue architecture across occasions, brands, packs, price points, and channels."},{"id":"Promotion Spend","label":"Promotion Spend","weight":0.18,"questionCount":13,"target":4.0,"threshold":3.0,"description":"Promotion role, spend efficiency, guardrails, ROI discipline, and reallocation logic."},{"id":"DFR / Trade Investment","label":"DFR / Trade Investment","weight":0.12,"questionCount":10,"target":3.8,"threshold":3.0,"description":"Commercial terms, funding logic, gross-to-net discipline, and customer investment structure."}],"stages":[{"id":"1. Opportunity Understanding","label":"1. Opportunity Understanding","order":1,"questionCount":15,"target":3.5,"threshold":3.0,"prioritySignal":"High","description":"Whether the market can diagnose value pools, market realities, and performance gaps with fact-based clarity."},{"id":"2. Strategy Design","label":"2. Strategy Design","order":2,"questionCount":12,"target":3.8,"threshold":3.0,"prioritySignal":"High","description":"Whether the market can convert insight into a coherent pillar strategy and clear prioritization."},{"id":"3. Policy Translation","label":"3. Policy Translation","order":3,"questionCount":7,"target":3.8,"threshold":3.0,"prioritySignal":"High","description":"Whether strategy is translated into rules, guardrails, commercial policy, and operating logic."},{"id":"4. Execution Management","label":"4. Execution Management","order":4,"questionCount":23,"target":3.8,"threshold":3.0,"prioritySignal":"High","description":"Whether the market manages implementation through tools, data, routines, and closed-loop review."},{"id":"5. Capability & Forward Planning","label":"5. Capability & Forward Planning","order":5,"questionCount":18,"target":3.8,"threshold":3.0,"prioritySignal":"High","description":"Whether the market can sustain improvement through people, governance, roadmap thinking, and future scenario planning."}],"enablers":[{"id":"Governance","label":"Governance","questionCount":29,"target":3.7,"threshold":3.0,"implication":"Structural gap","description":"Decision rights, review cadence, escalation, KPI reviews, and cross-functional working routines."},{"id":"Digital / Data / Tools","label":"Digital / Data / Tools","questionCount":19,"target":3.4,"threshold":3.0,"implication":"Structural gap","description":"Dashboards, tool adoption, data availability, analytics maturity, and workflow support."},{"id":"People & Capability Development","label":"People & Capability Development","questionCount":9,"target":3.6,"threshold":3.0,"implication":"Structural gap","description":"Role clarity, team capability, RGM literacy, leadership profile, training, and certification."},{"id":"Forward-looking","label":"Forward-looking","questionCount":18,"target":3.7,"threshold":3.0,"implication":"Structural gap","description":"Long-term roadmap thinking, scenario planning, future profit pools, and reallocation discipline."}],"questions":[{"id":"P3","pillar":"Pricing","sheet":"Pricing","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":3,"enabler":"Governance","subDimension":"Strategy Management","text":"Pricing decisions are based on more than inflation and COGS; they incorporate competition, consumer willingness to pay, and strategic price positioning.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P7","pillar":"Pricing","sheet":"Pricing","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":7,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"The market uses elasticity, cross-elasticity, switching behavior, or similar analytical methods to support pricing decisions.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P8","pillar":"Pricing","sheet":"Pricing","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":8,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"The market can estimate the likely impact of pricing decisions on volume, NSR, gross profit, and profit pool at SKU or channel level.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P1","pillar":"Pricing","sheet":"Pricing","stage":"2. Strategy Design","stageOrder":2,"sequence":1,"enabler":"Governance","subDimension":"Strategy Management","text":"The market has a clear pricing strategy by brand, pack, and channel that is consistent with brand positioning and commercial objectives.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P2","pillar":"Pricing","sheet":"Pricing","stage":"2. Strategy Design","stageOrder":2,"sequence":2,"enabler":"Forward-looking","subDimension":"Strategy Management","text":"The market has a clearly defined medium- to long-term price ladder or price curve, including affordability, mainstream, and premium roles where relevant.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P4","pillar":"Pricing","sheet":"Pricing","stage":"3. Policy Translation","stageOrder":3,"sequence":4,"enabler":"Governance","subDimension":"Operations Management","text":"Ex-factory prices are centrally governed with clear approval rules, documented logic, and integration with promotion and trade investment management.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P5","pillar":"Pricing","sheet":"Pricing","stage":"3. Policy Translation","stageOrder":3,"sequence":5,"enabler":"Governance","subDimension":"Operations Management","text":"There is a regular process to review realized prices, net prices, and compliance with target price corridors.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P6","pillar":"Pricing","sheet":"Pricing","stage":"4. Execution Management","stageOrder":4,"sequence":6,"enabler":"Governance","subDimension":"Operations Management","text":"Pricing decisions are translated into execution plans and tracked until implementation issues are resolved.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P9","pillar":"Pricing","sheet":"Pricing","stage":"4. Execution Management","stageOrder":4,"sequence":9,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"Pricing dashboards or tools are used regularly to monitor execution and identify deviations from strategy.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P10","pillar":"Pricing","sheet":"Pricing","stage":"4. Execution Management","stageOrder":4,"sequence":10,"enabler":"Governance","subDimension":"Cross-Functional Governance","text":"Pricing decisions are reviewed through a formal cross-functional process involving RGM, Sales, Finance, and relevant commercial stakeholders.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P11","pillar":"Pricing","sheet":"Pricing","stage":"4. Execution Management","stageOrder":4,"sequence":11,"enabler":"People & Capability Development","subDimension":"Cross-Functional Governance","text":"Pricing-related market insights and learning are systematically shared with regional or central RGM teams.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P12","pillar":"Pricing","sheet":"Pricing","stage":"5. Capability & Forward Planning","stageOrder":5,"sequence":12,"enabler":"Forward-looking","subDimension":"Forward-Looking Readiness","text":"The market maintains a 3–5 year pricing direction that anticipates inflation, affordability pressure, competitive moves, and structural channel change.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"P13","pillar":"Pricing","sheet":"Pricing","stage":"5. Capability & Forward Planning","stageOrder":5,"sequence":13,"enabler":"Forward-looking","subDimension":"Forward-Looking Readiness","text":"Pricing is used proactively to shape future value creation, not only to recover cost pressure.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"O6","pillar":"OBPPC","sheet":"OBPPC","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":6,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"The market uses pack-level performance, shopper behavior, and financial metrics to evaluate whether pack roles are delivering intended outcomes.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O7","pillar":"OBPPC","sheet":"OBPPC","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":7,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"The market can identify where value is created or destroyed across the pack-price ladder.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O1","pillar":"OBPPC","sheet":"OBPPC","stage":"2. Strategy Design","stageOrder":2,"sequence":1,"enabler":"Governance","subDimension":"Strategy Management","text":"The market has a clear localized OBPPC strategy linked to shopper occasions, channel realities, and category growth priorities.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O2","pillar":"OBPPC","sheet":"OBPPC","stage":"2. Strategy Design","stageOrder":2,"sequence":2,"enabler":"People & Capability Development","subDimension":"Strategy Management","text":"Key packs have clearly defined roles such as recruitment, core, premium, immediate consumption, or future consumption.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O3","pillar":"OBPPC","sheet":"OBPPC","stage":"2. Strategy Design","stageOrder":2,"sequence":3,"enabler":"Forward-looking","subDimension":"Strategy Management","text":"The price-pack architecture is designed intentionally to support both recruitment and premiumization without internal overlap.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O4","pillar":"OBPPC","sheet":"OBPPC","stage":"3. Policy Translation","stageOrder":3,"sequence":4,"enabler":"Governance","subDimension":"Operations Management","text":"There is a regular process to review pack-price ladder health, pack gaps, role conflicts, and SKU rationalization opportunities.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O5","pillar":"OBPPC","sheet":"OBPPC","stage":"3. Policy Translation","stageOrder":3,"sequence":5,"enabler":"Governance","subDimension":"Operations Management","text":"OBPPC decisions are translated into channel-specific action plans and tracked in execution.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O8","pillar":"OBPPC","sheet":"OBPPC","stage":"4. Execution Management","stageOrder":4,"sequence":8,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"Monitoring tools or dashboards are used to track OBPPC implementation and outcomes.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O9","pillar":"OBPPC","sheet":"OBPPC","stage":"4. Execution Management","stageOrder":4,"sequence":9,"enabler":"Governance","subDimension":"Cross-Functional Governance","text":"OBPPC strategy is jointly owned by RGM, Marketing, Sales, and Supply / Commercial Planning where relevant.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O10","pillar":"OBPPC","sheet":"OBPPC","stage":"4. Execution Management","stageOrder":4,"sequence":10,"enabler":"People & Capability Development","subDimension":"Cross-Functional Governance","text":"Market OBPPC insights are systematically shared across functions and with regional stakeholders.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O11","pillar":"OBPPC","sheet":"OBPPC","stage":"5. Capability & Forward Planning","stageOrder":5,"sequence":11,"enabler":"Forward-looking","subDimension":"Forward-Looking Readiness","text":"The market has a medium- to long-term view of how the pack-price architecture should evolve based on macro and shopper change.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"O12","pillar":"OBPPC","sheet":"OBPPC","stage":"5. Capability & Forward Planning","stageOrder":5,"sequence":12,"enabler":"Forward-looking","subDimension":"Forward-Looking Readiness","text":"The market can identify future growth corridors and whitespace opportunities within the pack-price ladder.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01166666666666667,"target":3.8},{"id":"PR7","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":7,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"The market measures uplift, incremental value, and ROI using a consistent logic.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR8","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":8,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"Promotion analytics are used to compare mechanics, discount depth, timing, and customer response.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR1","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"2. Strategy Design","stageOrder":2,"sequence":1,"enabler":"Governance","subDimension":"Strategy Management","text":"The market has clear promotion strategies by channel, customer, and pack role rather than relying mainly on historical activity patterns.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR2","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"2. Strategy Design","stageOrder":2,"sequence":2,"enabler":"Governance","subDimension":"Strategy Management","text":"Promotion plans are linked to clear objectives such as recruitment, frequency, basket building, visibility, or value defence.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR3","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"3. Policy Translation","stageOrder":3,"sequence":3,"enabler":"Governance","subDimension":"Strategy Management","text":"Promotion guardrails exist for key packs, brands, and channels to avoid damaging long-term pricing or brand role.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR10","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"3. Policy Translation","stageOrder":3,"sequence":10,"enabler":"Governance","subDimension":"Cross-Functional Governance","text":"Promotion strategy and investment decisions are reviewed across RGM, Sales, Finance, and commercial leadership.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR4","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"4. Execution Management","stageOrder":4,"sequence":4,"enabler":"Governance","subDimension":"Operations Management","text":"All major promotions and related spending are tracked through a structured management process with clear owners and review routines.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR5","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"4. Execution Management","stageOrder":4,"sequence":5,"enabler":"Governance","subDimension":"Operations Management","text":"Promotion results are reviewed systematically, and underperforming activities trigger corrective action or redesign.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR6","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"4. Execution Management","stageOrder":4,"sequence":6,"enabler":"People & Capability Development","subDimension":"Operations Management","text":"The market can distinguish between high-volume promotions and value-accretive promotions.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR11","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"4. Execution Management","stageOrder":4,"sequence":11,"enabler":"Governance","subDimension":"Cross-Functional Governance","text":"The market has a closed-loop mechanism to escalate and resolve recurring promotion issues.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR9","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"5. Capability & Forward Planning","stageOrder":5,"sequence":9,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"Predictive analytics or simulation is used, at least selectively, to estimate likely promotion outcomes before deployment.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR12","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"5. Capability & Forward Planning","stageOrder":5,"sequence":12,"enabler":"Forward-looking","subDimension":"Forward-Looking Readiness","text":"The market actively identifies low-value legacy promotions and can redesign the investment model over a 2–3 year horizon.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"PR13","pillar":"Promotion Spend","sheet":"Promotion_Spend","stage":"5. Capability & Forward Planning","stageOrder":5,"sequence":13,"enabler":"Forward-looking","subDimension":"Forward-Looking Readiness","text":"Promotion investment is reallocated over time toward higher-return opportunities based on learning and strategic direction.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.01384615384615384,"target":4.0},{"id":"T6","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":6,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"Gross-to-net analysis is used to understand the real financial impact of customer investment.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T7","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":7,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"Trade term scenarios can be modeled to support negotiations and customer planning.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T8","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"1. Opportunity Understanding","stageOrder":1,"sequence":8,"enabler":"Digital / Data / Tools","subDimension":"Data, Tools & Analytics","text":"The organization can assess profit pools by customer, channel, or SKU where relevant to support trade investment decisions.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T1","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"2. Strategy Design","stageOrder":2,"sequence":1,"enabler":"Governance","subDimension":"Strategy Management","text":"The market has a clear customer and channel investment strategy linked to the role of each channel and customer in the business.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T2","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"2. Strategy Design","stageOrder":2,"sequence":2,"enabler":"Governance","subDimension":"Strategy Management","text":"Trade terms and PTC are differentiated by customer type, business model, and strategic value rather than managed as generic discounts.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T3","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"3. Policy Translation","stageOrder":3,"sequence":3,"enabler":"Governance","subDimension":"Strategy Management","text":"Contract structures and investment rules are clearly defined and aligned with value creation logic.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T4","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"4. Execution Management","stageOrder":4,"sequence":4,"enabler":"Governance","subDimension":"Operations Management","text":"Trade terms are systematically tracked and reviewed for compliance, effectiveness, and alignment with agreed conditions.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T5","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"4. Execution Management","stageOrder":4,"sequence":5,"enabler":"Governance","subDimension":"Operations Management","text":"The market has structured routines for reviewing price realization, conditionality compliance, and issue resolution.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T9","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"4. Execution Management","stageOrder":4,"sequence":9,"enabler":"People & Capability Development","subDimension":"Cross-Functional Governance","text":"Customer investment decisions are reviewed through a formal cross-functional process involving Sales, Finance, and RGM.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8},{"id":"T10","pillar":"DFR / Trade Investment","sheet":"DFR_Trade_Investment","stage":"5. Capability & Forward Planning","stageOrder":5,"sequence":10,"enabler":"Forward-looking","subDimension":"Forward-Looking Readiness","text":"The market has a 2–3 year view of how customer and channel investment should evolve as channels, customer power, and route-to-market models change.","evidencePrompt":"Attach or describe the best supporting evidence available.","anchors":{"1":"Lacking","2":"Developing","3":"Competent","4":"Advanced","5":"Leading"},"weight":0.012,"target":3.8}]}
+{
+  "meta": {
+    "title": "Swire RGM Enterprise Assessment",
+    "version": "v1-web-core",
+    "sourceWorkbook": "Swire_RGM_Assessment_Integrated_v6_nav_flow_prohome.xlsx",
+    "questionCount": 48,
+    "pillarCount": 4,
+    "stageCount": 5,
+    "enablerCount": 4,
+    "assessmentFocus": "Core maturity assessment with dashboard outputs by pillar, stage, and enabler."
+  },
+  "pillars": [
+    {
+      "id": "Pricing",
+      "label": "Pricing",
+      "weight": 0.18,
+      "questionCount": 13,
+      "target": 4.0,
+      "threshold": 3.0,
+      "description": "Price realization, architecture, ex-factory discipline, P&L impact, and long-term price direction."
+    },
+    {
+      "id": "OBPPC",
+      "label": "OBPPC",
+      "weight": 0.14,
+      "questionCount": 12,
+      "target": 3.8,
+      "threshold": 3.0,
+      "description": "Revenue architecture across occasions, brands, packs, price points, and channels."
+    },
+    {
+      "id": "Promotion Spend",
+      "label": "Promotion Spend",
+      "weight": 0.18,
+      "questionCount": 13,
+      "target": 4.0,
+      "threshold": 3.0,
+      "description": "Promotion role, spend efficiency, guardrails, ROI discipline, and reallocation logic."
+    },
+    {
+      "id": "DFR / Trade Investment",
+      "label": "DFR / Trade Investment",
+      "weight": 0.12,
+      "questionCount": 10,
+      "target": 3.8,
+      "threshold": 3.0,
+      "description": "Commercial terms, funding logic, gross-to-net discipline, and customer investment structure."
+    }
+  ],
+  "stages": [
+    {
+      "id": "1. Opportunity Understanding",
+      "label": "1. Opportunity Understanding",
+      "order": 1,
+      "questionCount": 15,
+      "target": 3.5,
+      "threshold": 3.0,
+      "prioritySignal": "High",
+      "description": "Whether the market can diagnose value pools, market realities, and performance gaps with fact-based clarity."
+    },
+    {
+      "id": "2. Strategy Design",
+      "label": "2. Strategy Design",
+      "order": 2,
+      "questionCount": 12,
+      "target": 3.8,
+      "threshold": 3.0,
+      "prioritySignal": "High",
+      "description": "Whether the market can convert insight into a coherent pillar strategy and clear prioritization."
+    },
+    {
+      "id": "3. Policy Translation",
+      "label": "3. Policy Translation",
+      "order": 3,
+      "questionCount": 7,
+      "target": 3.8,
+      "threshold": 3.0,
+      "prioritySignal": "High",
+      "description": "Whether strategy is translated into rules, guardrails, commercial policy, and operating logic."
+    },
+    {
+      "id": "4. Execution Management",
+      "label": "4. Execution Management",
+      "order": 4,
+      "questionCount": 23,
+      "target": 3.8,
+      "threshold": 3.0,
+      "prioritySignal": "High",
+      "description": "Whether the market manages implementation through tools, data, routines, and closed-loop review."
+    },
+    {
+      "id": "5. Capability & Forward Planning",
+      "label": "5. Capability & Forward Planning",
+      "order": 5,
+      "questionCount": 18,
+      "target": 3.8,
+      "threshold": 3.0,
+      "prioritySignal": "High",
+      "description": "Whether the market can sustain improvement through people, governance, roadmap thinking, and future scenario planning."
+    }
+  ],
+  "enablers": [
+    {
+      "id": "Governance",
+      "label": "Governance",
+      "questionCount": 29,
+      "target": 3.7,
+      "threshold": 3.0,
+      "implication": "Structural gap",
+      "description": "Decision rights, review cadence, escalation, KPI reviews, and cross-functional working routines."
+    },
+    {
+      "id": "Digital / Data / Tools",
+      "label": "Digital / Data / Tools",
+      "questionCount": 19,
+      "target": 3.4,
+      "threshold": 3.0,
+      "implication": "Structural gap",
+      "description": "Dashboards, tool adoption, data availability, analytics maturity, and workflow support."
+    },
+    {
+      "id": "People & Capability Development",
+      "label": "People & Capability Development",
+      "questionCount": 9,
+      "target": 3.6,
+      "threshold": 3.0,
+      "implication": "Structural gap",
+      "description": "Role clarity, team capability, RGM literacy, leadership profile, training, and certification."
+    },
+    {
+      "id": "Forward-looking",
+      "label": "Forward-looking",
+      "questionCount": 18,
+      "target": 3.7,
+      "threshold": 3.0,
+      "implication": "Structural gap",
+      "description": "Long-term roadmap thinking, scenario planning, future profit pools, and reallocation discipline."
+    }
+  ],
+  "questions": [
+    {
+      "id": "P3",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 3,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "Pricing decisions are based on more than inflation and COGS; they incorporate competition, consumer willingness to pay, and strategic price positioning.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No reliable capability exists to set pricing using more than inflation and COGS. Decision support around competition, willingness-to-pay, and strategic price positioning inputs is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to set pricing using more than inflation and COGS, but decision support around competition, willingness-to-pay, and strategic price positioning inputs is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to set pricing using more than inflation and COGS for major decisions, and decision support around competition, willingness-to-pay, and strategic price positioning inputs provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to set pricing using more than inflation and COGS. Decision support around competition, willingness-to-pay, and strategic price positioning inputs is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to set pricing using more than inflation and COGS. Decision support around competition, willingness-to-pay, and strategic price positioning inputs is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P7",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 7,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "The market uses elasticity, cross-elasticity, switching behavior, or similar analytical methods to support pricing decisions.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to use elasticity and switching analysis in pricing decisions. Decision support around direct elasticity, cross-elasticity, switching behavior, and interpretation is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to use elasticity and switching analysis in pricing decisions, but decision support around direct elasticity, cross-elasticity, switching behavior, and interpretation is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to use elasticity and switching analysis in pricing decisions for major decisions, and decision support around direct elasticity, cross-elasticity, switching behavior, and interpretation provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to use elasticity and switching analysis in pricing decisions. Decision support around direct elasticity, cross-elasticity, switching behavior, and interpretation is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to use elasticity and switching analysis in pricing decisions. Decision support around direct elasticity, cross-elasticity, switching behavior, and interpretation is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P8",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 8,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "The market can estimate the likely impact of pricing decisions on volume, NSR, gross profit, and profit pool at SKU or channel level.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to estimate the financial impact of price decisions. Decision support around volume, NSR, gross profit, and profit-pool effects by SKU or channel is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to estimate the financial impact of price decisions, but decision support around volume, NSR, gross profit, and profit-pool effects by SKU or channel is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to estimate the financial impact of price decisions for major decisions, and decision support around volume, NSR, gross profit, and profit-pool effects by SKU or channel provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to estimate the financial impact of price decisions. Decision support around volume, NSR, gross profit, and profit-pool effects by SKU or channel is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to estimate the financial impact of price decisions. Decision support around volume, NSR, gross profit, and profit-pool effects by SKU or channel is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P1",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 1,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "The market has a clear pricing strategy by brand, pack, and channel that is consistent with brand positioning and commercial objectives.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear brand-, pack-, and channel-level pricing strategy is in place. The business lacks structure around brand roles, channel differentiation, and competitive price gaps, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic brand-, pack-, and channel-level pricing strategy is in place in selected parts of the business, but the treatment of brand roles, channel differentiation, and competitive price gaps is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined brand-, pack-, and channel-level pricing strategy is in place for major brands, channels, customers, or packs, and brand roles, channel differentiation, and competitive price gaps inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong brand-, pack-, and channel-level pricing strategy is documented and regularly used. Brand roles, channel differentiation, and competitive price gaps are clearly translated into decisions through an insight-led process.",
+        "5": "A leading brand-, pack-, and channel-level pricing strategy is dynamic and forward-looking. Brand roles, channel differentiation, and competitive price gaps are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P2",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 2,
+      "enabler": "Forward-looking",
+      "subDimension": "Strategy Management",
+      "text": "The market has a clearly defined medium- to long-term price ladder or price curve, including affordability, mainstream, and premium roles where relevant.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No meaningful forward-looking view exists for price ladder or long-term price curve. Affordability, mainstream, premium roles, and ladder coherence are not used to shape medium- to long-term choices.",
+        "2": "An initial forward-looking view exists for price ladder or long-term price curve, but affordability, mainstream, premium roles, and ladder coherence are high level, weakly evidenced, or not yet linked to action.",
+        "3": "A workable forward-looking view exists for price ladder or long-term price curve. Affordability, mainstream, premium roles, and ladder coherence inform planning for major priorities, but scenario depth and strategic linkage are limited.",
+        "4": "A strong forward-looking view exists for price ladder or long-term price curve. Affordability, mainstream, premium roles, and ladder coherence are evidence-based and actively shape medium-term planning and investment choices.",
+        "5": "A leading forward-looking view exists for price ladder or long-term price curve. Affordability, mainstream, premium roles, and ladder coherence are scenario-tested, dynamic, and directly shape current decisions as well as 3\u20135 year direction."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P4",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "3. Policy Translation",
+      "stageOrder": 3,
+      "sequence": 4,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "Ex-factory prices are centrally governed with clear approval rules, documented logic, and integration with promotion and trade investment management.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for ex-factory pricing governance. The business handles approval rules, documented logic, and linkage to promotions and trade investment ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for ex-factory pricing governance, but the management of approval rules, documented logic, and linkage to promotions and trade investment is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for ex-factory pricing governance in major cases, and approval rules, documented logic, and linkage to promotions and trade investment are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for ex-factory pricing governance. Approval rules, documented logic, and linkage to promotions and trade investment are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for ex-factory pricing governance. Approval rules, documented logic, and linkage to promotions and trade investment are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P5",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "3. Policy Translation",
+      "stageOrder": 3,
+      "sequence": 5,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "There is a regular process to review realized prices, net prices, and compliance with target price corridors.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for review realized price, net price, and corridor compliance. The business handles price realization, corridor deviations, and corrective actions ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for review realized price, net price, and corridor compliance, but the management of price realization, corridor deviations, and corrective actions is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for review realized price, net price, and corridor compliance in major cases, and price realization, corridor deviations, and corrective actions are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for review realized price, net price, and corridor compliance. Price realization, corridor deviations, and corrective actions are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for review realized price, net price, and corridor compliance. Price realization, corridor deviations, and corrective actions are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P6",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 6,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "Pricing decisions are translated into execution plans and tracked until implementation issues are resolved.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for translate pricing decisions into execution. The business handles owners, communication, implementation milestones, and issue resolution ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for translate pricing decisions into execution, but the management of owners, communication, implementation milestones, and issue resolution is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for translate pricing decisions into execution in major cases, and owners, communication, implementation milestones, and issue resolution are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for translate pricing decisions into execution. Owners, communication, implementation milestones, and issue resolution are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for translate pricing decisions into execution. Owners, communication, implementation milestones, and issue resolution are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P9",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 9,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "Pricing dashboards or tools are used regularly to monitor execution and identify deviations from strategy.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No effective tools are used for pricing execution monitoring. Visibility into pricing exceptions, compliance gaps, and deviations from strategy is unreliable, late, or absent.",
+        "2": "Basic tools exist for pricing execution monitoring, but pricing exceptions, compliance gaps, and deviations from strategy are tracked manually, inconsistently, or only for selected items.",
+        "3": "Useful tools support pricing execution monitoring for major brands, channels, customers, or packs, and pricing exceptions, compliance gaps, and deviations from strategy are tracked regularly, but insight-to-action remains uneven.",
+        "4": "Strong tools support pricing execution monitoring. Pricing exceptions, compliance gaps, and deviations from strategy are monitored through regular dashboards or alerts and are actively used to manage performance.",
+        "5": "Leading tools support pricing execution monitoring. Pricing exceptions, compliance gaps, and deviations from strategy are automated, timely, and embedded in workflows to enable rapid intervention and ongoing optimization."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P10",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 10,
+      "enabler": "Governance",
+      "subDimension": "Cross-Functional Governance",
+      "text": "Pricing decisions are reviewed through a formal cross-functional process involving RGM, Sales, Finance, and relevant commercial stakeholders.",
+      "evidencePrompt": "Provide meeting cadence, RACI, forum minutes, or cross-functional decision example.",
+      "anchors": {
+        "1": "No clear cross-functional governance exists for cross-functional pricing decision making. Management of RGM, Sales, Finance, and commercial stakeholder involvement depends largely on individual relationships or single-function decisions.",
+        "2": "Basic cross-functional governance exists for cross-functional pricing decision making, but management of RGM, Sales, Finance, and commercial stakeholder involvement is irregular, narrow in participation, or weak in decision authority.",
+        "3": "A defined governance process exists for cross-functional pricing decision making, and RGM, Sales, Finance, and commercial stakeholder involvement are discussed in major decisions, but participation and follow-through are uneven.",
+        "4": "Strong cross-functional governance exists for cross-functional pricing decision making. Rgm, sales, finance, and commercial stakeholder involvement are reviewed through clear forums, ownership, and escalation routes.",
+        "5": "Leading cross-functional governance exists for cross-functional pricing decision making. Rgm, sales, finance, and commercial stakeholder involvement are managed through high-quality dialogue, clear trade-offs, and rapid aligned decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P11",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 11,
+      "enabler": "People & Capability Development",
+      "subDimension": "Cross-Functional Governance",
+      "text": "Pricing-related market insights and learning are systematically shared with regional or central RGM teams.",
+      "evidencePrompt": "Provide meeting cadence, RACI, forum minutes, or cross-functional decision example.",
+      "anchors": {
+        "1": "No systematic sharing exists for sharing pricing insight with regional or central RGM teams. Market learning, implications, and recommended actions are retained locally, fragmented, or shared only on request.",
+        "2": "Basic sharing exists for sharing pricing insight with regional or central RGM teams, but market learning, implications, and recommended actions are shared irregularly, at a high level, or without enough context to drive action.",
+        "3": "A defined sharing routine exists for sharing pricing insight with regional or central RGM teams, and market learning, implications, and recommended actions are circulated on important topics, but sharing is not yet proactive or consistent.",
+        "4": "Strong sharing exists for sharing pricing insight with regional or central RGM teams. Market learning, implications, and recommended actions are communicated regularly with enough context to support alignment and action.",
+        "5": "Leading sharing exists for sharing pricing insight with regional or central RGM teams. Market learning, implications, and recommended actions are proactively socialized, enriched with forward-looking insight, and used to shape wider decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P12",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "5. Capability & Forward Planning",
+      "stageOrder": 5,
+      "sequence": 12,
+      "enabler": "Forward-looking",
+      "subDimension": "Forward-Looking Readiness",
+      "text": "The market maintains a 3\u20135 year pricing direction that anticipates inflation, affordability pressure, competitive moves, and structural channel change.",
+      "evidencePrompt": "Provide 2\u20135 year roadmap, scenario plan, profit pool work, or future-oriented business case.",
+      "anchors": {
+        "1": "No meaningful forward-looking view exists for 3\u20135 year pricing direction. Inflation, affordability pressure, competitive moves, and structural channel change are not used to shape medium- to long-term choices.",
+        "2": "An initial forward-looking view exists for 3\u20135 year pricing direction, but inflation, affordability pressure, competitive moves, and structural channel change are high level, weakly evidenced, or not yet linked to action.",
+        "3": "A workable forward-looking view exists for 3\u20135 year pricing direction. Inflation, affordability pressure, competitive moves, and structural channel change inform planning for major priorities, but scenario depth and strategic linkage are limited.",
+        "4": "A strong forward-looking view exists for 3\u20135 year pricing direction. Inflation, affordability pressure, competitive moves, and structural channel change are evidence-based and actively shape medium-term planning and investment choices.",
+        "5": "A leading forward-looking view exists for 3\u20135 year pricing direction. Inflation, affordability pressure, competitive moves, and structural channel change are scenario-tested, dynamic, and directly shape current decisions as well as 3\u20135 year direction."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "P13",
+      "pillar": "Pricing",
+      "sheet": "Pricing",
+      "stage": "5. Capability & Forward Planning",
+      "stageOrder": 5,
+      "sequence": 13,
+      "enabler": "Forward-looking",
+      "subDimension": "Forward-Looking Readiness",
+      "text": "Pricing is used proactively to shape future value creation, not only to recover cost pressure.",
+      "evidencePrompt": "Provide 2\u20135 year roadmap, scenario plan, profit pool work, or future-oriented business case.",
+      "anchors": {
+        "1": "No meaningful forward-looking view exists for pricing as a value-creation lever. Profit growth, portfolio shaping, and long-term strategic trade-offs are not used to shape medium- to long-term choices.",
+        "2": "An initial forward-looking view exists for pricing as a value-creation lever, but profit growth, portfolio shaping, and long-term strategic trade-offs are high level, weakly evidenced, or not yet linked to action.",
+        "3": "A workable forward-looking view exists for pricing as a value-creation lever. Profit growth, portfolio shaping, and long-term strategic trade-offs inform planning for major priorities, but scenario depth and strategic linkage are limited.",
+        "4": "A strong forward-looking view exists for pricing as a value-creation lever. Profit growth, portfolio shaping, and long-term strategic trade-offs are evidence-based and actively shape medium-term planning and investment choices.",
+        "5": "A leading forward-looking view exists for pricing as a value-creation lever. Profit growth, portfolio shaping, and long-term strategic trade-offs are scenario-tested, dynamic, and directly shape current decisions as well as 3\u20135 year direction."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "O6",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 6,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "The market uses pack-level performance, shopper behavior, and financial metrics to evaluate whether pack roles are delivering intended outcomes.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to evaluate whether pack roles are delivering. Decision support around pack-level performance, shopper behavior, and financial metrics is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to evaluate whether pack roles are delivering, but decision support around pack-level performance, shopper behavior, and financial metrics is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to evaluate whether pack roles are delivering for major decisions, and decision support around pack-level performance, shopper behavior, and financial metrics provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to evaluate whether pack roles are delivering. Decision support around pack-level performance, shopper behavior, and financial metrics is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to evaluate whether pack roles are delivering. Decision support around pack-level performance, shopper behavior, and financial metrics is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O7",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 7,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "The market can identify where value is created or destroyed across the pack-price ladder.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to diagnose value creation or destruction across the pack-price ladder. Decision support around price-pack gaps, role performance, and ladder economics is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to diagnose value creation or destruction across the pack-price ladder, but decision support around price-pack gaps, role performance, and ladder economics is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to diagnose value creation or destruction across the pack-price ladder for major decisions, and decision support around price-pack gaps, role performance, and ladder economics provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to diagnose value creation or destruction across the pack-price ladder. Decision support around price-pack gaps, role performance, and ladder economics is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to diagnose value creation or destruction across the pack-price ladder. Decision support around price-pack gaps, role performance, and ladder economics is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O1",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 1,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "The market has a clear localized OBPPC strategy linked to shopper occasions, channel realities, and category growth priorities.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear localized OBPPC strategy is in place. The business lacks structure around shopper occasions, channel realities, and category growth priorities, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic localized OBPPC strategy is in place in selected parts of the business, but the treatment of shopper occasions, channel realities, and category growth priorities is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined localized OBPPC strategy is in place for major brands, channels, customers, or packs, and shopper occasions, channel realities, and category growth priorities inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong localized OBPPC strategy is documented and regularly used. Shopper occasions, channel realities, and category growth priorities are clearly translated into decisions through an insight-led process.",
+        "5": "A leading localized OBPPC strategy is dynamic and forward-looking. Shopper occasions, channel realities, and category growth priorities are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O2",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 2,
+      "enabler": "People & Capability Development",
+      "subDimension": "Strategy Management",
+      "text": "Key packs have clearly defined roles such as recruitment, core, premium, immediate consumption, or future consumption.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear pack-role architecture is in place. The business lacks structure around recruitment, core, premium, immediate-consumption, and future-consumption roles, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic pack-role architecture is in place in selected parts of the business, but the treatment of recruitment, core, premium, immediate-consumption, and future-consumption roles is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined pack-role architecture is in place for major brands, channels, customers, or packs, and recruitment, core, premium, immediate-consumption, and future-consumption roles inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong pack-role architecture is documented and regularly used. Recruitment, core, premium, immediate-consumption, and future-consumption roles are clearly translated into decisions through an insight-led process.",
+        "5": "A leading pack-role architecture is dynamic and forward-looking. Recruitment, core, premium, immediate-consumption, and future-consumption roles are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O3",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 3,
+      "enabler": "Forward-looking",
+      "subDimension": "Strategy Management",
+      "text": "The price-pack architecture is designed intentionally to support both recruitment and premiumization without internal overlap.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear price-pack architecture is in place. The business lacks structure around recruitment logic, premiumization logic, and avoidance of internal overlap, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic price-pack architecture is in place in selected parts of the business, but the treatment of recruitment logic, premiumization logic, and avoidance of internal overlap is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined price-pack architecture is in place for major brands, channels, customers, or packs, and recruitment logic, premiumization logic, and avoidance of internal overlap inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong price-pack architecture is documented and regularly used. Recruitment logic, premiumization logic, and avoidance of internal overlap are clearly translated into decisions through an insight-led process.",
+        "5": "A leading price-pack architecture is dynamic and forward-looking. Recruitment logic, premiumization logic, and avoidance of internal overlap are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O4",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "3. Policy Translation",
+      "stageOrder": 3,
+      "sequence": 4,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "There is a regular process to review pack-price ladder health, pack gaps, role conflicts, and SKU rationalization opportunities.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for review pack-price ladder health. The business handles pack gaps, role conflicts, and rationalization opportunities ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for review pack-price ladder health, but the management of pack gaps, role conflicts, and rationalization opportunities is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for review pack-price ladder health in major cases, and pack gaps, role conflicts, and rationalization opportunities are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for review pack-price ladder health. Pack gaps, role conflicts, and rationalization opportunities are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for review pack-price ladder health. Pack gaps, role conflicts, and rationalization opportunities are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O5",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "3. Policy Translation",
+      "stageOrder": 3,
+      "sequence": 5,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "OBPPC decisions are translated into channel-specific action plans and tracked in execution.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for translate OBPPC decisions into channel action plans. The business handles channel-specific execution, tracking, and follow-through ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for translate OBPPC decisions into channel action plans, but the management of channel-specific execution, tracking, and follow-through is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for translate OBPPC decisions into channel action plans in major cases, and channel-specific execution, tracking, and follow-through are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for translate OBPPC decisions into channel action plans. Channel-specific execution, tracking, and follow-through are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for translate OBPPC decisions into channel action plans. Channel-specific execution, tracking, and follow-through are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O8",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 8,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "Monitoring tools or dashboards are used to track OBPPC implementation and outcomes.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No effective tools are used for OBPPC implementation monitoring. Visibility into pack-role execution, performance trends, and outcome tracking is unreliable, late, or absent.",
+        "2": "Basic tools exist for OBPPC implementation monitoring, but pack-role execution, performance trends, and outcome tracking are tracked manually, inconsistently, or only for selected items.",
+        "3": "Useful tools support OBPPC implementation monitoring for major brands, channels, customers, or packs, and pack-role execution, performance trends, and outcome tracking are tracked regularly, but insight-to-action remains uneven.",
+        "4": "Strong tools support OBPPC implementation monitoring. Pack-role execution, performance trends, and outcome tracking are monitored through regular dashboards or alerts and are actively used to manage performance.",
+        "5": "Leading tools support OBPPC implementation monitoring. Pack-role execution, performance trends, and outcome tracking are automated, timely, and embedded in workflows to enable rapid intervention and ongoing optimization."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O9",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 9,
+      "enabler": "Governance",
+      "subDimension": "Cross-Functional Governance",
+      "text": "OBPPC strategy is jointly owned by RGM, Marketing, Sales, and Supply / Commercial Planning where relevant.",
+      "evidencePrompt": "Provide meeting cadence, RACI, forum minutes, or cross-functional decision example.",
+      "anchors": {
+        "1": "No clear cross-functional governance exists for joint ownership of OBPPC strategy. Management of alignment across RGM, Marketing, Sales, and Supply or Commercial Planning depends largely on individual relationships or single-function decisions.",
+        "2": "Basic cross-functional governance exists for joint ownership of OBPPC strategy, but management of alignment across RGM, Marketing, Sales, and Supply or Commercial Planning is irregular, narrow in participation, or weak in decision authority.",
+        "3": "A defined governance process exists for joint ownership of OBPPC strategy, and alignment across RGM, Marketing, Sales, and Supply or Commercial Planning are discussed in major decisions, but participation and follow-through are uneven.",
+        "4": "Strong cross-functional governance exists for joint ownership of OBPPC strategy. Alignment across rgm, marketing, sales, and supply or commercial planning are reviewed through clear forums, ownership, and escalation routes.",
+        "5": "Leading cross-functional governance exists for joint ownership of OBPPC strategy. Alignment across rgm, marketing, sales, and supply or commercial planning are managed through high-quality dialogue, clear trade-offs, and rapid aligned decisions."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O10",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 10,
+      "enabler": "People & Capability Development",
+      "subDimension": "Cross-Functional Governance",
+      "text": "Market OBPPC insights are systematically shared across functions and with regional stakeholders.",
+      "evidencePrompt": "Provide meeting cadence, RACI, forum minutes, or cross-functional decision example.",
+      "anchors": {
+        "1": "No systematic sharing exists for sharing OBPPC insight across functions and with regional stakeholders. Portfolio learning, pack-role implications, and recommended actions are retained locally, fragmented, or shared only on request.",
+        "2": "Basic sharing exists for sharing OBPPC insight across functions and with regional stakeholders, but portfolio learning, pack-role implications, and recommended actions are shared irregularly, at a high level, or without enough context to drive action.",
+        "3": "A defined sharing routine exists for sharing OBPPC insight across functions and with regional stakeholders, and portfolio learning, pack-role implications, and recommended actions are circulated on important topics, but sharing is not yet proactive or consistent.",
+        "4": "Strong sharing exists for sharing OBPPC insight across functions and with regional stakeholders. Portfolio learning, pack-role implications, and recommended actions are communicated regularly with enough context to support alignment and action.",
+        "5": "Leading sharing exists for sharing OBPPC insight across functions and with regional stakeholders. Portfolio learning, pack-role implications, and recommended actions are proactively socialized, enriched with forward-looking insight, and used to shape wider decisions."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O11",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "5. Capability & Forward Planning",
+      "stageOrder": 5,
+      "sequence": 11,
+      "enabler": "Forward-looking",
+      "subDimension": "Forward-Looking Readiness",
+      "text": "The market has a medium- to long-term view of how the pack-price architecture should evolve based on macro and shopper change.",
+      "evidencePrompt": "Provide 2\u20135 year roadmap, scenario plan, profit pool work, or future-oriented business case.",
+      "anchors": {
+        "1": "No meaningful forward-looking view exists for medium- to long-term evolution of the pack-price architecture. Macro change, shopper change, and architecture implications are not used to shape medium- to long-term choices.",
+        "2": "An initial forward-looking view exists for medium- to long-term evolution of the pack-price architecture, but macro change, shopper change, and architecture implications are high level, weakly evidenced, or not yet linked to action.",
+        "3": "A workable forward-looking view exists for medium- to long-term evolution of the pack-price architecture. Macro change, shopper change, and architecture implications inform planning for major priorities, but scenario depth and strategic linkage are limited.",
+        "4": "A strong forward-looking view exists for medium- to long-term evolution of the pack-price architecture. Macro change, shopper change, and architecture implications are evidence-based and actively shape medium-term planning and investment choices.",
+        "5": "A leading forward-looking view exists for medium- to long-term evolution of the pack-price architecture. Macro change, shopper change, and architecture implications are scenario-tested, dynamic, and directly shape current decisions as well as 3\u20135 year direction."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "O12",
+      "pillar": "OBPPC",
+      "sheet": "OBPPC",
+      "stage": "5. Capability & Forward Planning",
+      "stageOrder": 5,
+      "sequence": 12,
+      "enabler": "Forward-looking",
+      "subDimension": "Forward-Looking Readiness",
+      "text": "The market can identify future growth corridors and whitespace opportunities within the pack-price ladder.",
+      "evidencePrompt": "Provide 2\u20135 year roadmap, scenario plan, profit pool work, or future-oriented business case.",
+      "anchors": {
+        "1": "No meaningful forward-looking view exists for future growth corridors and whitespace opportunities in the pack-price ladder. Unserved needs, ladder gaps, and future pack-price opportunities are not used to shape medium- to long-term choices.",
+        "2": "An initial forward-looking view exists for future growth corridors and whitespace opportunities in the pack-price ladder, but unserved needs, ladder gaps, and future pack-price opportunities are high level, weakly evidenced, or not yet linked to action.",
+        "3": "A workable forward-looking view exists for future growth corridors and whitespace opportunities in the pack-price ladder. Unserved needs, ladder gaps, and future pack-price opportunities inform planning for major priorities, but scenario depth and strategic linkage are limited.",
+        "4": "A strong forward-looking view exists for future growth corridors and whitespace opportunities in the pack-price ladder. Unserved needs, ladder gaps, and future pack-price opportunities are evidence-based and actively shape medium-term planning and investment choices.",
+        "5": "A leading forward-looking view exists for future growth corridors and whitespace opportunities in the pack-price ladder. Unserved needs, ladder gaps, and future pack-price opportunities are scenario-tested, dynamic, and directly shape current decisions as well as 3\u20135 year direction."
+      },
+      "weight": 0.01166666666666667,
+      "target": 3.8
+    },
+    {
+      "id": "PR7",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 7,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "The market measures uplift, incremental value, and ROI using a consistent logic.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to measure uplift, incremental value, and ROI. Decision support around consistent methodology, comparability, and financial interpretation is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to measure uplift, incremental value, and ROI, but decision support around consistent methodology, comparability, and financial interpretation is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to measure uplift, incremental value, and ROI for major decisions, and decision support around consistent methodology, comparability, and financial interpretation provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to measure uplift, incremental value, and ROI. Decision support around consistent methodology, comparability, and financial interpretation is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to measure uplift, incremental value, and ROI. Decision support around consistent methodology, comparability, and financial interpretation is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR8",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 8,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "Promotion analytics are used to compare mechanics, discount depth, timing, and customer response.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to compare promotion mechanics and response. Decision support around discount depth, timing, customer response, and mechanic effectiveness is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to compare promotion mechanics and response, but decision support around discount depth, timing, customer response, and mechanic effectiveness is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to compare promotion mechanics and response for major decisions, and decision support around discount depth, timing, customer response, and mechanic effectiveness provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to compare promotion mechanics and response. Decision support around discount depth, timing, customer response, and mechanic effectiveness is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to compare promotion mechanics and response. Decision support around discount depth, timing, customer response, and mechanic effectiveness is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR1",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 1,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "The market has clear promotion strategies by channel, customer, and pack role rather than relying mainly on historical activity patterns.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear promotion strategy by channel, customer, and pack role is in place. The business lacks structure around customer needs, channel realities, and avoidance of historical habit, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic promotion strategy by channel, customer, and pack role is in place in selected parts of the business, but the treatment of customer needs, channel realities, and avoidance of historical habit is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined promotion strategy by channel, customer, and pack role is in place for major brands, channels, customers, or packs, and customer needs, channel realities, and avoidance of historical habit inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong promotion strategy by channel, customer, and pack role is documented and regularly used. Customer needs, channel realities, and avoidance of historical habit are clearly translated into decisions through an insight-led process.",
+        "5": "A leading promotion strategy by channel, customer, and pack role is dynamic and forward-looking. Customer needs, channel realities, and avoidance of historical habit are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR2",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 2,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "Promotion plans are linked to clear objectives such as recruitment, frequency, basket building, visibility, or value defence.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear link promotion plans to clear business objectives is in place. The business lacks structure around recruitment, frequency, basket building, visibility, and value defence, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic link promotion plans to clear business objectives is in place in selected parts of the business, but the treatment of recruitment, frequency, basket building, visibility, and value defence is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined link promotion plans to clear business objectives is in place for major brands, channels, customers, or packs, and recruitment, frequency, basket building, visibility, and value defence inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong link promotion plans to clear business objectives is documented and regularly used. Recruitment, frequency, basket building, visibility, and value defence are clearly translated into decisions through an insight-led process.",
+        "5": "A leading link promotion plans to clear business objectives is dynamic and forward-looking. Recruitment, frequency, basket building, visibility, and value defence are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR3",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "3. Policy Translation",
+      "stageOrder": 3,
+      "sequence": 3,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "Promotion guardrails exist for key packs, brands, and channels to avoid damaging long-term pricing or brand role.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear promotion guardrails by pack, brand, and channel is in place. The business lacks structure around pack, brand, and channel rules that protect long-term price and role architecture, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic promotion guardrails by pack, brand, and channel is in place in selected parts of the business, but the treatment of pack, brand, and channel rules that protect long-term price and role architecture is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined promotion guardrails by pack, brand, and channel is in place for major brands, channels, customers, or packs, and pack, brand, and channel rules that protect long-term price and role architecture inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong promotion guardrails by pack, brand, and channel is documented and regularly used. Pack, brand, and channel rules that protect long-term price and role architecture are clearly translated into decisions through an insight-led process.",
+        "5": "A leading promotion guardrails by pack, brand, and channel is dynamic and forward-looking. Pack, brand, and channel rules that protect long-term price and role architecture are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR10",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "3. Policy Translation",
+      "stageOrder": 3,
+      "sequence": 10,
+      "enabler": "Governance",
+      "subDimension": "Cross-Functional Governance",
+      "text": "Promotion strategy and investment decisions are reviewed across RGM, Sales, Finance, and commercial leadership.",
+      "evidencePrompt": "Provide meeting cadence, RACI, forum minutes, or cross-functional decision example.",
+      "anchors": {
+        "1": "No clear cross-functional governance exists for cross-functional review of promotion strategy and investment. Management of RGM, Sales, Finance, and commercial leadership alignment depends largely on individual relationships or single-function decisions.",
+        "2": "Basic cross-functional governance exists for cross-functional review of promotion strategy and investment, but management of RGM, Sales, Finance, and commercial leadership alignment is irregular, narrow in participation, or weak in decision authority.",
+        "3": "A defined governance process exists for cross-functional review of promotion strategy and investment, and RGM, Sales, Finance, and commercial leadership alignment are discussed in major decisions, but participation and follow-through are uneven.",
+        "4": "Strong cross-functional governance exists for cross-functional review of promotion strategy and investment. Rgm, sales, finance, and commercial leadership alignment are reviewed through clear forums, ownership, and escalation routes.",
+        "5": "Leading cross-functional governance exists for cross-functional review of promotion strategy and investment. Rgm, sales, finance, and commercial leadership alignment are managed through high-quality dialogue, clear trade-offs, and rapid aligned decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR4",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 4,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "All major promotions and related spending are tracked through a structured management process with clear owners and review routines.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for track promotions and related spending. The business handles clear ownership, review cadence, and spend visibility ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for track promotions and related spending, but the management of clear ownership, review cadence, and spend visibility is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for track promotions and related spending in major cases, and clear ownership, review cadence, and spend visibility are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for track promotions and related spending. Clear ownership, review cadence, and spend visibility are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for track promotions and related spending. Clear ownership, review cadence, and spend visibility are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR5",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 5,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "Promotion results are reviewed systematically, and underperforming activities trigger corrective action or redesign.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for review promotion results and redesign underperformers. The business handles post-event evaluation, corrective action, and decision follow-through ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for review promotion results and redesign underperformers, but the management of post-event evaluation, corrective action, and decision follow-through is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for review promotion results and redesign underperformers in major cases, and post-event evaluation, corrective action, and decision follow-through are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for review promotion results and redesign underperformers. Post-event evaluation, corrective action, and decision follow-through are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for review promotion results and redesign underperformers. Post-event evaluation, corrective action, and decision follow-through are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR6",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 6,
+      "enabler": "People & Capability Development",
+      "subDimension": "Operations Management",
+      "text": "The market can distinguish between high-volume promotions and value-accretive promotions.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable capability exists to distinguish volume-driving promotions from value-accretive promotions. Decision support around incrementality, margin quality, and profitability is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to distinguish volume-driving promotions from value-accretive promotions, but decision support around incrementality, margin quality, and profitability is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to distinguish volume-driving promotions from value-accretive promotions for major decisions, and decision support around incrementality, margin quality, and profitability provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to distinguish volume-driving promotions from value-accretive promotions. Decision support around incrementality, margin quality, and profitability is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to distinguish volume-driving promotions from value-accretive promotions. Decision support around incrementality, margin quality, and profitability is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR11",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 11,
+      "enabler": "Governance",
+      "subDimension": "Cross-Functional Governance",
+      "text": "The market has a closed-loop mechanism to escalate and resolve recurring promotion issues.",
+      "evidencePrompt": "Provide meeting cadence, RACI, forum minutes, or cross-functional decision example.",
+      "anchors": {
+        "1": "No reliable process exists for escalate and resolve recurring promotion issues. The business handles issue ownership, root-cause resolution, and closed-loop correction ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for escalate and resolve recurring promotion issues, but the management of issue ownership, root-cause resolution, and closed-loop correction is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for escalate and resolve recurring promotion issues in major cases, and issue ownership, root-cause resolution, and closed-loop correction are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for escalate and resolve recurring promotion issues. Issue ownership, root-cause resolution, and closed-loop correction are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for escalate and resolve recurring promotion issues. Issue ownership, root-cause resolution, and closed-loop correction are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR9",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "5. Capability & Forward Planning",
+      "stageOrder": 5,
+      "sequence": 9,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "Predictive analytics or simulation is used, at least selectively, to estimate likely promotion outcomes before deployment.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to predict promotion outcomes before deployment. Decision support around simulation, scenario testing, and expected ROI is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to predict promotion outcomes before deployment, but decision support around simulation, scenario testing, and expected ROI is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to predict promotion outcomes before deployment for major decisions, and decision support around simulation, scenario testing, and expected ROI provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to predict promotion outcomes before deployment. Decision support around simulation, scenario testing, and expected ROI is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to predict promotion outcomes before deployment. Decision support around simulation, scenario testing, and expected ROI is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR12",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "5. Capability & Forward Planning",
+      "stageOrder": 5,
+      "sequence": 12,
+      "enabler": "Forward-looking",
+      "subDimension": "Forward-Looking Readiness",
+      "text": "The market actively identifies low-value legacy promotions and can redesign the investment model over a 2\u20133 year horizon.",
+      "evidencePrompt": "Provide 2\u20135 year roadmap, scenario plan, profit pool work, or future-oriented business case.",
+      "anchors": {
+        "1": "No meaningful forward-looking view exists for redesign of low-value legacy promotions. The multi-year investment model, not just the current calendar are not used to shape medium- to long-term choices.",
+        "2": "An initial forward-looking view exists for redesign of low-value legacy promotions, but the multi-year investment model, not just the current calendar are high level, weakly evidenced, or not yet linked to action.",
+        "3": "A workable forward-looking view exists for redesign of low-value legacy promotions. The multi-year investment model, not just the current calendar inform planning for major priorities, but scenario depth and strategic linkage are limited.",
+        "4": "A strong forward-looking view exists for redesign of low-value legacy promotions. The multi-year investment model, not just the current calendar are evidence-based and actively shape medium-term planning and investment choices.",
+        "5": "A leading forward-looking view exists for redesign of low-value legacy promotions. The multi-year investment model, not just the current calendar are scenario-tested, dynamic, and directly shape current decisions as well as 3\u20135 year direction."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "PR13",
+      "pillar": "Promotion Spend",
+      "sheet": "Promotion_Spend",
+      "stage": "5. Capability & Forward Planning",
+      "stageOrder": 5,
+      "sequence": 13,
+      "enabler": "Forward-looking",
+      "subDimension": "Forward-Looking Readiness",
+      "text": "Promotion investment is reallocated over time toward higher-return opportunities based on learning and strategic direction.",
+      "evidencePrompt": "Provide 2\u20135 year roadmap, scenario plan, profit pool work, or future-oriented business case.",
+      "anchors": {
+        "1": "No meaningful forward-looking view exists for promotion-investment reallocation toward higher-return opportunities. Learning loops, strategy shifts, and return improvement are not used to shape medium- to long-term choices.",
+        "2": "An initial forward-looking view exists for promotion-investment reallocation toward higher-return opportunities, but learning loops, strategy shifts, and return improvement are high level, weakly evidenced, or not yet linked to action.",
+        "3": "A workable forward-looking view exists for promotion-investment reallocation toward higher-return opportunities. Learning loops, strategy shifts, and return improvement inform planning for major priorities, but scenario depth and strategic linkage are limited.",
+        "4": "A strong forward-looking view exists for promotion-investment reallocation toward higher-return opportunities. Learning loops, strategy shifts, and return improvement are evidence-based and actively shape medium-term planning and investment choices.",
+        "5": "A leading forward-looking view exists for promotion-investment reallocation toward higher-return opportunities. Learning loops, strategy shifts, and return improvement are scenario-tested, dynamic, and directly shape current decisions as well as 3\u20135 year direction."
+      },
+      "weight": 0.01384615384615384,
+      "target": 4.0
+    },
+    {
+      "id": "T6",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 6,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "Gross-to-net analysis is used to understand the real financial impact of customer investment.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to use gross-to-net analysis for customer investment decisions. Decision support around discounts, terms, and trade-investment effects is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to use gross-to-net analysis for customer investment decisions, but decision support around discounts, terms, and trade-investment effects is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to use gross-to-net analysis for customer investment decisions for major decisions, and decision support around discounts, terms, and trade-investment effects provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to use gross-to-net analysis for customer investment decisions. Decision support around discounts, terms, and trade-investment effects is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to use gross-to-net analysis for customer investment decisions. Decision support around discounts, terms, and trade-investment effects is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T7",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 7,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "Trade term scenarios can be modeled to support negotiations and customer planning.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to model trade-term scenarios for negotiation and planning. Decision support around customer scenarios, option trade-offs, and negotiation support is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to model trade-term scenarios for negotiation and planning, but decision support around customer scenarios, option trade-offs, and negotiation support is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to model trade-term scenarios for negotiation and planning for major decisions, and decision support around customer scenarios, option trade-offs, and negotiation support provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to model trade-term scenarios for negotiation and planning. Decision support around customer scenarios, option trade-offs, and negotiation support is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to model trade-term scenarios for negotiation and planning. Decision support around customer scenarios, option trade-offs, and negotiation support is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T8",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "1. Opportunity Understanding",
+      "stageOrder": 1,
+      "sequence": 8,
+      "enabler": "Digital / Data / Tools",
+      "subDimension": "Data, Tools & Analytics",
+      "text": "The organization can assess profit pools by customer, channel, or SKU where relevant to support trade investment decisions.",
+      "evidencePrompt": "Provide dashboard, model output, analysis file, KPI tracker, or tool screenshot.",
+      "anchors": {
+        "1": "No reliable capability exists to assess profit pools by customer, channel, or SKU. Decision support around support for customer investment and commercial prioritization is absent, too weak, or not decision-grade.",
+        "2": "Basic capability exists to assess profit pools by customer, channel, or SKU, but decision support around support for customer investment and commercial prioritization is limited in scope, mostly manual, or used only occasionally.",
+        "3": "A workable capability exists to assess profit pools by customer, channel, or SKU for major decisions, and decision support around support for customer investment and commercial prioritization provides useful directional input, but depth and consistency remain limited.",
+        "4": "A strong capability exists to assess profit pools by customer, channel, or SKU. Decision support around support for customer investment and commercial prioritization is robust, regularly updated, and actively used in decision making.",
+        "5": "A leading capability exists to assess profit pools by customer, channel, or SKU. Decision support around support for customer investment and commercial prioritization is integrated, predictive where relevant, and used to continuously improve strategic and financial decisions."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T1",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 1,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "The market has a clear customer and channel investment strategy linked to the role of each channel and customer in the business.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear customer and channel investment strategy is in place. The business lacks structure around channel role, customer role, and investment logic, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic customer and channel investment strategy is in place in selected parts of the business, but the treatment of channel role, customer role, and investment logic is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined customer and channel investment strategy is in place for major brands, channels, customers, or packs, and channel role, customer role, and investment logic inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong customer and channel investment strategy is documented and regularly used. Channel role, customer role, and investment logic are clearly translated into decisions through an insight-led process.",
+        "5": "A leading customer and channel investment strategy is dynamic and forward-looking. Channel role, customer role, and investment logic are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T2",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "2. Strategy Design",
+      "stageOrder": 2,
+      "sequence": 2,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "Trade terms and PTC are differentiated by customer type, business model, and strategic value rather than managed as generic discounts.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear differentiated trade-terms and PTC design is in place. The business lacks structure around customer type, business model, and strategic importance, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic differentiated trade-terms and PTC design is in place in selected parts of the business, but the treatment of customer type, business model, and strategic importance is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined differentiated trade-terms and PTC design is in place for major brands, channels, customers, or packs, and customer type, business model, and strategic importance inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong differentiated trade-terms and PTC design is documented and regularly used. Customer type, business model, and strategic importance are clearly translated into decisions through an insight-led process.",
+        "5": "A leading differentiated trade-terms and PTC design is dynamic and forward-looking. Customer type, business model, and strategic importance are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T3",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "3. Policy Translation",
+      "stageOrder": 3,
+      "sequence": 3,
+      "enabler": "Governance",
+      "subDimension": "Strategy Management",
+      "text": "Contract structures and investment rules are clearly defined and aligned with value creation logic.",
+      "evidencePrompt": "Provide a current strategy deck, roadmap, architecture, or decision memo.",
+      "anchors": {
+        "1": "No clear contract structures and investment rules is in place. The business lacks structure around conditionality, commercial logic, and value-creation alignment, so choices remain reactive and weakly aligned to strategy.",
+        "2": "A basic contract structures and investment rules is in place in selected parts of the business, but the treatment of conditionality, commercial logic, and value-creation alignment is incomplete, outdated, or inconsistently applied.",
+        "3": "A defined contract structures and investment rules is in place for major brands, channels, customers, or packs, and conditionality, commercial logic, and value-creation alignment inform key decisions, but coverage and rigor remain uneven.",
+        "4": "A strong contract structures and investment rules is documented and regularly used. Conditionality, commercial logic, and value-creation alignment are clearly translated into decisions through an insight-led process.",
+        "5": "A leading contract structures and investment rules is dynamic and forward-looking. Conditionality, commercial logic, and value-creation alignment are continuously refreshed and actively shape both current choices and medium- to long-term value creation."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T4",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 4,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "Trade terms are systematically tracked and reviewed for compliance, effectiveness, and alignment with agreed conditions.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for track and review trade terms. The business handles compliance, effectiveness, and alignment with agreed conditions ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for track and review trade terms, but the management of compliance, effectiveness, and alignment with agreed conditions is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for track and review trade terms in major cases, and compliance, effectiveness, and alignment with agreed conditions are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for track and review trade terms. Compliance, effectiveness, and alignment with agreed conditions are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for track and review trade terms. Compliance, effectiveness, and alignment with agreed conditions are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T5",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 5,
+      "enabler": "Governance",
+      "subDimension": "Operations Management",
+      "text": "The market has structured routines for reviewing price realization, conditionality compliance, and issue resolution.",
+      "evidencePrompt": "Provide SOP, governance routine, review deck, workflow, or implementation example.",
+      "anchors": {
+        "1": "No reliable process exists for review price realization and conditionality compliance. The business handles issue resolution, escalation, and correction ad hoc, weakly controls them, or does not follow through.",
+        "2": "A basic process exists for review price realization and conditionality compliance, but the management of issue resolution, escalation, and correction is manual, inconsistent, or applied only in selected cases.",
+        "3": "A defined process exists for review price realization and conditionality compliance in major cases, and issue resolution, escalation, and correction are reviewed periodically, but discipline and closed-loop follow-through are uneven.",
+        "4": "A robust process exists for review price realization and conditionality compliance. Issue resolution, escalation, and correction are reviewed regularly, exceptions are managed, and actions are followed through.",
+        "5": "A leading process exists for review price realization and conditionality compliance. Issue resolution, escalation, and correction are tightly governed, rapidly escalated when needed, and continuously optimized through closed-loop management."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T9",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "4. Execution Management",
+      "stageOrder": 4,
+      "sequence": 9,
+      "enabler": "People & Capability Development",
+      "subDimension": "Cross-Functional Governance",
+      "text": "Customer investment decisions are reviewed through a formal cross-functional process involving Sales, Finance, and RGM.",
+      "evidencePrompt": "Provide meeting cadence, RACI, forum minutes, or cross-functional decision example.",
+      "anchors": {
+        "1": "No clear cross-functional governance exists for cross-functional customer investment decisions. Management of joint review across Sales, Finance, and RGM depends largely on individual relationships or single-function decisions.",
+        "2": "Basic cross-functional governance exists for cross-functional customer investment decisions, but management of joint review across Sales, Finance, and RGM is irregular, narrow in participation, or weak in decision authority.",
+        "3": "A defined governance process exists for cross-functional customer investment decisions, and joint review across Sales, Finance, and RGM are discussed in major decisions, but participation and follow-through are uneven.",
+        "4": "Strong cross-functional governance exists for cross-functional customer investment decisions. Joint review across sales, finance, and rgm are reviewed through clear forums, ownership, and escalation routes.",
+        "5": "Leading cross-functional governance exists for cross-functional customer investment decisions. Joint review across sales, finance, and rgm are managed through high-quality dialogue, clear trade-offs, and rapid aligned decisions."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    },
+    {
+      "id": "T10",
+      "pillar": "DFR / Trade Investment",
+      "sheet": "DFR_Trade_Investment",
+      "stage": "5. Capability & Forward Planning",
+      "stageOrder": 5,
+      "sequence": 10,
+      "enabler": "Forward-looking",
+      "subDimension": "Forward-Looking Readiness",
+      "text": "The market has a 2\u20133 year view of how customer and channel investment should evolve as channels, customer power, and route-to-market models change.",
+      "evidencePrompt": "Provide 2\u20135 year roadmap, scenario plan, profit pool work, or future-oriented business case.",
+      "anchors": {
+        "1": "No meaningful forward-looking view exists for 2\u20133 year evolution of customer and channel investment. Channel change, customer power, and route-to-market implications are not used to shape medium- to long-term choices.",
+        "2": "An initial forward-looking view exists for 2\u20133 year evolution of customer and channel investment, but channel change, customer power, and route-to-market implications are high level, weakly evidenced, or not yet linked to action.",
+        "3": "A workable forward-looking view exists for 2\u20133 year evolution of customer and channel investment. Channel change, customer power, and route-to-market implications inform planning for major priorities, but scenario depth and strategic linkage are limited.",
+        "4": "A strong forward-looking view exists for 2\u20133 year evolution of customer and channel investment. Channel change, customer power, and route-to-market implications are evidence-based and actively shape medium-term planning and investment choices.",
+        "5": "A leading forward-looking view exists for 2\u20133 year evolution of customer and channel investment. Channel change, customer power, and route-to-market implications are scenario-tested, dynamic, and directly shape current decisions as well as 3\u20135 year direction."
+      },
+      "weight": 0.012,
+      "target": 3.8
+    }
+  ]
+}

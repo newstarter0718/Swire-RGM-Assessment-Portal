@@ -1,0 +1,7 @@
+{
+  "name": "swire-rgm-assessment-portal",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "GitHub Pages friendly assessment portal for the Swire RGM workbook."
+}

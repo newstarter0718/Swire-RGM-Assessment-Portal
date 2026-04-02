@@ -1,0 +1,85 @@
+<svg width="1600" height="1180" viewBox="0 0 1600 1180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">RGM framework architecture illustration</title>
+  <desc id="desc">A branded diagram showing the Swire RGM framework as three connected layers with source foundation and operating cycle references.</desc>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="120" x2="1480" y2="1040" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8FA"/>
+      <stop offset="1" stop-color="#F3F5F8"/>
+    </linearGradient>
+    <linearGradient id="redPanel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#D12A43"/>
+      <stop offset="1" stop-color="#7B0F21"/>
+    </linearGradient>
+    <filter id="shadow" x="120" y="90" width="1360" height="980" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#111214" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1180" rx="48" fill="url(#bg)"/>
+  <circle cx="1330" cy="214" r="190" fill="#D12A43" fill-opacity="0.08"/>
+  <circle cx="240" cy="1040" r="240" fill="#C7CED8" fill-opacity="0.20"/>
+
+  <g filter="url(#shadow)">
+    <rect x="150" y="124" width="1300" height="932" rx="40" fill="white" fill-opacity="0.94"/>
+    <rect x="150.75" y="124.75" width="1298.5" height="930.5" rx="39.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+  </g>
+
+  <text x="214" y="212" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="3">FRAMEWORK ARCHITECTURE</text>
+  <text x="214" y="272" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="800">Three layers. One shared enterprise model.</text>
+  <text x="214" y="318" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="26">What is assessed, how it progresses, and what sustains it.</text>
+
+  <rect x="214" y="388" width="1172" height="506" rx="34" fill="#FAFBFC"/>
+  <rect x="214.75" y="388.75" width="1170.5" height="504.5" rx="33.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+
+  <text x="252" y="446" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2.6">MODEL STACK</text>
+
+  <rect x="252" y="480" width="1096" height="122" rx="30" fill="url(#redPanel)"/>
+  <text x="290" y="524" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.6">LAYER 1 / BUSINESS PILLARS</text>
+  <g fill="white" font-family="Inter, Arial, sans-serif">
+    <rect x="290" y="542" width="228" height="34" rx="17" fill="white" fill-opacity="0.14"/>
+    <text x="314" y="565" font-size="20" font-weight="700">Pricing</text>
+    <rect x="534" y="542" width="214" height="34" rx="17" fill="white" fill-opacity="0.14"/>
+    <text x="560" y="565" font-size="20" font-weight="700">OBPPC</text>
+    <rect x="764" y="542" width="282" height="34" rx="17" fill="white" fill-opacity="0.14"/>
+    <text x="790" y="565" font-size="20" font-weight="700">Promotion Spend</text>
+    <rect x="1062" y="542" width="248" height="34" rx="17" fill="white" fill-opacity="0.14"/>
+    <text x="1088" y="565" font-size="20" font-weight="700">DFR / Trade Investment</text>
+  </g>
+
+  <line x1="800" y1="603" x2="800" y2="650" stroke="#BFC7D1" stroke-width="2" stroke-dasharray="8 10"/>
+
+  <rect x="252" y="650" width="1096" height="110" rx="30" fill="#FFF3F5"/>
+  <rect x="252.75" y="650.75" width="1094.5" height="108.5" rx="29.25" stroke="#B4132D" stroke-opacity="0.16" stroke-width="1.5"/>
+  <text x="290" y="696" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.6">LAYER 2 / CAPABILITY STAGES</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#181B20">
+    <rect x="290" y="712" width="158" height="30" rx="15" fill="white"/>
+    <text x="312" y="732">1 Diagnose</text>
+    <rect x="468" y="712" width="144" height="30" rx="15" fill="white"/>
+    <text x="492" y="732">2 Design</text>
+    <rect x="632" y="712" width="162" height="30" rx="15" fill="white"/>
+    <text x="652" y="732">3 Translate</text>
+    <rect x="814" y="712" width="144" height="30" rx="15" fill="white"/>
+    <text x="842" y="732">4 Execute</text>
+    <rect x="978" y="712" width="156" height="30" rx="15" fill="white"/>
+    <text x="1002" y="732">5 Sustain</text>
+  </g>
+
+  <line x1="800" y1="760" x2="800" y2="804" stroke="#BFC7D1" stroke-width="2" stroke-dasharray="8 10"/>
+
+  <rect x="252" y="804" width="1096" height="54" rx="27" fill="#F0F3F6"/>
+  <text x="290" y="837" fill="#505865" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.6">LAYER 3 / CROSS-CUTTING ENABLERS</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#181B20">
+    <text x="630" y="837">Governance</text>
+    <text x="776" y="837">Tools</text>
+    <text x="864" y="837">People Capability</text>
+    <text x="1060" y="837">Future Readiness</text>
+  </g>
+
+  <rect x="214" y="930" width="560" height="82" rx="28" fill="#111214"/>
+  <text x="252" y="973" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2.2">SOURCE FOUNDATION</text>
+  <text x="252" y="1002" fill="#D9E0E8" font-family="Inter, Arial, sans-serif" font-size="18">RGM 2.0 playbook / HK-TW questionnaire / China certification / CDE E2E playbook</text>
+
+  <rect x="798" y="930" width="588" height="82" rx="28" fill="#F4F6F8"/>
+  <text x="836" y="973" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2.2">OPERATING CYCLE</text>
+  <text x="836" y="1002" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="18">Fact base → self-assessment → validation → calibration → roadmap → follow-up</text>
+</svg>

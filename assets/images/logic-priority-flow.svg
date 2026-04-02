@@ -1,0 +1,102 @@
+<svg width="1600" height="1080" viewBox="0 0 1600 1080" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Logic and priority flow illustration</title>
+  <desc id="desc">A diagram showing how RGM assessment answers are turned into scores, compared to targets, and converted into dashboard views and priorities.</desc>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="120" x2="1480" y2="960" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8FA"/>
+      <stop offset="1" stop-color="#F3F5F8"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#D12A43"/>
+      <stop offset="1" stop-color="#7B0F21"/>
+    </linearGradient>
+    <filter id="shadow" x="120" y="90" width="1360" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#111214" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1080" rx="48" fill="url(#bg)"/>
+  <circle cx="1340" cy="184" r="184" fill="#D12A43" fill-opacity="0.08"/>
+  <circle cx="220" cy="980" r="230" fill="#C7CED8" fill-opacity="0.18"/>
+
+  <g filter="url(#shadow)">
+    <rect x="150" y="124" width="1300" height="832" rx="40" fill="white" fill-opacity="0.94"/>
+    <rect x="150.75" y="124.75" width="1298.5" height="830.5" rx="39.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+  </g>
+
+  <text x="214" y="212" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="3">SCORING LOGIC</text>
+  <text x="214" y="272" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="800">From answer to priority in one explicit chain.</text>
+  <text x="214" y="318" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="26">No hidden math. Each step has a purpose and each output has a management use.</text>
+
+  <g transform="translate(214 400)">
+    <rect width="240" height="170" rx="28" fill="#FFFFFF"/>
+    <rect x="0.75" y="0.75" width="238.5" height="168.5" rx="27.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+    <circle cx="44" cy="42" r="18" fill="#FBE7EA"/>
+    <text x="44" y="48" text-anchor="middle" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">1</text>
+    <text x="28" y="90" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">Respond</text>
+    <text x="28" y="122" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Pick a maturity anchor</text>
+    <text x="28" y="148" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Capture evidence or note</text>
+  </g>
+
+  <g transform="translate(500 400)">
+    <rect width="240" height="170" rx="28" fill="#FFFFFF"/>
+    <rect x="0.75" y="0.75" width="238.5" height="168.5" rx="27.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+    <circle cx="44" cy="42" r="18" fill="#FBE7EA"/>
+    <text x="44" y="48" text-anchor="middle" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">2</text>
+    <text x="28" y="90" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">Aggregate</text>
+    <text x="28" y="122" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Roll up by pillar</text>
+    <text x="28" y="148" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Also by stage and enabler</text>
+  </g>
+
+  <g transform="translate(786 400)">
+    <rect width="240" height="170" rx="28" fill="#FFFFFF"/>
+    <rect x="0.75" y="0.75" width="238.5" height="168.5" rx="27.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+    <circle cx="44" cy="42" r="18" fill="#FBE7EA"/>
+    <text x="44" y="48" text-anchor="middle" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">3</text>
+    <text x="28" y="90" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">Compare</text>
+    <text x="28" y="122" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Read actual score</text>
+    <text x="28" y="148" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">against target state</text>
+  </g>
+
+  <g transform="translate(1072 400)">
+    <rect width="240" height="170" rx="28" fill="url(#accent)"/>
+    <text x="28" y="54" fill="#FFDCE3" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">4</text>
+    <text x="28" y="90" fill="white" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">Prioritize</text>
+    <text x="28" y="122" fill="#FFE7EC" font-family="Inter, Arial, sans-serif" font-size="18">Weight x gap to target</text>
+    <text x="28" y="148" fill="#FFE7EC" font-family="Inter, Arial, sans-serif" font-size="18">gives the action ranking</text>
+  </g>
+
+  <path d="M454 485h34" stroke="#B4BBC5" stroke-width="2" stroke-linecap="round"/>
+  <path d="M740 485h34" stroke="#B4BBC5" stroke-width="2" stroke-linecap="round"/>
+  <path d="M1026 485h34" stroke="#B4BBC5" stroke-width="2" stroke-linecap="round"/>
+  <path d="M478 469l16 16-16 16" stroke="#B4BBC5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M764 469l16 16-16 16" stroke="#B4BBC5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1050 469l16 16-16 16" stroke="#B4BBC5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="214" y="642" width="432" height="240" rx="32" fill="#111214"/>
+  <text x="252" y="700" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2.4">PRIORITY PRINCIPLE</text>
+  <text x="252" y="760" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">Priority Index = Weight x Max(0, Target - Actual)</text>
+  <text x="252" y="814" fill="#D9E0E8" font-family="Inter, Arial, sans-serif" font-size="22">A low score matters most when it is linked to a meaningful target gap and a strategically important question.</text>
+
+  <rect x="686" y="642" width="626" height="240" rx="32" fill="#FAFBFC"/>
+  <rect x="686.75" y="642.75" width="624.5" height="238.5" rx="31.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+  <text x="724" y="698" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2.4">DASHBOARD OUTPUT</text>
+  <text x="724" y="738" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">Read the result by lens, then move to the priority list.</text>
+
+  <rect x="724" y="770" width="170" height="14" rx="7" fill="#E5E9EE"/>
+  <rect x="724" y="770" width="134" height="14" rx="7" fill="#D12A43"/>
+  <text x="724" y="804" fill="#505865" font-family="Inter, Arial, sans-serif" font-size="18">By pillar</text>
+
+  <rect x="928" y="770" width="170" height="14" rx="7" fill="#E5E9EE"/>
+  <rect x="928" y="770" width="106" height="14" rx="7" fill="#C7CED8"/>
+  <text x="928" y="804" fill="#505865" font-family="Inter, Arial, sans-serif" font-size="18">By stage</text>
+
+  <rect x="1132" y="770" width="142" height="14" rx="7" fill="#E5E9EE"/>
+  <rect x="1132" y="770" width="124" height="14" rx="7" fill="#111214"/>
+  <text x="1132" y="804" fill="#505865" font-family="Inter, Arial, sans-serif" font-size="18">By enabler</text>
+
+  <rect x="724" y="826" width="250" height="32" rx="16" fill="#FFFFFF"/>
+  <text x="748" y="848" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">1 Pricing governance gap</text>
+  <rect x="992" y="826" width="210" height="32" rx="16" fill="#FFFFFF"/>
+  <text x="1016" y="848" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">2 Stage 2 strategy gap</text>
+</svg>

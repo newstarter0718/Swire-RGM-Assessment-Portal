@@ -1,0 +1,125 @@
+<svg width="1600" height="1100" viewBox="0 0 1600 1100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Swire RGM assessment model overview</title>
+  <desc id="desc">A red, white, and silver system diagram showing four pillars, five capability stages, four enablers, and the outputs of the RGM assessment.</desc>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="120" x2="1500" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9FA"/>
+      <stop offset="1" stop-color="#F3F5F8"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="236" y1="264" x2="236" y2="924" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CD203B"/>
+      <stop offset="1" stop-color="#7B0F21"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F7F8FA"/>
+    </linearGradient>
+    <filter id="shadow" x="120" y="90" width="1360" height="920" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#111214" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1100" rx="48" fill="url(#bg)"/>
+  <circle cx="1290" cy="180" r="180" fill="#E04A60" fill-opacity="0.08"/>
+  <circle cx="210" cy="970" r="220" fill="#AEB6C0" fill-opacity="0.14"/>
+
+  <g filter="url(#shadow)">
+    <rect x="148" y="124" width="1304" height="852" rx="40" fill="white" fill-opacity="0.92"/>
+    <rect x="148.75" y="124.75" width="1302.5" height="850.5" rx="39.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+  </g>
+
+  <rect x="188" y="164" width="96" height="96" rx="28" fill="url(#accent)"/>
+  <text x="236" y="224" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="800">S</text>
+
+  <text x="324" y="204" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="3">SWIRE COCA-COLA</text>
+  <text x="324" y="258" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="800">RGM Assessment Model</text>
+  <text x="324" y="304" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="26">One operating model. Three reading lenses. Clear action priority.</text>
+
+  <rect x="188" y="352" width="882" height="526" rx="34" fill="#FAFBFC"/>
+  <rect x="188.75" y="352.75" width="880.5" height="524.5" rx="33.25" stroke="#111214" stroke-opacity="0.06" stroke-width="1.5"/>
+
+  <text x="232" y="414" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2.8">ASSESSMENT SYSTEM</text>
+  <text x="232" y="454" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">4 Pillars + 5 Stages + 4 Enablers</text>
+
+  <g transform="translate(232 500)">
+    <rect width="190" height="126" rx="26" fill="url(#panel)"/>
+    <rect x="0.75" y="0.75" width="188.5" height="124.5" rx="25.25" stroke="#B4132D" stroke-opacity="0.14" stroke-width="1.5"/>
+    <text x="28" y="42" fill="#B4132D" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.6">PILLAR</text>
+    <text x="28" y="74" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Pricing</text>
+    <text x="28" y="100" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Revenue architecture</text>
+  </g>
+  <g transform="translate(440 500)">
+    <rect width="190" height="126" rx="26" fill="url(#panel)"/>
+    <rect x="0.75" y="0.75" width="188.5" height="124.5" rx="25.25" stroke="#B4132D" stroke-opacity="0.14" stroke-width="1.5"/>
+    <text x="28" y="42" fill="#B4132D" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.6">PILLAR</text>
+    <text x="28" y="74" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">OBPPC</text>
+    <text x="28" y="100" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Portfolio and pack-price</text>
+  </g>
+  <g transform="translate(648 500)">
+    <rect width="190" height="126" rx="26" fill="url(#panel)"/>
+    <rect x="0.75" y="0.75" width="188.5" height="124.5" rx="25.25" stroke="#B4132D" stroke-opacity="0.14" stroke-width="1.5"/>
+    <text x="28" y="42" fill="#B4132D" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.6">PILLAR</text>
+    <text x="28" y="74" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Promotion Spend</text>
+    <text x="28" y="100" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Investment effectiveness</text>
+  </g>
+  <g transform="translate(856 500)">
+    <rect width="170" height="126" rx="26" fill="url(#panel)"/>
+    <rect x="0.75" y="0.75" width="168.5" height="124.5" rx="25.25" stroke="#B4132D" stroke-opacity="0.14" stroke-width="1.5"/>
+    <text x="24" y="42" fill="#B4132D" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.6">PILLAR</text>
+    <text x="24" y="74" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800">DFR / TI</text>
+    <text x="24" y="100" fill="#677180" font-family="Inter, Arial, sans-serif" font-size="18">Trade investment</text>
+  </g>
+
+  <rect x="232" y="658" width="794" height="98" rx="26" fill="#FFF4F6"/>
+  <rect x="232.75" y="658.75" width="792.5" height="96.5" rx="25.25" stroke="#B4132D" stroke-opacity="0.16" stroke-width="1.5"/>
+  <text x="262" y="700" fill="#971127" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="1.8">CAPABILITY FLOW</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#181B20">
+    <rect x="262" y="713" width="132" height="24" rx="12" fill="white"/>
+    <text x="279" y="731">1 Diagnose</text>
+    <rect x="410" y="713" width="132" height="24" rx="12" fill="white"/>
+    <text x="434" y="731">2 Design</text>
+    <rect x="558" y="713" width="148" height="24" rx="12" fill="white"/>
+    <text x="574" y="731">3 Translate</text>
+    <rect x="722" y="713" width="136" height="24" rx="12" fill="white"/>
+    <text x="748" y="731">4 Execute</text>
+    <rect x="874" y="713" width="126" height="24" rx="12" fill="white"/>
+    <text x="889" y="731">5 Sustain</text>
+  </g>
+
+  <g transform="translate(232 792)">
+    <rect width="176" height="48" rx="24" fill="#F0F3F6"/>
+    <text x="88" y="30" text-anchor="middle" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Governance</text>
+  </g>
+  <g transform="translate(428 792)">
+    <rect width="176" height="48" rx="24" fill="#F0F3F6"/>
+    <text x="88" y="30" text-anchor="middle" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Tools</text>
+  </g>
+  <g transform="translate(624 792)">
+    <rect width="176" height="48" rx="24" fill="#F0F3F6"/>
+    <text x="88" y="30" text-anchor="middle" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">People</text>
+  </g>
+  <g transform="translate(820 792)">
+    <rect width="206" height="48" rx="24" fill="#F0F3F6"/>
+    <text x="103" y="30" text-anchor="middle" fill="#181B20" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Future Readiness</text>
+  </g>
+
+  <rect x="1102" y="352" width="308" height="526" rx="34" fill="#111214"/>
+  <text x="1142" y="414" fill="white" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2.4">OUTPUTS</text>
+  <text x="1142" y="456" fill="white" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">Three ways to read the result.</text>
+
+  <rect x="1142" y="500" width="228" height="18" rx="9" fill="#373C46"/>
+  <rect x="1142" y="500" width="186" height="18" rx="9" fill="#E04A60"/>
+  <text x="1142" y="542" fill="#DDE2E8" font-family="Inter, Arial, sans-serif" font-size="20">By pillar</text>
+
+  <rect x="1142" y="590" width="228" height="18" rx="9" fill="#373C46"/>
+  <rect x="1142" y="590" width="154" height="18" rx="9" fill="#C7CED8"/>
+  <text x="1142" y="632" fill="#DDE2E8" font-family="Inter, Arial, sans-serif" font-size="20">By stage</text>
+
+  <rect x="1142" y="680" width="228" height="18" rx="9" fill="#373C46"/>
+  <rect x="1142" y="680" width="202" height="18" rx="9" fill="#F3F5F8"/>
+  <text x="1142" y="722" fill="#DDE2E8" font-family="Inter, Arial, sans-serif" font-size="20">By enabler</text>
+
+  <rect x="1142" y="770" width="228" height="72" rx="22" fill="#1E232B"/>
+  <text x="1168" y="802" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Priority list</text>
+  <text x="1168" y="830" fill="#C7CED8" font-family="Inter, Arial, sans-serif" font-size="16">Weighted maturity gap to target</text>
+</svg>

@@ -1,17 +1,22 @@
-import { submitToGoogleSheets } from "./google-sheets.js";
+import { saveDraftToGoogleSheets, submitToGoogleSheets } from "./google-sheets.js";
 
 const STORAGE_KEY = "swire-rgm-assessment-draft-v1";
 const ENDPOINT_STORAGE_KEY = "swire-rgm-apps-script-url";
+const AUTOSAVE_DEBOUNCE_MS = 1000;
 
 const state = {
   config: null,
   activePillarIndex: 0,
+  sessionId: buildSessionId(),
   meta: createDefaultMeta(),
   responses: {},
   results: null,
+  lastSavedAt: "",
+  lastRemoteSavedAt: "",
 };
 
 const dom = {};
+let autosaveTimer = null;
 
 if (typeof document !== "undefined") {
   document.addEventListener("DOMContentLoaded", init);
@@ -48,6 +53,11 @@ function cacheDom() {
   dom.currentPillarDescription = document.getElementById("current-pillar-description");
   dom.currentStageSummary = document.getElementById("current-stage-summary");
   dom.questionnairePanels = document.getElementById("questionnaire-panels");
+  dom.wizardStep = document.getElementById("wizard-step");
+  dom.wizardSection = document.getElementById("wizard-section");
+  dom.wizardProgressValue = document.getElementById("wizard-progress-value");
+  dom.wizardProgressFill = document.getElementById("wizard-progress-fill");
+  dom.draftSavedAt = document.getElementById("draft-saved-at");
   dom.answeredCount = document.getElementById("answered-count");
   dom.completionRate = document.getElementById("completion-rate");
   dom.saveStatus = document.getElementById("save-status");
@@ -101,6 +111,9 @@ function hydrateFromStorage() {
     const parsed = JSON.parse(raw);
     state.meta = { ...createDefaultMeta(), ...(parsed.meta || {}) };
     state.responses = parsed.responses || {};
+    state.sessionId = parsed.sessionId || buildSessionId();
+    state.lastSavedAt = parsed.lastSavedAt || "";
+    state.lastRemoteSavedAt = parsed.lastRemoteSavedAt || "";
     state.activePillarIndex = Math.min(
       Math.max(parsed.activePillarIndex || 0, 0),
       state.config.pillars.length - 1,
@@ -110,6 +123,7 @@ function hydrateFromStorage() {
   }
 
   syncFormFromState();
+  syncDraftIndicator();
 }
 
 function syncFormFromState() {
@@ -132,10 +146,7 @@ function bindEvents() {
   dom.questionnairePanels?.addEventListener("input", handleQuestionNoteInput);
   dom.prevPillar?.addEventListener("click", () => shiftPillar(-1));
   dom.nextPillar?.addEventListener("click", () => shiftPillar(1));
-  dom.saveDraft?.addEventListener("click", () => {
-    persistDraft();
-    setStatus("Draft saved locally in this browser.", "success");
-  });
+  dom.saveDraft?.addEventListener("click", handleManualDraftSave);
   dom.downloadJson?.addEventListener("click", handleDownloadJson);
   dom.resetAssessment?.addEventListener("click", handleResetAssessment);
   dom.submitAssessment?.addEventListener("click", handleSubmitAssessment);
@@ -156,6 +167,7 @@ function handleMetaInput(event) {
   const { name, value } = event.target;
   state.meta[name] = value;
   persistDraft();
+  queueAutosave();
 }
 
 function handlePillarNavClick(event) {
@@ -167,6 +179,7 @@ function handlePillarNavClick(event) {
   persistDraft();
   renderPillarNav();
   renderActivePillar();
+  queueAutosave();
 }
 
 function handleScoreClick(event) {
@@ -188,6 +201,7 @@ function handleScoreClick(event) {
   updateQuestionSelection(questionId, score);
   renderPillarNav();
   recomputeResults();
+  queueAutosave();
 }
 
 function handleQuestionNoteInput(event) {
@@ -206,6 +220,7 @@ function handleQuestionNoteInput(event) {
   };
 
   persistDraft();
+  queueAutosave();
 }
 
 function handleDownloadJson() {
@@ -244,15 +259,34 @@ function handleResetAssessment() {
     return;
   }
 
+  window.clearTimeout(autosaveTimer);
+  autosaveTimer = null;
   state.meta = createDefaultMeta();
   state.responses = {};
   state.activePillarIndex = 0;
+  state.sessionId = buildSessionId();
+  state.lastSavedAt = "";
+  state.lastRemoteSavedAt = "";
   persistDraft();
   syncFormFromState();
+  syncDraftIndicator();
   renderPillarNav();
   renderActivePillar();
   recomputeResults();
   setStatus("Assessment draft reset.", "warn");
+}
+
+async function handleManualDraftSave() {
+  if (!dom.saveDraft) {
+    return;
+  }
+
+  setButtonLoading(dom.saveDraft, true, "Saving");
+  try {
+    await flushAutosave({ manual: true, preferRemote: true });
+  } finally {
+    setButtonLoading(dom.saveDraft, false);
+  }
 }
 
 async function handleSubmitAssessment() {
@@ -274,7 +308,13 @@ async function handleSubmitAssessment() {
 
   const payload = buildSubmissionPayload(true);
   persistDraft();
-  const result = await submitToGoogleSheets(payload);
+  setButtonLoading(dom.submitAssessment, true, "Submitting");
+  let result;
+  try {
+    result = await submitToGoogleSheets(payload);
+  } finally {
+    setButtonLoading(dom.submitAssessment, false);
+  }
 
   if (result.ok) {
     setStatus(
@@ -299,6 +339,54 @@ function shiftPillar(direction) {
   persistDraft();
   renderPillarNav();
   renderActivePillar();
+  queueAutosave();
+}
+
+function queueAutosave() {
+  syncDraftIndicator("Saving draft...");
+
+  if (autosaveTimer) {
+    window.clearTimeout(autosaveTimer);
+  }
+
+  autosaveTimer = window.setTimeout(() => {
+    void flushAutosave();
+  }, AUTOSAVE_DEBOUNCE_MS);
+}
+
+async function flushAutosave({ manual = false, preferRemote = true } = {}) {
+  if (autosaveTimer) {
+    window.clearTimeout(autosaveTimer);
+    autosaveTimer = null;
+  }
+
+  const savedAt = new Date().toISOString();
+  state.lastSavedAt = savedAt;
+  persistDraft();
+  syncDraftIndicator();
+
+  if (!preferRemote || !getActiveEndpoint()) {
+    if (manual) {
+      setStatus("Draft saved locally in this browser.", "success");
+    }
+    return;
+  }
+
+  const result = await saveDraftToGoogleSheets(buildSubmissionPayload(false, "draft"));
+
+  if (result.ok) {
+    state.lastRemoteSavedAt = new Date().toISOString();
+    persistDraft();
+    syncDraftIndicator();
+    if (manual) {
+      setStatus("Draft saved locally and synced to Google Sheets.", "success");
+    }
+    return;
+  }
+
+  if (manual) {
+    setStatus(`Draft saved locally. Remote sync pending: ${result.message}`, "warn");
+  }
 }
 
 function renderFramework() {
@@ -438,6 +526,7 @@ function renderPillarNav() {
           type="button"
           data-pillar-index="${index}"
         >
+          <span class="pillar-nav-step">Step ${index + 1}</span>
           <strong>${pillar.label}</strong>
           <div class="pillar-nav-meta">
             <span>${answered}/${pillarQuestions.length} answered</span>
@@ -457,9 +546,10 @@ function renderActivePillar() {
   const pillar = state.config.pillars[state.activePillarIndex];
   const questions = getQuestionsForPillar(pillar.label);
   const grouped = groupQuestionsByStage(questions);
+  const answered = questions.filter((question) => getQuestionScore(question.id) > 0).length;
 
   dom.currentPillarTitle.textContent = pillar.label;
-  dom.currentPillarDescription.textContent = pillar.description;
+  dom.currentPillarDescription.textContent = `${answered}/${questions.length} questions answered in this section.`;
 
   dom.currentStageSummary.innerHTML = Object.entries(grouped)
     .map(([stage, stageQuestions]) => {
@@ -479,6 +569,8 @@ function renderActivePillar() {
     )
     .join("");
 
+  syncWizardProgress();
+
   if (dom.prevPillar) {
     dom.prevPillar.disabled = state.activePillarIndex === 0;
   }
@@ -489,6 +581,8 @@ function renderActivePillar() {
 
 function renderQuestionCard(question) {
   const response = state.responses[question.id] || {};
+  const selectedScore = Number(response.score || 0);
+  const notesOpen = response.evidence || response.comment ? "open" : "";
 
   return `
     <article class="question-card" id="question-${question.id}">
@@ -497,67 +591,140 @@ function renderQuestionCard(question) {
           <div class="question-tags">
             <span class="question-tag code">${question.id}</span>
             <span class="question-tag">${question.enabler}</span>
-            <span class="question-tag">${question.subDimension}</span>
           </div>
           <h4>${question.text}</h4>
         </div>
-        <div class="question-tag">Target ${formatScore(question.target)}</div>
+        <div class="question-score-meta">
+          <span class="question-tag">Target ${formatScore(question.target)}</span>
+          <span class="question-tag question-tag-state" data-score-status="${question.id}">
+            ${selectedScore ? anchorShortLabel(selectedScore) : "Unscored"}
+          </span>
+        </div>
       </div>
 
-      <p class="evidence-prompt">Evidence prompt: ${question.evidencePrompt}</p>
-
-      <div class="anchor-grid">
+      <div class="score-rail" role="group" aria-label="Maturity scoring for ${question.id}">
         ${[1, 2, 3, 4, 5]
           .map((score) => {
-            const selected = Number(response.score) === score;
-            const anchorText = question.anchors[String(score)] || "No anchor supplied in workbook.";
+            const selected = selectedScore === score;
             return `
-              <div class="anchor-card ${selected ? "is-selected" : ""}" data-question-card="${question.id}" data-card-score="${score}">
-                <button
-                  class="anchor-button"
-                  type="button"
-                  data-question-id="${question.id}"
-                  data-score="${score}"
-                >
-                  ${score}
-                </button>
-                <strong>${anchorLabel(score)}</strong>
-                <p>${anchorText}</p>
-              </div>
+              <button
+                class="score-option ${selected ? "is-selected" : ""}"
+                type="button"
+                data-question-id="${question.id}"
+                data-score="${score}"
+                data-score-option="${question.id}"
+                aria-pressed="${selected ? "true" : "false"}"
+              >
+                <span class="score-option-value">${score}</span>
+                <span class="score-option-label">${anchorShortLabel(score)}</span>
+              </button>
             `;
           })
           .join("")}
       </div>
 
-      <div class="question-notes">
-        <label>
-          <span>Evidence notes</span>
-          <textarea
-            class="question-textarea"
-            data-question-id="${question.id}"
-            data-field="evidence"
-            placeholder="Optional: summarize evidence, references, or documents used."
-          >${escapeHtml(response.evidence || "")}</textarea>
-        </label>
-        <label>
-          <span>Reviewer comment</span>
-          <textarea
-            class="question-textarea"
-            data-question-id="${question.id}"
-            data-field="comment"
-            placeholder="Optional: capture interpretation, concerns, or follow-up actions."
-          >${escapeHtml(response.comment || "")}</textarea>
-        </label>
+      <div class="selected-anchor ${selectedScore ? "is-active" : ""}" data-selected-anchor="${question.id}">
+        ${renderSelectedAnchor(question, selectedScore)}
       </div>
+
+      <details class="question-disclosure" ${notesOpen}>
+        <summary>
+          <span>Evidence & comments</span>
+          <span class="question-disclosure-meta">Optional details</span>
+        </summary>
+
+        <div class="question-disclosure-body">
+          <p class="evidence-prompt">
+            <strong>Evidence prompt</strong>
+            <span>${question.evidencePrompt}</span>
+          </p>
+
+          <div class="question-notes">
+            <label>
+              <span>Evidence notes</span>
+              <textarea
+                class="question-textarea"
+                data-question-id="${question.id}"
+                data-field="evidence"
+                placeholder="Optional: summarize evidence, references, or documents used."
+              >${escapeHtml(response.evidence || "")}</textarea>
+            </label>
+            <label>
+              <span>Reviewer comment</span>
+              <textarea
+                class="question-textarea"
+                data-question-id="${question.id}"
+                data-field="comment"
+                placeholder="Optional: capture interpretation, concerns, or follow-up actions."
+              >${escapeHtml(response.comment || "")}</textarea>
+            </label>
+          </div>
+        </div>
+      </details>
     </article>
   `;
 }
 
 function updateQuestionSelection(questionId, score) {
-  const cards = document.querySelectorAll(`[data-question-card="${questionId}"]`);
-  cards.forEach((card) => {
-    card.classList.toggle("is-selected", Number(card.dataset.cardScore) === Number(score));
+  const options = document.querySelectorAll(`[data-score-option="${questionId}"]`);
+  options.forEach((option) => {
+    const selected = Number(option.dataset.score) === Number(score);
+    option.classList.toggle("is-selected", selected);
+    option.setAttribute("aria-pressed", String(selected));
   });
+
+  const selectedAnchor = document.querySelector(`[data-selected-anchor="${questionId}"]`);
+  const question = findQuestion(questionId);
+  if (selectedAnchor && question) {
+    selectedAnchor.classList.toggle("is-active", Number(score) > 0);
+    selectedAnchor.innerHTML = renderSelectedAnchor(question, Number(score));
+  }
+
+  const scoreStatus = document.querySelector(`[data-score-status="${questionId}"]`);
+  if (scoreStatus) {
+    scoreStatus.textContent = score ? anchorShortLabel(score) : "Unscored";
+  }
+}
+
+function renderSelectedAnchor(question, selectedScore) {
+  if (!selectedScore) {
+    return `
+      <div class="selected-anchor-head">
+        <span class="selected-anchor-badge is-empty">?</span>
+        <div>
+          <strong>Select a maturity level</strong>
+          <p>Choose 1 to 5 to reveal the matching workbook anchor.</p>
+        </div>
+      </div>
+    `;
+  }
+
+  const anchorText = question.anchors[String(selectedScore)] || "No anchor supplied in workbook.";
+  return `
+    <div class="selected-anchor-head">
+      <span class="selected-anchor-badge">${selectedScore}</span>
+      <div>
+        <strong>${anchorLabel(selectedScore)}</strong>
+        <p>${anchorText}</p>
+      </div>
+    </div>
+  `;
+}
+
+function syncWizardProgress() {
+  if (!dom.wizardStep || !dom.wizardSection || !dom.wizardProgressValue || !dom.wizardProgressFill) {
+    return;
+  }
+
+  const pillar = state.config?.pillars?.[state.activePillarIndex];
+  const completion = state.config?.questions?.length
+    ? getAnsweredQuestionsCount() / state.config.questions.length
+    : 0;
+
+  dom.wizardStep.textContent = `Section ${state.activePillarIndex + 1} of ${state.config.pillars.length}`;
+  dom.wizardSection.textContent = pillar?.label || "Assessment";
+  dom.wizardProgressValue.textContent = `${Math.round(completion * 100)}% complete`;
+  dom.wizardProgressFill.style.width = `${Math.round(completion * 100)}%`;
 }
 
 function recomputeResults() {
@@ -570,6 +737,7 @@ function recomputeResults() {
   const total = state.config.questions.length;
   dom.answeredCount.textContent = `${answered} / ${total}`;
   dom.completionRate.textContent = `${Math.round(state.results.completion * 100)}%`;
+  syncWizardProgress();
 
   if (answered === 0) {
     dom.resultsEmpty.hidden = false;
@@ -762,8 +930,8 @@ function getUnansweredQuestions() {
   return state.config.questions.filter((question) => getQuestionScore(question.id) === 0);
 }
 
-function buildSubmissionPayload(isFinalSubmission) {
-  const sessionId = buildSessionId();
+function buildSubmissionPayload(isFinalSubmission, saveMode = isFinalSubmission ? "final" : "draft") {
+  const sessionId = state.sessionId || buildSessionId();
   const submittedAt = new Date().toISOString();
   const results = state.results || computeResults();
 
@@ -771,6 +939,8 @@ function buildSubmissionPayload(isFinalSubmission) {
     sessionId,
     submittedAt,
     isFinalSubmission,
+    saveMode,
+    currentSection: state.config.pillars[state.activePillarIndex]?.label || "",
     meta: { ...state.meta },
     summary: {
       overallCoreScore: roundNumber(results.summary.overallCoreScore),
@@ -857,9 +1027,12 @@ function persistDraft() {
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({
+        sessionId: state.sessionId,
         meta: state.meta,
         responses: state.responses,
         activePillarIndex: state.activePillarIndex,
+        lastSavedAt: state.lastSavedAt,
+        lastRemoteSavedAt: state.lastRemoteSavedAt,
         updatedAt: new Date().toISOString(),
       }),
     );
@@ -891,6 +1064,25 @@ function setStatus(message, tone = "") {
   if (tone) {
     dom.saveStatus.classList.add(`is-${tone}`);
   }
+}
+
+function syncDraftIndicator(message = "") {
+  if (!dom.draftSavedAt) {
+    return;
+  }
+
+  if (message) {
+    dom.draftSavedAt.textContent = message;
+    return;
+  }
+
+  if (!state.lastSavedAt) {
+    dom.draftSavedAt.textContent = "Draft not saved yet";
+    return;
+  }
+
+  const label = state.lastRemoteSavedAt ? "Draft synced" : "Draft saved";
+  dom.draftSavedAt.textContent = `${label} ${formatTimestamp(state.lastSavedAt)}`;
 }
 
 function syncEndpointUi(message = "", tone = "") {
@@ -943,6 +1135,23 @@ function anchorLabel(score) {
   }
 }
 
+function anchorShortLabel(score) {
+  switch (score) {
+    case 1:
+      return "Lacking";
+    case 2:
+      return "Developing";
+    case 3:
+      return "Capable";
+    case 4:
+      return "Advanced";
+    case 5:
+      return "Leading";
+    default:
+      return "";
+  }
+}
+
 function formatScore(value) {
   return Number(value || 0).toFixed(1);
 }
@@ -953,6 +1162,14 @@ function formatPercent(value) {
 
 function roundNumber(value) {
   return Math.round(Number(value || 0) * 1000) / 1000;
+}
+
+function formatTimestamp(value) {
+  return new Date(value).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
 }
 
 function escapeHtml(value) {
@@ -1070,4 +1287,37 @@ function iconMarkup(type, label) {
       <path d="M12 9v6M9 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
     </svg>
   `;
+}
+
+function findQuestion(questionId) {
+  return state.config.questions.find((question) => question.id === questionId);
+}
+
+function setButtonLoading(button, isLoading, loadingText = "Loading") {
+  if (!button) {
+    return;
+  }
+
+  if (isLoading) {
+    if (!button.dataset.originalHtml) {
+      button.dataset.originalHtml = button.innerHTML;
+    }
+    button.style.width = `${button.offsetWidth}px`;
+    button.disabled = true;
+    button.classList.add("is-loading");
+    button.setAttribute("aria-busy", "true");
+    button.innerHTML = `
+      <span class="button-spinner" aria-hidden="true"></span>
+      <span class="button-label">${loadingText}</span>
+    `;
+    return;
+  }
+
+  if (button.dataset.originalHtml) {
+    button.innerHTML = button.dataset.originalHtml;
+  }
+  button.disabled = false;
+  button.classList.remove("is-loading");
+  button.removeAttribute("aria-busy");
+  button.style.width = "";
 }

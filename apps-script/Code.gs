@@ -19,6 +19,15 @@ function doPost(e) {
     var spreadsheet = getTargetSpreadsheet_();
     ensureSheets_(spreadsheet);
 
+    if (payload.saveMode === "draft" || payload.isFinalSubmission !== true) {
+      writeOrUpdateDraft_(spreadsheet.getSheetByName("Assessment_Drafts"), payload);
+      return jsonOutput_({
+        ok: true,
+        sessionId: payload.sessionId || "",
+        message: "Draft written to Google Sheets.",
+      });
+    }
+
     writeSession_(spreadsheet.getSheetByName("Assessment_Sessions"), payload);
     writeResponses_(spreadsheet.getSheetByName("Assessment_Responses"), payload);
     writePriorities_(spreadsheet.getSheetByName("Assessment_Priority"), payload);
@@ -46,6 +55,25 @@ function getTargetSpreadsheet_() {
 }
 
 function ensureSheets_(spreadsheet) {
+  ensureSheet_(
+    spreadsheet,
+    "Assessment_Drafts",
+    [
+      "session_id",
+      "saved_at",
+      "current_section",
+      "market",
+      "respondent_name",
+      "respondent_email",
+      "role",
+      "completion",
+      "answered_questions",
+      "total_questions",
+      "overall_core_score",
+      "payload_json",
+    ],
+  );
+
   ensureSheet_(
     spreadsheet,
     "Assessment_Sessions",
@@ -152,6 +180,33 @@ function writeSession_(sheet, payload) {
   ]);
 }
 
+function writeOrUpdateDraft_(sheet, payload) {
+  var summary = payload.summary || {};
+  var meta = payload.meta || {};
+  var values = [
+    payload.sessionId || "",
+    payload.submittedAt || "",
+    payload.currentSection || "",
+    meta.market || "",
+    meta.respondentName || "",
+    meta.respondentEmail || "",
+    meta.role || "",
+    summary.completion || 0,
+    summary.answeredQuestions || 0,
+    summary.totalQuestions || 0,
+    summary.overallCoreScore || 0,
+    JSON.stringify(payload),
+  ];
+  var rowIndex = findRowBySessionId_(sheet, payload.sessionId || "");
+
+  if (rowIndex > 0) {
+    sheet.getRange(rowIndex, 1, 1, values.length).setValues([values]);
+    return;
+  }
+
+  sheet.appendRow(values);
+}
+
 function writeResponses_(sheet, payload) {
   var rows = (payload.responses || []).map(function (item) {
     return [
@@ -203,6 +258,21 @@ function appendRows_(sheet, rows) {
   var numRows = rows.length;
   var numColumns = rows[0].length;
   sheet.getRange(startRow, startColumn, numRows, numColumns).setValues(rows);
+}
+
+function findRowBySessionId_(sheet, sessionId) {
+  if (!sessionId || sheet.getLastRow() < 2) {
+    return -1;
+  }
+
+  var sessionIds = sheet.getRange(2, 1, sheet.getLastRow() - 1, 1).getValues();
+  for (var index = 0; index < sessionIds.length; index += 1) {
+    if (sessionIds[index][0] === sessionId) {
+      return index + 2;
+    }
+  }
+
+  return -1;
 }
 
 function jsonOutput_(payload) {

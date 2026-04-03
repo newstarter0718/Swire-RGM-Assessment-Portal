@@ -14,6 +14,14 @@ function resolveEndpoint() {
 }
 
 export async function submitToGoogleSheets(payload) {
+  return postToGoogleSheets(payload, { preferBeacon: true });
+}
+
+export async function saveDraftToGoogleSheets(payload) {
+  return postToGoogleSheets(payload, { preferBeacon: false });
+}
+
+async function postToGoogleSheets(payload, { preferBeacon = true } = {}) {
   const config = window.RGM_SITE_CONFIG || {};
   const endpoint = resolveEndpoint();
 
@@ -28,7 +36,7 @@ export async function submitToGoogleSheets(payload) {
   const body = JSON.stringify(payload);
 
   try {
-    if (config.preferBeacon !== false && navigator.sendBeacon) {
+    if (preferBeacon && config.preferBeacon !== false && navigator.sendBeacon) {
       const beaconBody = new Blob([body], { type: "text/plain;charset=utf-8" });
       const queued = navigator.sendBeacon(endpoint, beaconBody);
       return {

@@ -43,10 +43,9 @@
     <section class="page-hero">
       <div>
         <p class="eyebrow">Assessment</p>
-        <h1>The working page for respondents, reviewers, and submission logging.</h1>
+        <h1>A cleaner assessment flow built for completion.</h1>
         <p class="page-lede">
-          This page keeps the full interactive experience in one place: respondent setup, scoring by pillar,
-          live results, and lightweight backend configuration for Google Sheets.
+          Set up the respondent profile, complete one section at a time, and watch the result view build live.
         </p>
       </div>
 
@@ -57,8 +56,8 @@
             <path d="M9 9h6M9 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
         </span>
-        <strong>Use the page in three passes: setup, score, then review the live dashboard.</strong>
-        <p>You do not need the full framework text here anymore. This page is for action and completion.</p>
+        <strong>Use the page in three passes: setup, score, review.</strong>
+        <p>The detail now sits behind lighter interactions so the page feels less like a workbook.</p>
       </div>
     </section>
 
@@ -169,6 +168,22 @@
         </aside>
 
         <div class="panel assessment-main">
+          <div class="wizard-progress">
+            <div class="wizard-progress-head">
+              <div>
+                <span id="wizard-step" class="wizard-step">Section 1 of 4</span>
+                <strong id="wizard-section" class="wizard-section">Loading assessment...</strong>
+              </div>
+              <div class="wizard-progress-meta">
+                <span id="wizard-progress-value" class="wizard-progress-value">0% complete</span>
+                <span id="draft-saved-at" class="draft-saved-at">Draft not saved yet</span>
+              </div>
+            </div>
+            <div class="wizard-progress-track" aria-hidden="true">
+              <span id="wizard-progress-fill" class="wizard-progress-fill"></span>
+            </div>
+          </div>
+
           <div class="assessment-main-head">
             <div>
               <p class="eyebrow">Pillar View</p>
@@ -323,6 +338,7 @@
         <div>
           <h3>Recommended tabs</h3>
           <ul class="detail-list">
+            <li><strong>Assessment_Drafts</strong>: one row per autosaved session draft.</li>
             <li><strong>Assessment_Sessions</strong>: one row per submitted session.</li>
             <li><strong>Assessment_Responses</strong>: one row per question response.</li>
             <li><strong>Assessment_Priority</strong>: top priority items by session.</li>

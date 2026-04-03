@@ -1,10 +1,4 @@
-import {
-  ChevronDown,
-  Download,
-  RotateCcw,
-  Save,
-  Send,
-} from "lucide-react";
+import { Download, Pencil, RotateCcw, Save, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button, Eyebrow, MetricBar, SectionHeading, SurfaceCard } from "../components/ui.jsx";
 import { assessmentData } from "../lib/assessment-data.js";
@@ -20,11 +14,8 @@ import {
   formatScore,
   formatTimestamp,
   getAnsweredQuestionsCount,
-  getQuestionsForPillar,
   getUnansweredQuestions,
-  groupQuestionsByStage,
   RESULTS_MIN_ANSWERED,
-  widthClassFromPercent,
 } from "../lib/assessment.js";
 import { clearDraftState, readDraftState, saveDraftState } from "../lib/browser-storage.js";
 import { saveDraftPayload, submitAssessmentPayload } from "../lib/submission.js";
@@ -203,7 +194,6 @@ function QuestionCard({ question, response, onScoreSelect, onNoteChange }) {
     </article>
   );
 }
-
 function ResultsPanel({ results, answeredQuestions }) {
   if (answeredQuestions < RESULTS_MIN_ANSWERED) {
     return (
@@ -336,23 +326,26 @@ function ResultsPanel({ results, answeredQuestions }) {
 
 export function AssessmentPage() {
   const [assessmentState, setAssessmentState] = useState(createInitialState);
+  const [currentStep, setCurrentStep] = useState(0);
   const [status, setStatus] = useState({ message: "Draft storage is ready.", tone: "" });
   const [draftLabel, setDraftLabel] = useState(
     assessmentState.lastSavedAt
       ? `${assessmentState.lastRemoteSavedAt ? "Draft synced" : "Draft saved"} ${formatTimestamp(assessmentState.lastSavedAt)}`
       : "Draft not saved yet",
   );
-  const [setupOpen, setSetupOpen] = useState(true);
   const [savingDraft, setSavingDraft] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const autosaveReady = useRef(false);
 
   const results = computeResults(assessmentData, assessmentState.responses);
   const answeredQuestions = getAnsweredQuestionsCount(assessmentData.questions, assessmentState.responses);
-  const completionPercent = Math.round(results.completion * 100);
-  const activePillar = assessmentData.pillars[assessmentState.activePillarIndex];
-  const pillarQuestions = getQuestionsForPillar(assessmentData, activePillar.label);
-  const stageGroups = groupQuestionsByStage(pillarQuestions);
+  const allQuestions = assessmentData.questions;
+  const totalQuestions = allQuestions.length;
+  const currentQuestion = currentStep >= 1 && currentStep <= totalQuestions ? allQuestions[currentStep - 1] : null;
+  const currentResponse = currentQuestion ? assessmentState.responses[currentQuestion.id] : null;
+  const currentScore = Number(currentResponse?.score || 0);
+  const notesOpen = Boolean(currentResponse?.evidence || currentResponse?.comment);
+  const progressPercent = totalQuestions > 0 ? (currentStep / totalQuestions) * 100 : 0;
 
   useEffect(() => {
     saveDraftState({
@@ -406,6 +399,18 @@ export function AssessmentPage() {
       window.clearTimeout(timer);
     };
   }, [assessmentState.activePillarIndex, assessmentState.meta, assessmentState.responses]);
+
+  useEffect(() => {
+    if (!currentQuestion) {
+      return;
+    }
+
+    const nextPillarIndex = assessmentData.pillars.findIndex((pillar) => pillar.label === currentQuestion.pillar);
+
+    if (nextPillarIndex >= 0 && nextPillarIndex !== assessmentState.activePillarIndex) {
+      setActivePillarIndex(nextPillarIndex);
+    }
+  }, [currentQuestion, assessmentState.activePillarIndex]);
 
   function updateMeta(key, value) {
     setAssessmentState((current) => ({
@@ -483,7 +488,11 @@ export function AssessmentPage() {
     if (unanswered.length > 0) {
       const firstMissing = unanswered[0];
       const targetIndex = assessmentData.pillars.findIndex((pillar) => pillar.label === firstMissing.pillar);
+      const missingStep = assessmentData.questions.findIndex((question) => question.id === firstMissing.id);
       setActivePillarIndex(targetIndex);
+      if (missingStep >= 0) {
+        setCurrentStep(missingStep + 1);
+      }
       setStatus({
         message: `Assessment is incomplete. ${unanswered.length} question(s) still need scores. First missing item: ${firstMissing.id}.`,
         tone: "warn",
@@ -497,6 +506,8 @@ export function AssessmentPage() {
       return;
     }
 
+    setCurrentStep(totalQuestions + 1);
+    window.scrollTo({ top: 0, behavior: "auto" });
     setSubmitting(true);
     const payload = buildSubmissionPayload(assessmentData, assessmentState, results, true);
     const result = await submitAssessmentPayload(payload);
@@ -530,6 +541,7 @@ export function AssessmentPage() {
     fresh.lastSavedAt = "";
     fresh.lastRemoteSavedAt = "";
     setAssessmentState(fresh);
+    setCurrentStep(0);
     setDraftLabel("Draft not saved yet");
     setStatus({ message: "Assessment draft reset.", tone: "warn" });
   }
@@ -548,312 +560,312 @@ export function AssessmentPage() {
     setStatus({ message: "Current assessment state downloaded as JSON.", tone: "success" });
   }
 
-  function handleNext() {
-    if (assessmentState.activePillarIndex === assessmentData.pillars.length - 1) {
+  function goNext() {
+    if (currentStep === totalQuestions) {
       void handleSubmit();
-      return;
+    } else {
+      setCurrentStep((s) => s + 1);
+      window.scrollTo({ top: 0, behavior: "auto" });
     }
-
-    setActivePillarIndex(assessmentState.activePillarIndex + 1);
   }
 
-  function handlePrevious() {
-    if (assessmentState.activePillarIndex === 0) {
-      return;
+  function goPrev() {
+    if (currentStep > 0) {
+      setCurrentStep((s) => s - 1);
+      window.scrollTo({ top: 0, behavior: "auto" });
     }
-    setActivePillarIndex(assessmentState.activePillarIndex - 1);
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-5 py-8 md:px-8 md:py-12">
-      <section className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
-        <div className="space-y-4">
-          <Eyebrow>Assessment</Eyebrow>
-          <h1 className="font-[var(--font-display)] text-4xl font-semibold tracking-tight text-[var(--text-primary)] md:text-5xl">
-            A cleaner assessment flow built for completion.
-          </h1>
-          <p className="max-w-2xl text-lg leading-8 text-[var(--text-secondary)]">
-            Set up the respondent profile, complete one pillar at a time, and let live results activate only when the response base is strong enough to read.
-          </p>
-        </div>
-
-        <SurfaceCard className="rounded-[28px] p-8">
-          <div className="grid gap-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
-              Assessment Sequence
-            </p>
-            <h2 className="font-[var(--font-display)] text-3xl font-semibold text-[var(--text-primary)]">
-              Setup, score, review.
-            </h2>
-            <p className="text-sm leading-7 text-[var(--text-secondary)]">
-              The heavy workbook detail now appears only when it is needed, so the page feels more like a guided product workflow than a spreadsheet translation.
-            </p>
-          </div>
-        </SurfaceCard>
-      </section>
-      <section className="grid gap-8 xl:grid-cols-[320px_minmax(0,1fr)] xl:items-start">
-        <aside className="grid gap-5 xl:sticky xl:top-28">
-          <SurfaceCard className="rounded-[28px] p-5">
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:px-8 md:py-12">
+      {currentStep === 0 ? (
+        <section className="flex min-h-[calc(100vh-12rem)] items-center">
+          <SurfaceCard className="mx-auto w-full max-w-2xl rounded-[32px] p-8 md:p-10">
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                Section Navigation
+              <Eyebrow>Assessment</Eyebrow>
+              <h1 className="font-[var(--font-display)] text-4xl font-semibold tracking-tight text-[var(--text-primary)] md:text-5xl">
+                Start the assessment one question at a time.
+              </h1>
+              <p className="text-base leading-8 text-[var(--text-secondary)] md:text-lg">
+                Capture the respondent profile first, then move through each workbook question in a focused wizard flow with autosave and final review intact.
               </p>
-              <div className="grid gap-3">
-                {assessmentData.pillars.map((pillar, index) => {
-                  const questions = getQuestionsForPillar(assessmentData, pillar.label);
-                  const answered = getAnsweredQuestionsCount(questions, assessmentState.responses);
-                  const average = questions.length
-                    ? questions
-                        .map((question) => Number(assessmentState.responses[question.id]?.score || 0))
-                        .filter(Boolean)
-                        .reduce((sum, score, _, array) => sum + score / array.length, 0)
-                    : 0;
-
-                  return (
-                    <PillarNavButton
-                      key={pillar.id}
-                      pillar={pillar}
-                      index={index}
-                      active={index === assessmentState.activePillarIndex}
-                      answered={answered}
-                      total={questions.length}
-                      average={average}
-                      onClick={() => setActivePillarIndex(index)}
-                    />
-                  );
-                })}
-              </div>
             </div>
-          </SurfaceCard>
 
-          <SurfaceCard className="rounded-[28px] p-5">
-            <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                Session Controls
-              </p>
-              <div className="grid gap-3">
-                <Button
-                  tone="secondary"
-                  onClick={handleManualSave}
-                  loading={savingDraft}
-                  className="w-full"
-                  aria-label="Save assessment draft"
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {[
+                ["market", "Market", "e.g. Hong Kong"],
+                ["cluster", "Cluster", "e.g. Greater China"],
+                ["businessUnit", "Business Unit", "e.g. RGM / Commercial"],
+                ["respondentName", "Respondent Name", "Full name"],
+                ["respondentEmail", "Respondent Email", "name@company.com"],
+                ["role", "Role", "e.g. Market RGM Lead"],
+                ["assessmentCycle", "Assessment Cycle", "e.g. 2026 Full Assessment"],
+              ].map(([key, label, placeholder]) => (
+                <label
+                  key={key}
+                  className={key === "assessmentCycle" ? "grid gap-2 text-sm font-medium text-[var(--text-primary)] md:col-span-2" : "grid gap-2 text-sm font-medium text-[var(--text-primary)]"}
                 >
+                  {label}
+                  <input
+                    type={key === "respondentEmail" ? "email" : "text"}
+                    value={assessmentState.meta[key]}
+                    onChange={(event) => updateMeta(key, event.target.value)}
+                    placeholder={placeholder}
+                    className="h-12 rounded-2xl border border-[var(--border-soft)] bg-white px-4 text-sm text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
+                  />
+                </label>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-col gap-4">
+              <Button
+                onClick={() => {
+                  setCurrentStep(1);
+                  window.scrollTo({ top: 0, behavior: "auto" });
+                }}
+                className="h-12 w-full text-base"
+                aria-label="Start assessment"
+              >
+                Start Assessment
+              </Button>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)] px-4 py-3 text-sm text-[var(--text-secondary)]">
+                <span>{answeredQuestions}/{totalQuestions} questions answered</span>
+                <span>{draftLabel}</span>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <Button tone="secondary" onClick={handleManualSave} loading={savingDraft} aria-label="Save assessment draft">
                   <Save className="size-4" aria-hidden="true" />
                   Save Draft
                 </Button>
-                <Button
-                  onClick={handleSubmit}
-                  loading={submitting}
-                  className="w-full"
-                  aria-label="Submit completed assessment"
-                >
-                  <Send className="size-4" aria-hidden="true" />
-                  Submit
+                <Button tone="secondary" onClick={handleDownload} aria-label="Download assessment JSON">
+                  <Download className="size-4" aria-hidden="true" />
+                  Download JSON
                 </Button>
-                <details className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-muted)]">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-sm font-semibold text-[var(--text-primary)]">
-                    More tools
-                    <ChevronDown className="size-4 text-[var(--text-tertiary)]" aria-hidden="true" />
-                  </summary>
-                  <div className="grid gap-2 border-t border-[var(--border-soft)] p-3">
-                    <Button tone="tertiary" onClick={handleDownload} className="justify-start" aria-label="Download assessment JSON">
-                      <Download className="size-4" aria-hidden="true" />
-                      Download JSON
-                    </Button>
-                    <Button tone="tertiary" onClick={handleReset} className="justify-start" aria-label="Reset assessment draft">
-                      <RotateCcw className="size-4" aria-hidden="true" />
-                      Reset Draft
-                    </Button>
-                  </div>
-                </details>
+                <Button tone="secondary" onClick={handleReset} aria-label="Reset assessment draft">
+                  <RotateCcw className="size-4" aria-hidden="true" />
+                  Reset Draft
+                </Button>
               </div>
+
               <div className={`rounded-2xl border px-4 py-3 text-sm leading-6 ${statusClass(status.tone)}`}>
                 {status.message}
               </div>
             </div>
           </SurfaceCard>
-        </aside>
-
-        <div className="grid gap-8">
-          <SurfaceCard className="rounded-[28px] p-0">
+        </section>
+      ) : currentQuestion ? (
+        <section className="mx-auto flex w-full max-w-3xl flex-col gap-4">
+          <div className="flex items-center justify-between gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)] py-2 px-4 text-sm text-[var(--text-secondary)]">
+            <span className="truncate">
+              {assessmentState.meta.market || "Market"} | {assessmentState.meta.businessUnit || "Business Unit"} | {assessmentState.meta.respondentName || "Respondent"}
+            </span>
             <button
               type="button"
-              onClick={() => setSetupOpen((current) => !current)}
-              aria-label="Toggle respondent setup"
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              onClick={() => {
+                setCurrentStep(0);
+                window.scrollTo({ top: 0, behavior: "auto" });
+              }}
+              className="inline-flex size-8 items-center justify-center rounded-full border border-[var(--border-soft)] bg-white text-[var(--text-secondary)] transition hover:border-[rgba(225,38,28,0.25)] hover:text-[var(--swire-red)]"
+              aria-label="Edit respondent details"
             >
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                  Step 0
-                </p>
-                <strong className="mt-1 block text-lg font-semibold text-[var(--text-primary)]">
-                  Respondent setup
-                </strong>
-              </div>
-              <span className="text-sm text-[var(--text-secondary)]">
-                {assessmentState.meta.respondentName || assessmentState.meta.market
-                  ? "Profile captured"
-                  : "Who is completing this assessment?"}
-              </span>
+              <Pencil className="size-4" aria-hidden="true" />
             </button>
+          </div>
 
-            {setupOpen ? (
-              <div className="grid gap-4 border-t border-[var(--border-soft)] px-6 py-6 md:grid-cols-2">
-                {[
-                  ["market", "Market", "e.g. Hong Kong"],
-                  ["cluster", "Cluster", "e.g. Greater China"],
-                  ["businessUnit", "Business Unit", "e.g. RGM / Commercial"],
-                  ["respondentName", "Respondent Name", "Full name"],
-                  ["respondentEmail", "Email", "name@company.com"],
-                  ["role", "Role", "e.g. Market RGM Lead"],
-                  ["assessmentCycle", "Assessment Cycle", "e.g. 2026 Full Assessment"],
-                ].map(([key, label, placeholder]) => (
-                  <label key={key} className={key === "assessmentCycle" ? "grid gap-2 text-sm font-medium text-[var(--text-primary)] md:col-span-2" : "grid gap-2 text-sm font-medium text-[var(--text-primary)]"}>
-                    {label}
-                    <input
-                      type={key === "respondentEmail" ? "email" : "text"}
-                      value={assessmentState.meta[key]}
-                      onChange={(event) => updateMeta(key, event.target.value)}
-                      placeholder={placeholder}
-                      className="h-12 rounded-2xl border border-[var(--border-soft)] bg-white px-4 text-sm text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
-                    />
-                  </label>
-                ))}
-              </div>
-            ) : null}
-          </SurfaceCard>
+          <div className="flex items-end justify-between gap-4">
+            <p className="text-sm font-semibold text-[var(--text-secondary)]">
+              {currentQuestion.pillar} &gt; {currentQuestion.stage}
+            </p>
+            <span className="text-sm font-semibold text-[var(--text-secondary)]">
+              Question {currentStep} of {totalQuestions}
+            </span>
+          </div>
 
-          <SurfaceCard className="rounded-[28px] p-5 md:sticky md:top-24 md:z-20">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <div className="space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                  Section {assessmentState.activePillarIndex + 1} of {assessmentData.pillars.length}
-                </p>
-                <h2 className="font-[var(--font-display)] text-3xl font-semibold text-[var(--text-primary)]">
-                  {activePillar.label}
-                </h2>
-                <p className="text-sm leading-7 text-[var(--text-secondary)]">
-                  {pillarQuestions.filter((question) => Number(assessmentState.responses[question.id]?.score || 0) > 0).length}/{pillarQuestions.length} questions answered in this section.
-                </p>
-              </div>
-              <div className="flex flex-col items-start gap-1 text-left md:items-end md:text-right">
-                <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  {completionPercent}% complete
-                </span>
-                <span className="text-[12px] text-[var(--text-tertiary)]">{draftLabel}</span>
-              </div>
-            </div>
-            <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-[rgba(38,38,38,0.08)]">
-              <div
-                className={[
-                  "h-full rounded-full bg-[linear-gradient(90deg,#e1261c_0%,#ff8f87_100%)] transition-[width] duration-300",
-                  widthClassFromPercent(completionPercent),
-                ].join(" ")}
-              />
-            </div>
-          </SurfaceCard>
+          <div className="h-2 overflow-hidden rounded-full bg-[rgba(38,38,38,0.08)]">
+            <div
+              className="h-full rounded-full bg-[var(--swire-red)] transition-[width] duration-300"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
 
-          <SurfaceCard className="rounded-[28px] p-6">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                  Pillar View
-                </p>
-                <h3 className="mt-2 text-2xl font-semibold text-[var(--text-primary)]">
-                  {activePillar.label}
-                </h3>
-                <p className="mt-2 max-w-3xl text-sm leading-7 text-[var(--text-secondary)]">
-                  {activePillar.description}
-                </p>
-              </div>
-              <div className="grid grid-cols-2 gap-3 sm:min-w-72">
-                <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-muted)] px-4 py-3">
-                  <span className="text-xs uppercase tracking-[0.18em] text-[var(--text-tertiary)]">Answered</span>
-                  <strong className="mt-2 block text-2xl font-semibold text-[var(--text-primary)]">
-                    {answeredQuestions} / {assessmentData.questions.length}
-                  </strong>
-                </div>
-                <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-muted)] px-4 py-3">
-                  <span className="text-xs uppercase tracking-[0.18em] text-[var(--text-tertiary)]">Completion</span>
-                  <strong className="mt-2 block text-2xl font-semibold text-[var(--text-primary)]">
-                    {completionPercent}%
-                  </strong>
-                </div>
-              </div>
+          <article
+            id={`question-${currentQuestion.id}`}
+            className="rounded-[28px] border border-[var(--border-soft)] bg-white p-6 shadow-[0_18px_40px_rgba(17,17,17,0.06)] md:p-7"
+          >
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                {currentQuestion.id}
+              </span>
+              <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                {currentQuestion.enabler}
+              </span>
+              <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-sm font-medium text-[var(--text-secondary)]">
+                Target {formatScore(currentQuestion.target)}
+              </span>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {Object.entries(stageGroups).map(([stage, questions]) => {
-                const answered = questions.filter((question) => Number(assessmentState.responses[question.id]?.score || 0) > 0).length;
+            <h2 className="mt-4 text-2xl font-semibold leading-9 text-[var(--text-primary)]">
+              {currentQuestion.text}
+            </h2>
+
+            <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
+              <span className="font-semibold text-[var(--text-primary)]">Evidence prompt:</span>{" "}
+              {currentQuestion.evidencePrompt}
+            </p>
+
+            <div className="mt-6 grid gap-3">
+              {[1, 2, 3, 4, 5].map((score) => {
+                const selected = currentScore === score;
+
                 return (
-                  <span
-                    key={stage}
-                    className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-2 text-sm text-[var(--text-secondary)]"
+                  <button
+                    key={score}
+                    type="button"
+                    onClick={() => updateScore(currentQuestion.id, score)}
+                    aria-label={`Score ${currentQuestion.id} as ${anchorShortLabel(score)}`}
+                    aria-pressed={selected}
+                    className={[
+                      "flex w-full flex-col gap-2 rounded-[22px] border px-5 py-4 text-left transition duration-200",
+                      selected
+                        ? "border-[rgba(225,38,28,0.35)] bg-[var(--surface-tint)] shadow-[0_14px_30px_rgba(225,38,28,0.08)]"
+                        : "border-[var(--border-soft)] bg-[var(--surface-muted)] hover:border-[rgba(225,38,28,0.18)] hover:bg-white",
+                    ].join(" ")}
                   >
-                    {stage.replace(/^\d+\.\s*/, "")}: {answered}/{questions.length}
-                  </span>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="text-2xl font-semibold text-[var(--text-primary)]">{score}</span>
+                      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+                        {anchorShortLabel(score)}
+                      </span>
+                    </div>
+                    <p className="text-sm leading-7 text-[var(--text-secondary)]">
+                      {currentQuestion.anchors[String(score)]}
+                    </p>
+                  </button>
                 );
               })}
             </div>
-          </SurfaceCard>
 
-          <div className="grid gap-6">
-            {Object.entries(stageGroups).map(([stage, questions]) => (
-              <section key={stage} className="grid gap-4">
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                    Stage
-                  </p>
-                  <h3 className="text-2xl font-semibold text-[var(--text-primary)]">{stage}</h3>
-                </div>
-                <div className="grid gap-4">
-                  {questions.map((question) => (
-                    <QuestionCard
-                      key={question.id}
-                      question={question}
-                      response={assessmentState.responses[question.id]}
-                      onScoreSelect={updateScore}
-                      onNoteChange={updateNote}
-                    />
-                  ))}
-                </div>
-              </section>
-            ))}
+            <details className="mt-6 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)]" open={notesOpen}>
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4">
+                <span className="text-sm font-semibold text-[var(--text-primary)]">Evidence & comments</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                  Optional
+                </span>
+              </summary>
+              <div className="grid gap-4 border-t border-[var(--border-soft)] px-4 py-4">
+                <label className="grid gap-2 text-sm font-medium text-[var(--text-primary)]">
+                  Evidence notes
+                  <textarea
+                    value={currentResponse?.evidence || ""}
+                    onChange={(event) => updateNote(currentQuestion.id, "evidence", event.target.value)}
+                    rows={4}
+                    className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3 text-sm leading-6 text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
+                    placeholder="Optional: summarize evidence, references, or documents used."
+                  />
+                </label>
+                <label className="grid gap-2 text-sm font-medium text-[var(--text-primary)]">
+                  Reviewer comment
+                  <textarea
+                    value={currentResponse?.comment || ""}
+                    onChange={(event) => updateNote(currentQuestion.id, "comment", event.target.value)}
+                    rows={4}
+                    className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3 text-sm leading-6 text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
+                    placeholder="Optional: capture interpretation, concerns, or follow-up actions."
+                  />
+                </label>
+              </div>
+            </details>
+          </article>
+
+          <div className="flex flex-col gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-elevated)] p-4 sm:flex-row sm:items-center sm:justify-between">
+            <Button tone="secondary" onClick={goPrev} aria-label="Go to previous step">
+              Back
+            </Button>
+            <span className="text-sm font-medium text-[var(--text-secondary)]">
+              {answeredQuestions}/{totalQuestions} answered
+            </span>
+            <Button
+              onClick={goNext}
+              loading={submitting && currentStep === totalQuestions}
+              aria-label={currentStep === totalQuestions ? "Submit assessment" : "Go to next question"}
+            >
+              {currentStep === totalQuestions ? "Submit Assessment" : "Next Question"}
+            </Button>
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
-            <Button
-              tone="secondary"
-              onClick={handlePrevious}
-              disabled={assessmentState.activePillarIndex === 0}
-              className="w-full sm:w-auto"
-              aria-label="Go to previous pillar"
-            >
-              Previous Section
+          <div className="flex flex-col gap-4 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)] p-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--text-secondary)]">
+              <span>{draftLabel}</span>
+              <span>{currentScore ? `${anchorShortLabel(currentScore)} selected` : "No score selected yet"}</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button tone="secondary" onClick={handleManualSave} loading={savingDraft} aria-label="Save assessment draft">
+                <Save className="size-4" aria-hidden="true" />
+                Save Draft
+              </Button>
+              <Button tone="secondary" onClick={handleDownload} aria-label="Download assessment JSON">
+                <Download className="size-4" aria-hidden="true" />
+                Download JSON
+              </Button>
+              <Button tone="secondary" onClick={handleReset} aria-label="Reset assessment draft">
+                <RotateCcw className="size-4" aria-hidden="true" />
+                Reset Draft
+              </Button>
+            </div>
+            <div className={`rounded-2xl border px-4 py-3 text-sm leading-6 ${statusClass(status.tone)}`}>
+              {status.message}
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section id="results-section" className="mx-auto flex w-full max-w-6xl flex-col gap-6">
+          <SectionHeading
+            eyebrow="Live Results"
+            title="Assessment review and submission"
+            description="Review the computed dashboard, submit when ready, or jump back to the question flow to refine scores and notes."
+          />
+
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)] px-4 py-3 text-sm text-[var(--text-secondary)]">
+            <span>
+              {assessmentState.meta.market || "Market"} | {assessmentState.meta.businessUnit || "Business Unit"} | {assessmentState.meta.respondentName || "Respondent"}
+            </span>
+            <span>{draftLabel}</span>
+          </div>
+
+          <ResultsPanel results={results} answeredQuestions={answeredQuestions} />
+
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <Button tone="secondary" onClick={goPrev} aria-label="Back to questions">
+              Back to Questions
             </Button>
-            <Button
-              onClick={handleNext}
-              loading={submitting}
-              className="w-full sm:w-auto"
-              aria-label={assessmentState.activePillarIndex === assessmentData.pillars.length - 1 ? "Submit assessment" : "Go to next pillar"}
-            >
-              {assessmentState.activePillarIndex === assessmentData.pillars.length - 1
-                ? "Submit Assessment"
-                : "Next Section"}
+            <Button onClick={handleSubmit} loading={submitting} aria-label="Submit completed assessment">
+              <Send className="size-4" aria-hidden="true" />
+              Submit Assessment
             </Button>
           </div>
 
-          <section id="results-section" className="grid gap-6">
-            <SectionHeading
-              eyebrow="Live Results"
-              title="Review the dashboard once the response base is strong enough to read."
-              description="Results stay inline so the respondent never loses context, but they remain intentionally quiet until enough answers exist."
-            />
-            <ResultsPanel results={results} answeredQuestions={answeredQuestions} />
-          </section>
-        </div>
-      </section>
+          <div className="flex flex-wrap gap-2">
+            <Button tone="secondary" onClick={handleManualSave} loading={savingDraft} aria-label="Save assessment draft">
+              <Save className="size-4" aria-hidden="true" />
+              Save Draft
+            </Button>
+            <Button tone="secondary" onClick={handleDownload} aria-label="Download assessment JSON">
+              <Download className="size-4" aria-hidden="true" />
+              Download JSON
+            </Button>
+            <Button tone="secondary" onClick={handleReset} aria-label="Reset assessment draft">
+              <RotateCcw className="size-4" aria-hidden="true" />
+              Reset Draft
+            </Button>
+          </div>
+
+          <div className={`rounded-2xl border px-4 py-3 text-sm leading-6 ${statusClass(status.tone)}`}>
+            {status.message}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

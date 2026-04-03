@@ -1,9 +1,11 @@
 import { readCustomEndpoint } from "./browser-storage.js";
 
+const DEFAULT_APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxADOQGY4XxBMfDDR4pYCGBPGzBx5oJLU8c4fmAQ-jtZFOUfkeiLSAh7tP8JO1xGV90/exec";
 const CLIENT_ENV_ENDPOINT = (import.meta.env.VITE_APPS_SCRIPT_URL || "").trim();
 
 function resolveDirectEndpoint() {
-  return readCustomEndpoint() || CLIENT_ENV_ENDPOINT;
+  return readCustomEndpoint() || CLIENT_ENV_ENDPOINT || DEFAULT_APPS_SCRIPT_URL;
 }
 
 function isLocalHost(hostname) {

@@ -62,12 +62,25 @@ export function AppShell({ children }) {
               <Settings2 className="size-4" aria-hidden="true" />
               Admin
             </Link>
-            <Link to="/assessment" className="hidden md:block">
-              <Button aria-label={isAssessment ? "Review live results" : "Start assessment"}>
-                <span>{isAssessment ? "Review Results" : "Start Assessment"}</span>
+            {isAssessment ? (
+              <Button
+                className="hidden md:flex"
+                aria-label="Review live results"
+                onClick={() =>
+                  document.getElementById("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
+              >
+                <span>Review Results</span>
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Button>
-            </Link>
+            ) : (
+              <Link to="/assessment" className="hidden md:block">
+                <Button aria-label="Start assessment">
+                  <span>Start Assessment</span>
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </header>

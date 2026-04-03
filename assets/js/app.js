@@ -3,6 +3,7 @@ import { saveDraftToGoogleSheets, submitToGoogleSheets } from "./google-sheets.j
 const STORAGE_KEY = "swire-rgm-assessment-draft-v1";
 const ENDPOINT_STORAGE_KEY = "swire-rgm-apps-script-url";
 const AUTOSAVE_DEBOUNCE_MS = 1000;
+const RESULTS_MIN_ANSWERED = 5;
 
 const state = {
   config: null,
@@ -145,7 +146,7 @@ function bindEvents() {
   dom.questionnairePanels?.addEventListener("click", handleScoreClick);
   dom.questionnairePanels?.addEventListener("input", handleQuestionNoteInput);
   dom.prevPillar?.addEventListener("click", () => shiftPillar(-1));
-  dom.nextPillar?.addEventListener("click", () => shiftPillar(1));
+  dom.nextPillar?.addEventListener("click", handleNextAssessmentAction);
   dom.saveDraft?.addEventListener("click", handleManualDraftSave);
   dom.downloadJson?.addEventListener("click", handleDownloadJson);
   dom.resetAssessment?.addEventListener("click", handleResetAssessment);
@@ -221,6 +222,21 @@ function handleQuestionNoteInput(event) {
 
   persistDraft();
   queueAutosave();
+}
+
+async function handleNextAssessmentAction() {
+  const isLastSection = state.activePillarIndex === state.config.pillars.length - 1;
+  if (isLastSection) {
+    setButtonLoading(dom.nextPillar, true, "Submitting");
+    try {
+      await handleSubmitAssessment();
+    } finally {
+      setButtonLoading(dom.nextPillar, false);
+    }
+    return;
+  }
+
+  shiftPillar(1);
 }
 
 function handleDownloadJson() {
@@ -573,9 +589,13 @@ function renderActivePillar() {
 
   if (dom.prevPillar) {
     dom.prevPillar.disabled = state.activePillarIndex === 0;
+    dom.prevPillar.textContent = "Previous Section";
   }
   if (dom.nextPillar) {
-    dom.nextPillar.disabled = state.activePillarIndex === state.config.pillars.length - 1;
+    dom.nextPillar.disabled = false;
+    dom.nextPillar.textContent = state.activePillarIndex === state.config.pillars.length - 1
+      ? "Submit Assessment"
+      : "Next Section";
   }
 }
 
@@ -739,9 +759,12 @@ function recomputeResults() {
   dom.completionRate.textContent = `${Math.round(state.results.completion * 100)}%`;
   syncWizardProgress();
 
-  if (answered === 0) {
+  if (answered < RESULTS_MIN_ANSWERED) {
     dom.resultsEmpty.hidden = false;
     dom.resultsContent.hidden = true;
+    dom.resultsEmpty.innerHTML = answered === 0
+      ? `<strong>Live results are waiting for input.</strong><span>Answer at least ${RESULTS_MIN_ANSWERED} questions to activate the dashboard.</span>`
+      : `<strong>${answered} question(s) captured so far.</strong><span>Answer at least ${RESULTS_MIN_ANSWERED} questions before reading the live dashboard.</span>`;
     return;
   }
 

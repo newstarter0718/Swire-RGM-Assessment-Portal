@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Setup | Swire RGM Assessment Portal</title>
+  <meta
+    name="description"
+    content="Admin setup page for Apps Script, Google Sheets, and browser endpoint configuration in the Swire RGM portal."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <script src="./assets/js/site-config.js"></script>
+</head>
+<body class="page-detail">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark">S</span>
+        <span class="brand-copy">
+          <strong>Swire Coca-Cola</strong>
+          <span>RGM Enterprise Assessment Portal</span>
+        </span>
+      </a>
+
+      <nav class="topnav" aria-label="Primary">
+        <a href="./index.html">Home</a>
+        <a href="./framework.html">Framework</a>
+        <a href="./logic.html">Logic</a>
+        <a href="./assessment.html">Assessment</a>
+      </nav>
+
+      <a class="button button-primary topbar-cta" href="./assessment.html#questionnaire">Open Assessment</a>
+    </div>
+  </header>
+
+  <main class="site-shell">
+    <section class="page-hero">
+      <div>
+        <p class="eyebrow">Admin Setup</p>
+        <h1>Keep the backend lightweight, practical, and easy to maintain.</h1>
+        <p class="page-lede">
+          This page is for the configuration layer only: GitHub Pages, Apps Script, Google Sheets, and the browser endpoint used for draft and final submission.
+        </p>
+      </div>
+
+      <div class="hero-note">
+        <span class="icon-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="5" width="16" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M8 9h8M8 13h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <strong>Assessment users should not need this page.</strong>
+        <p>It exists to keep backend setup out of the main response flow while still staying easy to access for administrators.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head compact-head">
+        <div>
+          <p class="eyebrow">System Stack</p>
+          <h2>Three simple layers handle hosting, submission, and storage.</h2>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <article class="admin-card">
+          <strong>GitHub Pages</strong>
+          <p>Hosts the static site, front-end logic, and live assessment interface.</p>
+        </article>
+        <article class="admin-card">
+          <strong>Apps Script</strong>
+          <p>Receives draft and final payloads from the browser and writes them to Sheets.</p>
+        </article>
+        <article class="admin-card">
+          <strong>Google Sheets</strong>
+          <p>Stores drafts, completed sessions, question responses, and priority output.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel panel-soft">
+      <div class="section-head compact-head">
+        <div>
+          <p class="eyebrow">Browser Endpoint</p>
+          <h2>Configure the Apps Script URL used by this browser.</h2>
+        </div>
+        <p class="section-copy">
+          Use this if you want to test draft autosave and final submission directly from the live site.
+        </p>
+      </div>
+
+      <div class="admin-layout">
+        <div class="endpoint-form meta-form">
+          <label>
+            <span>Apps Script Web App URL</span>
+            <input
+              id="apps-script-url"
+              type="url"
+              placeholder="https://script.google.com/macros/s/DEPLOYMENT_ID/exec"
+            />
+          </label>
+          <div class="endpoint-actions">
+            <button id="save-endpoint" class="button button-primary" type="button">Save Endpoint</button>
+            <button id="clear-endpoint" class="button button-secondary" type="button">Clear</button>
+          </div>
+          <p id="endpoint-status" class="endpoint-status">No Apps Script endpoint configured yet.</p>
+        </div>
+
+        <div class="checklist-card">
+          <span class="eyebrow">Recommended tabs</span>
+          <ul class="detail-list">
+            <li><strong>Assessment_Drafts</strong>: one row per autosaved draft session.</li>
+            <li><strong>Assessment_Sessions</strong>: one row per submitted session.</li>
+            <li><strong>Assessment_Responses</strong>: one row per question response.</li>
+            <li><strong>Assessment_Priority</strong>: ranked output by session.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head compact-head">
+        <div>
+          <p class="eyebrow">Setup Flow</p>
+          <h2>Use a short admin sequence and then leave the page.</h2>
+        </div>
+      </div>
+
+      <div class="flow-strip admin-support-grid">
+        <article class="flow-step">
+          <span>01</span>
+          <strong>Deploy Apps Script</strong>
+          <p>Bind the script to your target spreadsheet and publish it as a web app.</p>
+        </article>
+        <article class="flow-step">
+          <span>02</span>
+          <strong>Save the endpoint</strong>
+          <p>Paste the `/exec` URL into this page so the current browser knows where to write.</p>
+        </article>
+        <article class="flow-step">
+          <span>03</span>
+          <strong>Run a draft test</strong>
+          <p>Open the assessment, answer a few questions, and confirm the draft row appears.</p>
+        </article>
+        <article class="flow-step">
+          <span>04</span>
+          <strong>Submit a full session</strong>
+          <p>Complete one run and verify sessions, responses, and priority rows appear correctly.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-panel">
+      <div>
+        <p class="eyebrow">Back To Work</p>
+        <h2>Once the endpoint is configured, the main assessment flow stays clean and focused.</h2>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-primary" href="./assessment.html#questionnaire">Go to Assessment</a>
+        <a class="button button-secondary" href="./logic.html">Review the Logic</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Swire RGM Assessment Portal</strong>
+        <p>Admin setup for endpoint configuration, draft logging, and lightweight backend management.</p>
+      </div>
+      <div class="footer-actions">
+        <a class="button button-secondary" href="./assessment.html">Assessment</a>
+        <a class="button button-secondary" href="./framework.html">Framework</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/animations.js"></script>
+  <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>

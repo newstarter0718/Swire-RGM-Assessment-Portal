@@ -45,7 +45,7 @@
         <p class="eyebrow">Assessment</p>
         <h1>A cleaner assessment flow built for completion.</h1>
         <p class="page-lede">
-          Set up the respondent profile, complete one section at a time, and watch the result view build live.
+          Set up the respondent profile, complete one section at a time, and activate live results as the response base becomes meaningful.
         </p>
       </div>
 
@@ -64,43 +64,7 @@
     <nav class="page-subnav" aria-label="Assessment sections">
       <a href="#questionnaire">Questionnaire</a>
       <a href="#results">Live Results</a>
-      <a href="#admin">Admin Setup</a>
     </nav>
-
-    <section class="panel panel-soft">
-      <div class="icon-grid icon-grid-3">
-        <article class="icon-card">
-          <span class="icon-badge">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 4 5 7v5c0 4.1 2.7 7.8 7 9 4.3-1.2 7-4.9 7-9V7l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <h3>Evidence-backed scoring</h3>
-          <p>Score each maturity question and capture notes where needed.</p>
-        </article>
-
-        <article class="icon-card">
-          <span class="icon-badge">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 17h12M8 15V8m4 7V5m4 10v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <h3>Live result building</h3>
-          <p>See pillar, stage, and enabler views update as answers are entered.</p>
-        </article>
-
-        <article class="icon-card">
-          <span class="icon-badge">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="4" y="5" width="16" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
-              <path d="M8 9h8M8 13h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <h3>Google Sheets logging</h3>
-          <p>Send completed sessions to Apps Script and store them in a lightweight backend.</p>
-        </article>
-      </div>
-    </section>
 
     <section id="questionnaire" class="assessment-section">
       <div class="section-head compact-head">
@@ -109,16 +73,46 @@
           <h2>Complete the core maturity assessment.</h2>
         </div>
         <p class="section-copy">
-          The working flow is still organized by the four pillar sheets from the original workbook.
+          The working flow is organized by the four pillar sheets from the original workbook, but with a lighter digital structure.
         </p>
       </div>
 
       <div class="assessment-layout">
         <aside class="panel assessment-sidebar">
           <div class="sidebar-block">
-            <p class="eyebrow">Respondent Setup</p>
-            <h3>Session details</h3>
-            <form id="respondent-form" class="meta-form">
+            <p class="eyebrow">Section Navigation</p>
+            <div id="questionnaire-nav" class="pillar-nav" aria-label="Assessment pillars"></div>
+          </div>
+
+          <div class="sidebar-block">
+            <p class="eyebrow">Session Controls</p>
+            <div class="sidebar-actions sidebar-actions-primary">
+              <button id="save-draft" class="button button-secondary" type="button">Save Draft</button>
+              <button id="submit-assessment" class="button button-primary" type="button">Submit</button>
+            </div>
+            <details class="utility-menu">
+              <summary>More tools</summary>
+              <div class="utility-actions">
+                <button id="download-json" class="button button-ghost" type="button">Download JSON</button>
+                <button id="reset-assessment" class="button button-ghost" type="button">Reset All</button>
+                <a class="utility-link" href="./admin.html">Open Admin Setup</a>
+              </div>
+            </details>
+            <div id="save-status" class="status-panel">Draft storage is ready.</div>
+          </div>
+        </aside>
+
+        <div class="panel assessment-main">
+          <details class="setup-disclosure" open>
+            <summary>
+              <div>
+                <span class="eyebrow">Step 0</span>
+                <strong>Respondent setup</strong>
+              </div>
+              <span class="setup-summary-copy">Who is completing this assessment?</span>
+            </summary>
+
+            <form id="respondent-form" class="meta-form respondent-grid">
               <label>
                 <span>Market</span>
                 <input type="text" name="market" placeholder="e.g. Hong Kong" />
@@ -143,31 +137,13 @@
                 <span>Role</span>
                 <input type="text" name="role" placeholder="e.g. Market RGM Lead" />
               </label>
-              <label>
+              <label class="respondent-grid-full">
                 <span>Assessment Cycle</span>
                 <input type="text" name="assessmentCycle" placeholder="e.g. 2026 Full Assessment" />
               </label>
             </form>
-          </div>
+          </details>
 
-          <div class="sidebar-block">
-            <p class="eyebrow">Pillar Navigation</p>
-            <div id="questionnaire-nav" class="pillar-nav" aria-label="Assessment pillars"></div>
-          </div>
-
-          <div class="sidebar-block">
-            <p class="eyebrow">Session Controls</p>
-            <div class="sidebar-actions">
-              <button id="save-draft" class="button button-secondary" type="button">Save Draft</button>
-              <button id="download-json" class="button button-secondary" type="button">Download JSON</button>
-              <button id="reset-assessment" class="button button-ghost" type="button">Reset All</button>
-              <button id="submit-assessment" class="button button-primary" type="button">Submit</button>
-            </div>
-            <div id="save-status" class="status-panel">Draft storage is ready.</div>
-          </div>
-        </aside>
-
-        <div class="panel assessment-main">
           <div class="wizard-progress">
             <div class="wizard-progress-head">
               <div>
@@ -217,43 +193,12 @@
       <div class="section-head compact-head">
         <div>
           <p class="eyebrow">Live Results</p>
-          <h2>Review the dashboard as the assessment fills in.</h2>
+          <h2>Review the dashboard once the response base is strong enough to read.</h2>
         </div>
       </div>
 
-      <div class="icon-grid icon-grid-3 results-storyboard">
-        <article class="icon-card">
-          <span class="icon-badge">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18V7m6 11V5m6 13V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <h3>Pillar</h3>
-          <p>Which lever is strongest or weakest?</p>
-        </article>
-        <article class="icon-card">
-          <span class="icon-badge">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h4l3-4 4 8 3-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <h3>Stage</h3>
-          <p>Where does the operating chain break?</p>
-        </article>
-        <article class="icon-card">
-          <span class="icon-badge">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/>
-              <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <h3>Enabler</h3>
-          <p>What needs to be strengthened to sustain progress?</p>
-        </article>
-      </div>
-
       <div id="results-empty" class="panel results-empty">
-        Start filling the questionnaire to see the dashboard build in real time.
+        Answer a meaningful set of questions first. The live dashboard activates once enough data is in the assessment.
       </div>
 
       <div id="results-content" class="results-content" hidden>
@@ -311,72 +256,19 @@
       </div>
     </section>
 
-    <section id="admin" class="panel">
-      <div class="section-head compact-head">
-        <div>
-          <p class="eyebrow">Admin Setup</p>
-          <h2>Keep the backend lightweight and practical.</h2>
-        </div>
-      </div>
-
-      <div class="admin-grid">
-        <article class="admin-card">
-          <strong>GitHub Pages</strong>
-          <p>Hosts the static site, questionnaire logic, and result dashboard.</p>
-        </article>
-        <article class="admin-card">
-          <strong>Apps Script</strong>
-          <p>Receives a submitted payload from the browser and appends it to Sheets.</p>
-        </article>
-        <article class="admin-card">
-          <strong>Google Sheets</strong>
-          <p>Stores completed sessions, question responses, and priority output.</p>
-        </article>
-      </div>
-
-      <div class="sheet-schema">
-        <div>
-          <h3>Recommended tabs</h3>
-          <ul class="detail-list">
-            <li><strong>Assessment_Drafts</strong>: one row per autosaved session draft.</li>
-            <li><strong>Assessment_Sessions</strong>: one row per submitted session.</li>
-            <li><strong>Assessment_Responses</strong>: one row per question response.</li>
-            <li><strong>Assessment_Priority</strong>: top priority items by session.</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Browser endpoint setup</h3>
-          <p>Paste the Apps Script Web App URL below to test submissions directly from this browser.</p>
-          <div class="endpoint-form meta-form">
-            <label>
-              <span>Apps Script Web App URL</span>
-              <input
-                id="apps-script-url"
-                type="url"
-                placeholder="https://script.google.com/macros/s/DEPLOYMENT_ID/exec"
-              />
-            </label>
-            <div class="endpoint-actions">
-              <button id="save-endpoint" class="button button-primary" type="button">Save Endpoint</button>
-              <button id="clear-endpoint" class="button button-secondary" type="button">Clear</button>
-            </div>
-            <p id="endpoint-status" class="endpoint-status">No Apps Script endpoint configured yet.</p>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
       <div>
         <strong>Swire RGM Assessment Portal</strong>
-        <p>Assessment page with live scoring, live results, and Google Sheets submission support.</p>
+        <p>Assessment page with stepwise scoring, autosave, and inline results.</p>
       </div>
       <div class="footer-actions">
         <a class="button button-secondary" href="./framework.html">Framework</a>
         <a class="button button-secondary" href="./logic.html">Logic</a>
       </div>
+      <a class="footer-link" href="./admin.html">Admin Setup</a>
     </div>
   </footer>
 

@@ -656,7 +656,7 @@ export function AssessmentPage() {
           </SurfaceCard>
         </section>
       ) : currentQuestion ? (
-        <section className="mx-auto flex w-full max-w-3xl flex-col gap-4">
+        <section className="mx-auto flex w-full max-w-6xl flex-col gap-4">
           <div className="flex items-center justify-between gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)] py-2 px-4 text-sm text-[var(--text-secondary)]">
             <span className="truncate">
               {assessmentState.meta.market || "Market"} | {assessmentState.meta.businessUnit || "Business Unit"} | {assessmentState.meta.respondentName || "Respondent"}
@@ -694,89 +694,95 @@ export function AssessmentPage() {
             id={`question-${currentQuestion.id}`}
             className="rounded-[28px] border border-[var(--border-soft)] bg-white p-6 shadow-[0_18px_40px_rgba(17,17,17,0.06)] md:p-7"
           >
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                {currentQuestion.id}
-              </span>
-              <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                {currentQuestion.enabler}
-              </span>
-              <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-sm font-medium text-[var(--text-secondary)]">
-                Target {formatScore(currentQuestion.target)}
-              </span>
-            </div>
+            <div className="grid grid-cols-[40%_1fr] gap-6 items-start">
+              {/* Left column: question info + evidence notes */}
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                    {currentQuestion.id}
+                  </span>
+                  <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                    {currentQuestion.enabler}
+                  </span>
+                  <span className="rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-1 text-sm font-medium text-[var(--text-secondary)]">
+                    Target {formatScore(currentQuestion.target)}
+                  </span>
+                </div>
 
-            <h2 className="mt-4 text-2xl font-semibold leading-9 text-[var(--text-primary)]">
-              {currentQuestion.text}
-            </h2>
+                <h2 className="text-xl font-semibold leading-8 text-[var(--text-primary)]">
+                  {currentQuestion.text}
+                </h2>
 
-            <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
-              <span className="font-semibold text-[var(--text-primary)]">Evidence prompt:</span>{" "}
-              {currentQuestion.evidencePrompt}
-            </p>
+                <p className="text-sm leading-6 text-[var(--text-secondary)]">
+                  <span className="font-semibold text-[var(--text-primary)]">Evidence prompt:</span>{" "}
+                  {currentQuestion.evidencePrompt}
+                </p>
 
-            <div className="mt-6 grid gap-3">
-              {[1, 2, 3, 4, 5].map((score) => {
-                const selected = currentScore === score;
-
-                return (
-                  <button
-                    key={score}
-                    type="button"
-                    onClick={() => updateScore(currentQuestion.id, score)}
-                    aria-label={`Score ${currentQuestion.id} as ${anchorShortLabel(score)}`}
-                    aria-pressed={selected}
-                    className={[
-                      "flex w-full flex-col gap-2 rounded-[22px] border px-5 py-4 text-left transition duration-200",
-                      selected
-                        ? "border-[rgba(225,38,28,0.35)] bg-[var(--surface-tint)] shadow-[0_14px_30px_rgba(225,38,28,0.08)]"
-                        : "border-[var(--border-soft)] bg-[var(--surface-muted)] hover:border-[rgba(225,38,28,0.18)] hover:bg-white",
-                    ].join(" ")}
-                  >
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="text-2xl font-semibold text-[var(--text-primary)]">{score}</span>
-                      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
-                        {anchorShortLabel(score)}
-                      </span>
-                    </div>
-                    <p className="text-sm leading-7 text-[var(--text-secondary)]">
-                      {currentQuestion.anchors[String(score)]}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-
-            <details className="mt-6 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)]" open={notesOpen}>
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4">
-                <span className="text-sm font-semibold text-[var(--text-primary)]">Evidence & comments</span>
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                  Optional
-                </span>
-              </summary>
-              <div className="grid gap-4 border-t border-[var(--border-soft)] px-4 py-4">
-                <label className="grid gap-2 text-sm font-medium text-[var(--text-primary)]">
-                  Evidence notes
-                  <textarea
-                    value={currentResponse?.evidence || ""}
-                    onChange={(event) => updateNote(currentQuestion.id, "evidence", event.target.value)}
-                    rows={4}
-                    className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3 text-sm leading-6 text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
-                    placeholder="Optional: summarize evidence, references, or documents used."
-                  />
-                </label>
-                <label className="grid gap-2 text-sm font-medium text-[var(--text-primary)]">
-                  Reviewer comment
-                  <textarea
-                    value={currentResponse?.comment || ""}
-                    onChange={(event) => updateNote(currentQuestion.id, "comment", event.target.value)}
-                    rows={4}
-                    className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3 text-sm leading-6 text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
-                    placeholder="Optional: capture interpretation, concerns, or follow-up actions."
-                  />
-                </label>
+                <details className="rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)]" open={notesOpen}>
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3">
+                    <span className="text-sm font-semibold text-[var(--text-primary)]">Evidence & comments</span>
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                      Optional
+                    </span>
+                  </summary>
+                  <div className="grid gap-4 border-t border-[var(--border-soft)] px-4 py-4">
+                    <label className="grid gap-2 text-sm font-medium text-[var(--text-primary)]">
+                      Evidence notes
+                      <textarea
+                        value={currentResponse?.evidence || ""}
+                        onChange={(event) => updateNote(currentQuestion.id, "evidence", event.target.value)}
+                        rows={3}
+                        className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3 text-sm leading-6 text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
+                        placeholder="Optional: summarize evidence, references, or documents used."
+                      />
+                    </label>
+                    <label className="grid gap-2 text-sm font-medium text-[var(--text-primary)]">
+                      Reviewer comment
+                      <textarea
+                        value={currentResponse?.comment || ""}
+                        onChange={(event) => updateNote(currentQuestion.id, "comment", event.target.value)}
+                        rows={3}
+                        className="rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3 text-sm leading-6 text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
+                        placeholder="Optional: capture interpretation, concerns, or follow-up actions."
+                      />
+                    </label>
+                  </div>
+                </details>
               </div>
-            </details>
+
+              {/* Right column: score selection */}
+              <div className="grid gap-2">
+                {[1, 2, 3, 4, 5].map((score) => {
+                  const selected = currentScore === score;
+
+                  return (
+                    <button
+                      key={score}
+                      type="button"
+                      onClick={() => updateScore(currentQuestion.id, score)}
+                      aria-label={`Score ${currentQuestion.id} as ${anchorShortLabel(score)}`}
+                      aria-pressed={selected}
+                      className={[
+                        "flex w-full flex-row gap-3 items-start rounded-2xl border px-4 py-3 text-left transition duration-200",
+                        selected
+                          ? "border-[rgba(225,38,28,0.35)] bg-[var(--surface-tint)] shadow-[0_14px_30px_rgba(225,38,28,0.08)]"
+                          : "border-[var(--border-soft)] bg-[var(--surface-muted)] hover:border-[rgba(225,38,28,0.18)] hover:bg-white",
+                      ].join(" ")}
+                    >
+                      <div className="flex items-center gap-2 shrink-0 min-w-[110px]">
+                        <span className="text-lg font-semibold text-[var(--text-primary)]">{score}</span>
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+                          {anchorShortLabel(score)}
+                        </span>
+                      </div>
+                      <p className="text-xs leading-5 text-[var(--text-secondary)]">
+                        {currentQuestion.anchors[String(score)]}
+                      </p>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </article>
 
           <div className="flex flex-col gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-elevated)] p-4 sm:flex-row sm:items-center sm:justify-between">
@@ -795,29 +801,6 @@ export function AssessmentPage() {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-4 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)] p-4">
-            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--text-secondary)]">
-              <span>{draftLabel}</span>
-              <span>{currentScore ? `${anchorShortLabel(currentScore)} selected` : "No score selected yet"}</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <Button tone="secondary" onClick={handleManualSave} loading={savingDraft} aria-label="Save assessment draft">
-                <Save className="size-4" aria-hidden="true" />
-                Save Draft
-              </Button>
-              <Button tone="secondary" onClick={handleDownload} aria-label="Download assessment JSON">
-                <Download className="size-4" aria-hidden="true" />
-                Download JSON
-              </Button>
-              <Button tone="secondary" onClick={handleReset} aria-label="Reset assessment draft">
-                <RotateCcw className="size-4" aria-hidden="true" />
-                Reset Draft
-              </Button>
-            </div>
-            <div className={`rounded-2xl border px-4 py-3 text-sm leading-6 ${statusClass(status.tone)}`}>
-              {status.message}
-            </div>
-          </div>
         </section>
       ) : (
         <section id="results-section" className="mx-auto flex w-full max-w-6xl flex-col gap-6">

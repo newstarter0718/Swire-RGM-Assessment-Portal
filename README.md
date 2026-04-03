@@ -1,26 +1,87 @@
 # Swire RGM Assessment Portal
 
-This project is a GitHub Pages friendly static website that introduces the Swire RGM enterprise assessment and converts the core maturity workbook into a web assessment flow.
+This project is now a `React + Tailwind + Vite` application prepared for `Vercel` deployment while preserving the existing Swire RGM assessment logic, Google Sheets flow, and workbook-derived data model.
 
-Key capabilities:
+## Current Stack
 
-- Red, white, and silver branded landing experience
-- Methodology and architecture overview derived from the uploaded deck and manual
-- Web version of the 48-question core maturity assessment
-- Instant results by pillar, stage, and enabler
-- Google Apps Script and Google Sheets submission pattern for lightweight backend logging
+- `React` for routed application structure
+- `Tailwind CSS` with global Swire brand tokens in `src/index.css`
+- `Vite` for local development and production builds
+- `Vercel Functions` via `api/assessment.js` for proxying draft save and submission requests
+- `Google Apps Script + Google Sheets` as the lightweight backend writer
 
-## Structure
+## Routes
 
-- `index.html`: single-page site shell
-- `assets/css/styles.css`: site styling
-- `assets/js/app.js`: interactive UI and scoring logic
-- `assets/js/google-sheets.js`: Google Sheets submission helper
-- `assets/js/site-config.js`: deployment-time config for the Apps Script URL
+- `/#/` Home
+- `/#/framework` Framework
+- `/#/logic` Logic
+- `/#/assessment` Assessment
+- `/#/admin` Admin Setup
+
+Legacy entry pages such as `framework.html` and `assessment.html` are retained as small redirects so older links continue to work.
+
+## Important Files
+
+- `src/App.jsx`: app routes and shell
+- `src/pages/*.jsx`: page-level React views
+- `src/components/ui.jsx`: reusable UI primitives
+- `src/pages/AssessmentPage.jsx`: assessment wizard, autosave, live results, and submission flow
+- `src/lib/assessment.js`: scoring logic, formatting helpers, and payload construction
+- `src/lib/submission.js`: client submission transport selection
+- `api/assessment.js`: Vercel proxy function
 - `data/assessment-config.json`: workbook-derived assessment data
-- `scripts/extract_workbook_data.py`: regenerate JSON from the source workbook
-- `apps-script/Code.gs`: sample Apps Script web app backend
-- `google-sheet-template/*.csv`: importable Google Sheet tab headers if connector setup is blocked
+- `apps-script/Code.gs`: Google Apps Script writer
+- `scripts/extract_workbook_data.py`: regenerate the assessment JSON from the source workbook
+
+## Local Development
+
+Install dependencies:
+
+```powershell
+npm install
+```
+
+Run the dev server:
+
+```powershell
+npm run dev
+```
+
+Build for production:
+
+```powershell
+npm run build
+```
+
+## Submission Paths
+
+The app now supports two submission modes:
+
+1. `Vercel Proxy`
+   The browser posts to `/api/assessment`, and the Vercel Function forwards the payload to Apps Script using the server-side `APPS_SCRIPT_URL` environment variable.
+
+2. `Direct Apps Script`
+   The user can set a browser-specific Apps Script URL override from the Admin Setup page. This is useful for local testing or fallback scenarios.
+
+## Vercel Setup
+
+1. Create or open the Vercel project linked to this repository.
+2. Add environment variable:
+   - `APPS_SCRIPT_URL=<your Apps Script /exec URL>`
+3. Deploy the project on Vercel.
+4. Open the preview deployment and validate:
+   - assessment autosave
+   - live results
+   - final submission to Google Sheets
+
+## Google Apps Script
+
+1. Open your target Google Sheet.
+2. Create or open the bound Apps Script project.
+3. Paste `apps-script/Code.gs`.
+4. Deploy it as a Web App.
+5. Copy the `/exec` URL.
+6. Store it in Vercel as `APPS_SCRIPT_URL`, or paste it into the Admin Setup page for browser-local override testing.
 
 ## Regenerate Assessment Data
 
@@ -30,54 +91,13 @@ python .\scripts\extract_workbook_data.py `
   --output ".\data\assessment-config.json"
 ```
 
-## Local Preview
-
-```powershell
-python -m http.server 8765
-```
-
-Then open `http://localhost:8765/output/web/swire-rgm-assessment-portal/`
-
-## Deployment
-
-1. Push this folder to a GitHub repository.
-2. The included `.github/workflows/deploy-pages.yml` will publish the site automatically from the `main` branch via GitHub Actions.
-3. In the GitHub repository settings, set `Pages -> Source` to `GitHub Actions`.
-4. Create a Google Sheet and bind an Apps Script project to it.
-5. Paste the sample `apps-script/Code.gs` into the Apps Script editor.
-6. Deploy the Apps Script as a Web App.
-7. Paste the deployed Apps Script URL into the `Admin Setup` page of the live site to test draft autosave and final submission in your own browser.
-8. After validation, update `assets/js/site-config.js` with the same deployed Apps Script URL if you want every user to submit without local setup.
-
-If connector-based Google Sheet creation is unavailable, use the files in `google-sheet-template/` and the Apps Script bootstrap to create the required tabs manually, including the draft tab used for autosave.
-
-## Publish From This Machine
-
-This project has already been initialized as a local Git repository on branch `main`.
-
-Once you have created a GitHub repository, run:
-
-```powershell
-git remote add origin <YOUR_GITHUB_REPO_URL>
-git add .
-git commit -m "Initial Swire RGM assessment portal"
-git push -u origin main
-```
-
-If `git commit` asks for identity, configure:
-
-```powershell
-git config user.name "Your Name"
-git config user.email "you@example.com"
-```
-
 ## Scope
 
-This first version focuses on the core maturity assessment that powers the dashboard outputs:
+This version focuses on the core 48-question maturity assessment and its reporting outputs:
 
 - Pricing
 - OBPPC
 - Promotion Spend
 - DFR / Trade Investment
 
-The workbook's knowledge questionnaire, interview guide, and case assessment are included as methodology context and phase-two expansion candidates rather than primary form flows in this release.
+The workbook's knowledge questionnaire, interview guide, and case assessment remain future expansion candidates rather than primary interactive flows in this release.

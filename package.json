@@ -1,7 +1,24 @@
 {
   "name": "swire-rgm-assessment-portal",
   "private": true,
+  "version": "0.2.0",
   "type": "module",
-  "version": "0.1.0",
-  "description": "GitHub Pages friendly assessment portal for the Swire RGM workbook."
+  "description": "React + Tailwind + Vercel version of the Swire RGM Assessment Portal.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.542.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@vitejs/plugin-react": "^5.0.4",
+    "tailwindcss": "^4.1.13",
+    "vite": "^7.1.7"
+  }
 }

@@ -62,16 +62,41 @@
   }
 }
 
+/* Scroll-reveal: JS adds .js-scroll-reveal on <html> and .is-visible on each element */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-home,
-  .panel,
-  .icon-card,
-  .route-card,
-  .pillar-card,
-  .stage-card,
-  .enabler-card,
-  .question-card {
+  /* Fallback (no JS): everything visible from load */
+  .hero-home, .panel, .cta-panel, .page-hero,
+  .icon-card, .route-card, .flow-step, .logic-step,
+  .pillar-card, .stage-card, .enabler-card,
+  .cycle-step, .stat-card, .summary-card,
+  .question-card, .admin-card {
     animation: fadeInUp 0.55s var(--ease-out) both;
+  }
+
+  /* JS-enhanced: hide until .is-visible is added */
+  .js-scroll-reveal .hero-home,
+  .js-scroll-reveal .panel,
+  .js-scroll-reveal .cta-panel,
+  .js-scroll-reveal .page-hero,
+  .js-scroll-reveal .icon-card,
+  .js-scroll-reveal .route-card,
+  .js-scroll-reveal .flow-step,
+  .js-scroll-reveal .logic-step,
+  .js-scroll-reveal .pillar-card,
+  .js-scroll-reveal .stage-card,
+  .js-scroll-reveal .enabler-card,
+  .js-scroll-reveal .cycle-step,
+  .js-scroll-reveal .stat-card,
+  .js-scroll-reveal .summary-card,
+  .js-scroll-reveal .question-card,
+  .js-scroll-reveal .admin-card {
+    opacity: 0;
+    transform: translateY(22px);
+    animation: none;
+  }
+
+  .js-scroll-reveal .is-visible {
+    animation: fadeInUp 0.6s var(--ease-out) both;
   }
 }
 

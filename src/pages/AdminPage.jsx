@@ -37,7 +37,7 @@ export function AdminPage() {
         <SurfaceCard className="rounded-[28px] p-8">
           <div className="grid gap-5">
             <div className="flex items-center gap-3">
-              <span className="flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-tint)] text-[var(--swire-red)]">
+              <span className="flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                 <Workflow className="size-5" aria-hidden="true" />
               </span>
               <div>
@@ -91,7 +91,7 @@ export function AdminPage() {
         <div className="grid gap-4">
           <SurfaceCard className="rounded-[24px] p-6">
             <div className="flex items-start gap-3">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--surface-tint)] text-[var(--swire-red)]">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                 <ShieldCheck className="size-5" aria-hidden="true" />
               </span>
               <div className="space-y-2">
@@ -105,7 +105,7 @@ export function AdminPage() {
 
           <SurfaceCard className="rounded-[24px] p-6">
             <div className="flex items-start gap-3">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--surface-tint)] text-[var(--swire-red)]">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                 <Link2 className="size-5" aria-hidden="true" />
               </span>
               <div className="space-y-2">

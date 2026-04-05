@@ -95,11 +95,11 @@ export function HomePage() {
           </div>
         </div>
 
-        <div className="rounded-[32px] border border-white/70 bg-[var(--surface-glass)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl">
+        <div className="rounded-[32px] bg-[var(--surface-glass)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl">
           <img
             src={heroSystemOverview}
             alt="System view of pillars, stages, and enablers in the Swire RGM assessment"
-            className="w-full rounded-[24px] border border-[rgba(38,38,38,0.06)] bg-white/85"
+            className="w-full rounded-[24px] bg-[var(--surface-container-lowest,#fff)]"
           />
         </div>
       </section>
@@ -116,8 +116,8 @@ export function HomePage() {
             const Icon = item.icon;
             return (
               <Link key={item.to} to={item.to} className="group">
-                <SurfaceCard className="flex h-full flex-col gap-5 rounded-[28px] transition duration-300 group-hover:-translate-y-0.5 group-hover:border-[rgba(225,38,28,0.18)] group-hover:shadow-[var(--shadow-card)]">
-                  <span className="flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-tint)] text-[var(--swire-red)]">
+                <SurfaceCard className="flex h-full flex-col gap-5 rounded-[28px] transition duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_20px_48px_rgba(23,28,31,0.1)]">
+                  <span className="flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                     <Icon className="size-5" aria-hidden="true" />
                   </span>
                   <div className="space-y-2">

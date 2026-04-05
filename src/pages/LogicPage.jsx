@@ -60,11 +60,11 @@ export function LogicPage() {
           </p>
         </div>
 
-        <div className="rounded-[32px] border border-white/70 bg-[var(--surface-glass)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl">
+        <div className="rounded-[32px] bg-[var(--surface-glass)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl">
           <img
             src={logicPriorityFlow}
             alt="Flow showing respond, score, compare, and prioritize"
-            className="w-full rounded-[24px] border border-[rgba(38,38,38,0.06)] bg-white/85"
+            className="w-full rounded-[24px] bg-[var(--surface-container-lowest,#fff)]"
             loading="lazy"
           />
         </div>
@@ -77,14 +77,17 @@ export function LogicPage() {
           description="The page keeps the logic visual, short, and operational instead of burying it in methodology copy."
         />
         <div className="grid gap-5 xl:grid-cols-4">
-          {steps.map((step) => {
+          {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <SurfaceCard key={step.title} className="flex h-full flex-col gap-4 rounded-[24px] p-6">
-                <span className="flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-tint)] text-[var(--swire-red)]">
+              <SurfaceCard key={step.title} className="relative overflow-hidden flex h-full flex-col gap-4 rounded-[24px] p-6 hover:shadow-[0_20px_48px_rgba(23,28,31,0.1)] transition-shadow duration-300">
+                <span className="absolute top-4 right-5 text-5xl font-black text-[var(--surface-container-highest,#dfe3e7)] select-none leading-none">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="relative flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
-                <h3 className="font-[var(--font-display)] text-2xl font-semibold text-[var(--text-primary)]">
+                <h3 className="relative font-[var(--font-display)] text-2xl font-bold tracking-tight text-[var(--text-primary)]">
                   {step.title}
                 </h3>
                 <p className="text-sm leading-6 text-[var(--text-secondary)]">{step.copy}</p>

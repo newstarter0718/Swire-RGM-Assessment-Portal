@@ -13,8 +13,8 @@ export function Button({
     tone === "primary"
       ? "bg-[var(--swire-red)] text-white shadow-[0_14px_30px_rgba(225,38,28,0.24)] hover:bg-[#ca2118]"
       : tone === "secondary"
-        ? "border border-[var(--border-strong)] bg-white/80 text-[var(--text-primary)] hover:border-[rgba(225,38,28,0.32)] hover:bg-white"
-        : "border border-transparent bg-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]";
+        ? "bg-[var(--surface-muted)] text-[var(--text-primary)] hover:bg-[var(--surface-container-high,#e4e9ed)]"
+        : "bg-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]";
 
   return (
     <button
@@ -65,7 +65,7 @@ export function SurfaceCard({ children, className = "" }) {
   return (
     <div
       className={[
-        "rounded-[24px] border border-[var(--border-soft)] bg-[var(--surface-elevated)] p-6 shadow-[var(--shadow-soft)] backdrop-blur-sm",
+        "rounded-[24px] bg-[var(--surface-elevated)] p-6 shadow-[var(--shadow-card)] backdrop-blur-md",
         className,
       ].join(" ")}
     >

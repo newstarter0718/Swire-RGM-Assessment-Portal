@@ -657,7 +657,7 @@ export function AssessmentPage() {
         </section>
       ) : currentQuestion ? (
         <section className="mx-auto flex w-full max-w-6xl flex-col gap-4">
-          <div className="flex items-center justify-between gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)] py-2 px-4 text-sm text-[var(--text-secondary)]">
+          <div className="flex items-center justify-between gap-3 rounded-[22px] bg-[var(--surface-muted)] py-2 px-4 text-sm text-[var(--text-secondary)]">
             <span className="truncate">
               {assessmentState.meta.market || "Market"} | {assessmentState.meta.businessUnit || "Business Unit"} | {assessmentState.meta.respondentName || "Respondent"}
             </span>
@@ -692,7 +692,7 @@ export function AssessmentPage() {
 
           <article
             id={`question-${currentQuestion.id}`}
-            className="rounded-[28px] border border-[var(--border-soft)] bg-white p-6 shadow-[0_18px_40px_rgba(17,17,17,0.06)] md:p-7"
+            className="rounded-[28px] bg-[var(--surface-glass)] p-6 shadow-[var(--shadow-card)] backdrop-blur-md md:p-7"
           >
             <div className="grid grid-cols-[40%_1fr] gap-6 items-start">
               {/* Left column: question info + evidence notes */}
@@ -766,7 +766,7 @@ export function AssessmentPage() {
                         "flex w-full flex-row gap-3 items-start rounded-2xl border px-4 py-3 text-left transition duration-200",
                         selected
                           ? "border-[rgba(225,38,28,0.35)] bg-[var(--surface-tint)] shadow-[0_14px_30px_rgba(225,38,28,0.08)]"
-                          : "border-[var(--border-soft)] bg-[var(--surface-muted)] hover:border-[rgba(225,38,28,0.18)] hover:bg-white",
+                          : "border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] hover:bg-[var(--surface-muted)]",
                       ].join(" ")}
                     >
                       <div className="flex items-center gap-2 shrink-0 min-w-[110px]">
@@ -785,7 +785,7 @@ export function AssessmentPage() {
             </div>
           </article>
 
-          <div className="flex flex-col gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-elevated)] p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 rounded-[22px] bg-[var(--surface-muted)] p-4 sm:flex-row sm:items-center sm:justify-between">
             <Button tone="secondary" onClick={goPrev} aria-label="Go to previous step">
               Back
             </Button>

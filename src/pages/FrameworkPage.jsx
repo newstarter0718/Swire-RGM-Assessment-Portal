@@ -25,11 +25,11 @@ export function FrameworkPage() {
           </p>
         </div>
 
-        <div className="rounded-[32px] border border-white/70 bg-[var(--surface-glass)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl">
+        <div className="rounded-[32px] bg-[var(--surface-glass)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl">
           <img
             src={frameworkArchitecture}
             alt="Layered architecture of the Swire RGM assessment framework"
-            className="w-full rounded-[24px] border border-[rgba(38,38,38,0.06)] bg-white/85"
+            className="w-full rounded-[24px] bg-[var(--surface-container-lowest,#fff)]"
             loading="lazy"
           />
         </div>
@@ -42,22 +42,25 @@ export function FrameworkPage() {
           description="Each pillar keeps its workbook weight, target, and question count while being reframed into a cleaner visual system."
         />
         <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
-          {assessmentData.pillars.map((pillar) => {
+          {assessmentData.pillars.map((pillar, index) => {
             const Icon = pillarIcons[pillar.label] || Layers3;
             return (
-              <SurfaceCard key={pillar.id} className="space-y-4 rounded-[26px] p-6">
-                <span className="flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-tint)] text-[var(--swire-red)]">
+              <SurfaceCard key={pillar.id} className="group relative overflow-hidden space-y-4 rounded-[26px] p-6 hover:shadow-[0_20px_48px_rgba(23,28,31,0.1)] transition-shadow duration-300">
+                <span className="absolute top-4 right-5 text-6xl font-black text-[var(--surface-container-highest,#dfe3e7)] select-none leading-none">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="relative flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
-                <div className="space-y-2">
-                  <h3 className="font-[var(--font-display)] text-2xl font-semibold text-[var(--text-primary)]">
+                <div className="relative space-y-2">
+                  <h3 className="font-[var(--font-display)] text-2xl font-bold tracking-tight text-[var(--text-primary)]">
                     {pillar.label}
                   </h3>
                   <p className="text-sm leading-6 text-[var(--text-secondary)]">
                     {pillar.description}
                   </p>
                 </div>
-                <div className="grid gap-2 text-sm text-[var(--text-secondary)]">
+                <div className="relative grid gap-2 text-sm text-[var(--text-secondary)]">
                   <p>Questions: <span className="font-semibold text-[var(--text-primary)]">{pillar.questionCount}</span></p>
                   <p>Target: <span className="font-semibold text-[var(--text-primary)]">{formatScore(pillar.target)}</span></p>
                   <p>Weight: <span className="font-semibold text-[var(--text-primary)]">{formatPercent(pillar.weight)}</span></p>
@@ -108,25 +111,52 @@ export function FrameworkPage() {
           description="These are not side notes. They are the structural reasons why a strong strategy still fails to land in-market."
         />
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {assessmentData.enablers.map((enabler) => (
-            <SurfaceCard key={enabler.id} className="space-y-4 rounded-[24px] p-6">
-              <div className="space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
-                  {enabler.implication}
+          {assessmentData.enablers.map((enabler, index) => {
+            const isDark = index === 0;
+            const isAccent = index === assessmentData.enablers.length - 1;
+            const cardClass = isDark
+              ? "space-y-4 rounded-[24px] p-6 bg-[var(--inverse-surface,#2c3134)] text-[var(--inverse-on-surface,#edf1f5)] shadow-[var(--shadow-card)] backdrop-blur-md"
+              : isAccent
+                ? "space-y-4 rounded-[24px] p-6 bg-[var(--swire-red)] text-white shadow-[0_14px_30px_rgba(225,38,28,0.22)] backdrop-blur-md"
+                : "space-y-4 rounded-[24px] p-6 hover:shadow-[0_20px_48px_rgba(23,28,31,0.1)] transition-shadow duration-300";
+            return isDark || isAccent ? (
+              <div key={enabler.id} className={cardClass}>
+                <div className="space-y-2">
+                  <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${isDark ? "text-white/50" : "text-white/70"}`}>
+                    {enabler.implication}
+                  </p>
+                  <h3 className="font-[var(--font-display)] text-2xl font-bold tracking-tight text-white">
+                    {enabler.label}
+                  </h3>
+                </div>
+                <p className={`text-sm leading-6 ${isDark ? "text-white/70" : "text-white/80"}`}>
+                  {enabler.description}
                 </p>
-                <h3 className="font-[var(--font-display)] text-2xl font-semibold text-[var(--text-primary)]">
-                  {enabler.label}
-                </h3>
+                <div className={`grid gap-2 text-sm ${isDark ? "text-white/50" : "text-white/70"}`}>
+                  <p>{enabler.questionCount} linked questions</p>
+                  <p>Target {formatScore(enabler.target)}</p>
+                </div>
               </div>
-              <p className="text-sm leading-6 text-[var(--text-secondary)]">
-                {enabler.description}
-              </p>
-              <div className="grid gap-2 text-sm text-[var(--text-secondary)]">
-                <p>{enabler.questionCount} linked questions</p>
-                <p>Target {formatScore(enabler.target)}</p>
-              </div>
-            </SurfaceCard>
-          ))}
+            ) : (
+              <SurfaceCard key={enabler.id} className={cardClass}>
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+                    {enabler.implication}
+                  </p>
+                  <h3 className="font-[var(--font-display)] text-2xl font-bold tracking-tight text-[var(--text-primary)]">
+                    {enabler.label}
+                  </h3>
+                </div>
+                <p className="text-sm leading-6 text-[var(--text-secondary)]">
+                  {enabler.description}
+                </p>
+                <div className="grid gap-2 text-sm text-[var(--text-secondary)]">
+                  <p>{enabler.questionCount} linked questions</p>
+                  <p>Target {formatScore(enabler.target)}</p>
+                </div>
+              </SurfaceCard>
+            );
+          })}
         </div>
       </section>
     </div>

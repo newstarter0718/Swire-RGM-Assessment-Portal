@@ -15,7 +15,7 @@ export function AppShell({ children }) {
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-40 border-b border-white/60 bg-[var(--surface-glass)] backdrop-blur-xl">
+      <header className="sticky top-0 z-40 bg-[var(--surface-glass)] backdrop-blur-xl shadow-[var(--shadow-soft)]">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8">
           <Link
             to="/"
@@ -35,7 +35,7 @@ export function AppShell({ children }) {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-2 rounded-full border border-white/70 bg-white/72 px-2 py-1 shadow-[var(--shadow-soft)] lg:flex">
+          <nav className="hidden items-center gap-2 rounded-full bg-[var(--surface-muted)] px-2 py-1 shadow-[var(--shadow-soft)] lg:flex">
             {navigation.map((item) => (
               <NavLink
                 key={item.to}
@@ -57,7 +57,7 @@ export function AppShell({ children }) {
           <div className="flex items-center gap-3">
             <Link
               to="/admin"
-              className="hidden items-center gap-2 rounded-full border border-[var(--border-soft)] bg-white/75 px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition hover:border-[rgba(225,38,28,0.2)] hover:text-[var(--text-primary)] md:inline-flex"
+              className="hidden items-center gap-2 rounded-full bg-[var(--surface-muted)] px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition hover:bg-[var(--surface-container-high,#e4e9ed)] hover:text-[var(--text-primary)] md:inline-flex"
             >
               <Settings2 className="size-4" aria-hidden="true" />
               Admin
@@ -87,7 +87,7 @@ export function AppShell({ children }) {
 
       <main>{children}</main>
 
-      <footer className="border-t border-white/70 bg-white/75">
+      <footer className="bg-[var(--surface-muted)] shadow-[0_-1px_0_rgba(23,28,31,0.06)]">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-5 py-8 text-sm text-[var(--text-secondary)] md:flex-row md:items-center md:justify-between md:px-8">
           <div>
             <p className="font-semibold text-[var(--text-primary)]">Swire RGM Assessment Portal</p>

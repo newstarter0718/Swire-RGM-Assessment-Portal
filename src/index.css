@@ -1,27 +1,60 @@
 @import "tailwindcss";
 
+@theme {
+  --color-surface: #f6fafe;
+  --color-surface-bright: #f6fafe;
+  --color-surface-dim: #d6dade;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f0f4f8;
+  --color-surface-container: #eaeef2;
+  --color-surface-container-high: #e4e9ed;
+  --color-surface-container-highest: #dfe3e7;
+  --color-surface-variant: #dfe3e7;
+  --color-on-surface: #171c1f;
+  --color-on-surface-variant: #5d3f3b;
+  --color-on-background: #171c1f;
+  --color-primary: #bb0005;
+  --color-primary-container: #e1261c;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #fffaff;
+  --color-secondary: #515f74;
+  --color-secondary-container: #d5e3fc;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #57657a;
+  --color-tertiary: #005e9f;
+  --color-tertiary-container: #0077c8;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #fbfbff;
+  --color-outline: #926f6a;
+  --color-outline-variant: #e7bdb7;
+  --color-inverse-surface: #2c3134;
+  --color-inverse-on-surface: #edf1f5;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+}
+
 :root {
   color-scheme: light;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Inter Tight", var(--font-sans);
+  --font-display: "Inter", var(--font-sans);
   --swire-red: #e1261c;
-  --charcoal: #262626;
-  --charcoal-soft: #4b4b4b;
-  --surface: #ffffff;
-  --surface-muted: #f5f5f5;
-  --surface-elevated: rgba(255, 255, 255, 0.92);
-  --surface-glass: rgba(255, 255, 255, 0.78);
-  --surface-tint: #fff5f4;
-  --border-soft: rgba(38, 38, 38, 0.1);
-  --border-strong: rgba(38, 38, 38, 0.18);
-  --text-primary: #262626;
-  --text-secondary: #5f5f5f;
-  --text-tertiary: #7a7a7a;
+  --charcoal: #171c1f;
+  --charcoal-soft: #515f74;
+  --surface: #f6fafe;
+  --surface-muted: #f0f4f8;
+  --surface-elevated: rgba(255, 255, 255, 0.8);
+  --surface-glass: rgba(255, 255, 255, 0.8);
+  --surface-tint: #ffdad5;
+  --border-soft: rgba(23, 28, 31, 0.08);
+  --border-strong: rgba(23, 28, 31, 0.15);
+  --text-primary: #171c1f;
+  --text-secondary: #515f74;
+  --text-tertiary: #5d3f3b;
   --success: #0f8a4b;
   --warning: #b26a00;
-  --danger: #b42318;
-  --shadow-soft: 0 18px 44px rgba(17, 17, 17, 0.08);
-  --shadow-card: 0 24px 56px rgba(17, 17, 17, 0.07);
+  --danger: #ba1a1a;
+  --shadow-soft: 0px 12px 32px rgba(23, 28, 31, 0.06);
+  --shadow-card: 0px 12px 32px rgba(23, 28, 31, 0.06);
 }
 
 * {
@@ -35,9 +68,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background:
-    radial-gradient(circle at top right, rgba(225, 38, 28, 0.12), transparent 24%),
-    linear-gradient(180deg, #ffffff 0%, #fbfbfb 36%, #f5f5f5 100%);
+  background: #f6fafe;
   color: var(--text-primary);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;

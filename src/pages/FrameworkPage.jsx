@@ -29,13 +29,13 @@ export function FrameworkPage() {
       <section className="flex flex-col items-end justify-between gap-8 md:flex-row">
         <div className="max-w-2xl space-y-4">
           <p className="text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">
-            Framework Strategy
+            Framework Overview
           </p>
           <h1 className="font-[var(--font-display)] text-5xl font-black leading-[1.08] tracking-tight text-[var(--text-primary)] md:text-6xl">
-            Revenue Growth <span className="italic text-[var(--swire-red)]">Mastery</span>
+            4 Pillars. 5 Stages. <span className="italic text-[var(--swire-red)]">One operating system.</span>
           </h1>
           <p className="text-lg font-light leading-relaxed text-[var(--text-secondary)]">
-            The Precision Architect framework is our blueprint for sustainable value creation — aligning pricing, promotion, and portfolio strategies through a rigorous data-centric approach.
+            The Global RGM Framework aligns portfolio, pricing, promotion, and trade investment through a single capability chain — from identifying growth pools to building for the future.
           </p>
         </div>
         <div className="flex shrink-0 gap-4">
@@ -71,7 +71,7 @@ export function FrameworkPage() {
       <section className="space-y-8">
         <Divider label={<>The 04 <span className="italic text-[var(--swire-red)]">Pillars</span></>} />
         <p className="max-w-2xl text-base leading-7 text-[var(--text-secondary)]">
-          Each pillar keeps its workbook weight, target, and question count while being reframed into a cleaner visual system.
+          Four commercial levers assessed across the full capability chain. Each pillar carries its own weight, target, and question set drawn directly from the workbook.
         </p>
 
         <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
@@ -109,7 +109,7 @@ export function FrameworkPage() {
       <section className="space-y-8">
         <Divider label={<>The 05 <span className="italic text-[var(--swire-red)]">Stages</span></>} />
         <p className="max-w-2xl text-base leading-7 text-[var(--text-secondary)]">
-          Five capability stages show where the operating chain holds or breaks — from opportunity understanding through to forward planning.
+          Five capability stages show where the operating chain holds or breaks. Stage 1 — Identify the Opportunity — aligns with the Global RGM Framework's foundational principle: know where to play before designing strategy.
         </p>
 
         <div className="grid gap-4">

@@ -6,36 +6,65 @@ import { assessmentData } from "../lib/assessment-data.js";
 const pillars = [
   {
     number: "01",
-    title: "Pricing",
-    description: "Optimizing price strategy across channels and customer segments to capture maximum value.",
-    icon: TrendingUp,
-  },
-  {
-    number: "02",
     title: "OBPPC",
-    description: "Occasion, Brand, Pack, Price, Channel segmentation for precise commercial targeting.",
+    subtitle: "Build margin through portfolio differentiation",
+    description: "Match consumer and shopper needs to the right Occasion, Brand, Pack, Price and Channel to create differentiated value across the portfolio.",
     icon: LayoutPanelTop,
   },
   {
+    number: "02",
+    title: "Pricing",
+    subtitle: "Make every customer investment work harder",
+    description: "Manage price realization, ex-factory discipline, and long-term price direction to maximize P&L impact across channels and customers.",
+    icon: TrendingUp,
+  },
+  {
     number: "03",
-    title: "Promotion",
-    description: "Evaluating trade promotion investment effectiveness and ROI across spend categories.",
+    title: "Promotion Spend",
+    subtitle: "Know what you give and what you get",
+    description: "Plan, track and manage trade promotions with clear ROI discipline, guardrails, and reallocation logic toward higher-return opportunities.",
     icon: BarChart3,
   },
   {
     number: "04",
-    title: "DFR / TI",
-    description: "Managing distributor fees, rebates, and trade investments to protect net margin.",
+    title: "DFR / Trade Investment",
+    subtitle: "Protect net margin through structured trade terms",
+    description: "Define commercial terms, funding logic, and gross-to-net discipline so every customer investment is tied to clear conditions and value.",
     icon: ClipboardCheck,
   },
 ];
 
 const stages = [
-  { number: "1", label: "Foundation",  description: "Manual processes, limited visibility" },
-  { number: "2", label: "Developed",   description: "Structured processes, basic analytics" },
-  { number: "3", label: "Advanced",    description: "Target state — data-driven decisions", highlight: true },
-  { number: "4", label: "Expert",      description: "Predictive capability, integrated systems" },
-  { number: "5", label: "Mastery",     description: "Automated intelligence and leadership" },
+  {
+    number: "1",
+    label: "Identify the Opportunity",
+    description: "Knowing where the growth pools are",
+    highlight: false,
+  },
+  {
+    number: "2",
+    label: "Shape the Strategy",
+    description: "Building strategy around those opportunities",
+    highlight: false,
+  },
+  {
+    number: "3",
+    label: "Set Commercial Policy",
+    description: "Translating strategy into clear commercial policy",
+    highlight: true,
+  },
+  {
+    number: "4",
+    label: "Win In-Market",
+    description: "Tracking return on every investment made",
+    highlight: false,
+  },
+  {
+    number: "5",
+    label: "Build for the Future",
+    description: "Planning forward with a value growth mindset",
+    highlight: false,
+  },
 ];
 
 export function HomePage() {
@@ -50,12 +79,12 @@ export function HomePage() {
               Assessment Portal
             </p>
             <h1 className="font-[var(--font-display)] text-5xl font-black leading-[1.08] tracking-tight text-[var(--text-primary)] md:text-6xl">
-              The Precision<br />
-              <span className="text-[var(--swire-red)]">Architect</span>
+              Know Where to Play.<br />
+              <span className="text-[var(--swire-red)]">Know How to Win.</span>
             </h1>
           </div>
           <p className="max-w-xl text-lg font-light leading-8 text-[var(--text-secondary)]">
-            Transform complexity into a structured roadmap for commercial excellence through a strategic 48-question RGM maturity assessment.
+            48 questions across 4 commercial pillars — pinpoint the capability gaps that are costing margin.
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -75,9 +104,9 @@ export function HomePage() {
           {/* Stat tiles */}
           <div className="grid grid-cols-3 gap-4">
             {[
-              { label: "Pillars",    value: assessmentData.meta.pillarCount,   sub: "Core commercial levers" },
-              { label: "Stages",     value: assessmentData.meta.stageCount,    sub: "Capability chain" },
-              { label: "Questions",  value: assessmentData.meta.questionCount, sub: "Maturity signals" },
+              { label: "Pillars",   value: assessmentData.meta.pillarCount,   sub: "Commercial levers" },
+              { label: "Stages",    value: assessmentData.meta.stageCount,    sub: "Capability chain" },
+              { label: "Questions", value: assessmentData.meta.questionCount, sub: "Maturity signals" },
             ].map((stat) => (
               <div
                 key={stat.label}
@@ -100,9 +129,8 @@ export function HomePage() {
             alt="System view of pillars, stages, and enablers in the Swire RGM assessment"
             className="w-full rounded-[20px] bg-white"
           />
-          {/* Floating accent */}
           <div className="absolute -bottom-4 -left-4 rounded-2xl border border-[var(--border-soft)] bg-white px-5 py-3 shadow-[var(--shadow-card)]">
-            <p className="text-[0.65rem] font-black uppercase tracking-[0.22em] text-[var(--text-secondary)]">Maturity Target</p>
+            <p className="text-[0.65rem] font-black uppercase tracking-[0.22em] text-[var(--text-secondary)]">Target Stage</p>
             <p className="text-2xl font-black text-[var(--text-primary)]">Stage 3</p>
           </div>
           <div className="absolute -right-4 -top-4 rounded-2xl border border-[var(--border-soft)] bg-white px-5 py-3 shadow-[var(--shadow-card)]">
@@ -128,14 +156,15 @@ export function HomePage() {
               key={p.number}
               className="group relative overflow-hidden rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-8 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(23,28,31,0.1)]"
             >
-              <span className="absolute right-5 top-4 text-6xl font-black leading-none text-[var(--surface-container-highest,#dfe3e7)] transition-colors duration-300 group-hover:text-[rgba(225,38,28,0.07)] select-none">
+              <span className="absolute right-5 top-4 select-none text-6xl font-black leading-none text-[var(--surface-container-highest,#dfe3e7)] transition-colors duration-300 group-hover:text-[rgba(225,38,28,0.07)]">
                 {p.number}
               </span>
               <div className="relative">
-                <span className="mb-5 flex size-11 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
+                <span className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
-                <h3 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--text-primary)]">{p.title}</h3>
+                <h3 className="mb-1 font-[var(--font-display)] text-xl font-black text-[var(--text-primary)]">{p.title}</h3>
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--swire-red)]">{p.subtitle}</p>
                 <p className="text-sm leading-6 text-[var(--text-secondary)]">{p.description}</p>
               </div>
             </div>
@@ -146,18 +175,18 @@ export function HomePage() {
       {/* ── Divider ───────────────────────────────────────────── */}
       <div className="mb-16 flex items-center gap-6">
         <div className="h-px flex-1 bg-[var(--border-soft)]" />
-        <span className="text-[0.65rem] font-black uppercase tracking-[0.3em] text-[var(--text-secondary)]">Maturity Framework</span>
+        <span className="text-[0.65rem] font-black uppercase tracking-[0.3em] text-[var(--text-secondary)]">Capability Chain</span>
         <div className="h-px flex-1 bg-[var(--border-soft)]" />
       </div>
 
-      {/* ── 5-Stage Maturity ───────────────────────────────────── */}
+      {/* ── 5-Stage Capability Chain ───────────────────────────── */}
       <section className="mb-20">
         <div className="mb-8 max-w-2xl">
           <h2 className="font-[var(--font-display)] text-4xl font-black tracking-tight text-[var(--text-primary)]">
-            Five stages from <span className="text-[var(--swire-red)]">Foundation</span> to Mastery
+            Five stages from <span className="italic text-[var(--swire-red)]">Identify</span> to Build
           </h2>
           <p className="mt-4 text-base leading-7 text-[var(--text-secondary)]">
-            Each stage represents a step-change in commercial capability — from manual, reactive processes to automated intelligence.
+            Each stage represents a step-change in commercial capability — from diagnosing growth pools to embedding a value growth mindset across the organisation.
           </p>
         </div>
 
@@ -193,7 +222,7 @@ export function HomePage() {
         <div className="rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-8 shadow-[var(--shadow-card)]">
           <p className="mb-3 text-[0.72rem] font-black uppercase tracking-[0.26em] text-[var(--swire-red)]">Why It Exists</p>
           <h2 className="font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--text-primary)]">
-            Turn a complex workbook into a decision-ready operating view.
+            Turn commercial complexity into a decision-ready operating view.
           </h2>
           <p className="mt-4 text-base leading-7 text-[var(--text-secondary)]">
             The portal reduces completion friction while preserving the workbook's structure, anchor logic, and reporting outputs for leadership review.
@@ -202,9 +231,9 @@ export function HomePage() {
 
         <div className="grid gap-4 rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-8 shadow-[var(--shadow-card)] md:grid-cols-3">
           {[
-            { title: "Explain the model",   body: "Clarify what is being assessed before the respondent starts scoring." },
-            { title: "Guide the scoring",   body: "Use a digital flow with autosave, progress, and section-based completion." },
-            { title: "Read the outcome",    body: "Surface results by pillar, stage, enabler, and priority without leaving the workflow." },
+            { title: "See the gaps",      body: "Understand where capability sits relative to target — by pillar, stage, and enabler." },
+            { title: "Score with rigor",  body: "A structured 1–5 maturity scale anchored to workbook logic, with autosave and progress tracking." },
+            { title: "Act with priority", body: "A weighted priority list surfaces the issues that matter most to the operating model." },
           ].map((item) => (
             <div key={item.title} className="space-y-2">
               <div className="h-1 w-8 rounded-full bg-[var(--swire-red)]" />

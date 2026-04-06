@@ -4,22 +4,22 @@ import logicPriorityFlow from "../../assets/images/logic-priority-flow.svg";
 const steps = [
   {
     title: "Respond",
-    copy: "Each question is scored on a horizontal 1–5 rail. The detailed maturity anchor only appears after selection to keep the flow uninterrupted.",
+    copy: "Score each question 1–5. The full workbook anchor only appears after selection — keeping the flow clean and decision-focused.",
     icon: CheckCircle2,
   },
   {
     title: "Score",
-    copy: "Responses roll into pillar, stage, and enabler metrics using the same question weights carried over from the workbook.",
+    copy: "Responses roll into pillar, stage, and enabler metrics using the original workbook weights — no recalibration, no interpretation layer.",
     icon: CircleGauge,
   },
   {
     title: "Compare",
-    copy: "A live gap-to-target view shows where capability sits beneath the intended operating standard for each dimension.",
+    copy: "A live gap-to-target view shows where capability sits below the commercial standard for each pillar, stage, and enabler.",
     icon: CircleAlert,
   },
   {
     title: "Prioritize",
-    copy: "The priority list weights each answered question by both gap size and importance so action planning becomes more concrete.",
+    copy: "The priority list combines gap size with question weight — so action planning focuses on what matters most to profitable growth.",
     icon: ListChecks,
   },
 ];
@@ -43,10 +43,10 @@ const accordions = [
 ];
 
 const resultViews = [
-  { label: "By Pillar",     body: "Where the business levers are strong or weak." },
-  { label: "By Stage",      body: "Where the operating chain breaks." },
-  { label: "By Enabler",    body: "What structural capability is missing." },
-  { label: "Priority List", body: "Which scored items carry the biggest weighted action need." },
+  { label: "By Pillar",     body: "Which commercial lever — OBPPC, Pricing, Promotion, or Trade Investment — is holding performance back." },
+  { label: "By Stage",      body: "Where the operating chain breaks: opportunity identification, strategy, policy, execution, or future planning." },
+  { label: "By Enabler",    body: "Which structural gaps — governance, data, capability, or forward-looking discipline — are the root cause." },
+  { label: "Priority List", body: "A weighted view of which scored items carry the greatest gap-to-target, ranked for action planning." },
 ];
 
 export function LogicPage() {
@@ -60,10 +60,10 @@ export function LogicPage() {
             Scoring Logic
           </p>
           <h1 className="font-[var(--font-display)] text-5xl font-black leading-[1.08] tracking-tight text-[var(--text-primary)] md:text-6xl">
-            The scoring logic is short enough to scan and <span className="italic text-[var(--swire-red)]">clear enough</span> to trust.
+            Every score becomes a <span className="italic text-[var(--swire-red)]">commercial signal</span>.
           </h1>
           <p className="text-lg font-light leading-relaxed text-[var(--text-secondary)]">
-            This page strips the methodology down to its decision path so respondents understand what the system does with every score they enter.
+            A four-step chain converts each maturity rating into pillar scores, gap-to-target views, and a weighted priority list for action planning.
           </p>
         </div>
         <div className="flex shrink-0 gap-4">
@@ -130,7 +130,7 @@ export function LogicPage() {
           <div>
             <p className="mb-2 text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">Result Views</p>
             <h2 className="font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--text-primary)]">
-              The output is meant to support action, not just reporting.
+              Built for action, not just reporting.
             </h2>
             <p className="mt-3 text-base leading-7 text-[var(--text-secondary)]">
               Once enough answers exist, the dashboard opens three lenses and one action list.

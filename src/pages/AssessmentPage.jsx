@@ -582,12 +582,12 @@ export function AssessmentPage() {
         <section className="flex min-h-[calc(100vh-12rem)] items-center">
           <div className="mx-auto w-full max-w-2xl rounded-3xl border border-[var(--border-soft)] bg-white p-8 shadow-[var(--shadow-card)] md:p-10">
             <div className="space-y-4">
-              <p className="text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">Assessment</p>
+              <p className="text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">RGM Maturity Assessment</p>
               <h1 className="font-[var(--font-display)] text-4xl font-black leading-[1.1] tracking-tight text-[var(--text-primary)] md:text-5xl">
-                Start the assessment <span className="italic text-[var(--swire-red)]">one question</span> at a time.
+                48 questions. <span className="italic text-[var(--swire-red)]">One clear picture</span> of where you stand.
               </h1>
               <p className="text-base leading-8 text-[var(--text-secondary)] md:text-lg">
-                Capture the respondent profile first, then move through each workbook question in a focused wizard flow with autosave and final review intact.
+                Capture the respondent profile, then score each question against workbook anchors. Autosave keeps your progress — results are live when you're ready.
               </p>
             </div>
 
@@ -807,10 +807,10 @@ export function AssessmentPage() {
           <div className="space-y-2">
             <p className="text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">Live Results</p>
             <h2 className="font-[var(--font-display)] text-4xl font-black tracking-tight text-[var(--text-primary)]">
-              Assessment review and <span className="italic text-[var(--swire-red)]">submission</span>
+              Review results and <span className="italic text-[var(--swire-red)]">submit</span>
             </h2>
             <p className="text-base leading-7 text-[var(--text-secondary)]">
-              Review the computed dashboard, submit when ready, or jump back to the question flow to refine scores and notes.
+              Your scores across all pillars, stages, and enablers — with a weighted priority list for action planning. Refine any scores before submitting.
             </p>
           </div>
 

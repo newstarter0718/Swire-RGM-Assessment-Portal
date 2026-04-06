@@ -33,10 +33,10 @@ export function AdminPage() {
             Admin Setup
           </p>
           <h1 className="font-[var(--font-display)] text-5xl font-black leading-[1.08] tracking-tight text-[var(--text-primary)] md:text-6xl">
-            Keep configuration close to <span className="italic text-[var(--swire-red)]">operations</span>, not inside the respondent flow.
+            Configuration stays here. <span className="italic text-[var(--swire-red)]">Respondents stay focused.</span>
           </h1>
           <p className="text-lg font-light leading-relaxed text-[var(--text-secondary)]">
-            Endpoint setup, deployment notes, and fallback options live here so the assessment page stays focused on completion.
+            Endpoint setup and deployment options live here — outside the assessment flow — so nothing interrupts completion.
           </p>
         </div>
 

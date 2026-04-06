@@ -577,14 +577,14 @@ export function AssessmentPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:px-8 md:py-12">
+    <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-8 py-12 md:px-12">
       {currentStep === 0 ? (
         <section className="flex min-h-[calc(100vh-12rem)] items-center">
-          <SurfaceCard className="mx-auto w-full max-w-2xl rounded-[32px] p-8 md:p-10">
+          <div className="mx-auto w-full max-w-2xl rounded-3xl border border-[var(--border-soft)] bg-white p-8 shadow-[var(--shadow-card)] md:p-10">
             <div className="space-y-4">
-              <Eyebrow>Assessment</Eyebrow>
-              <h1 className="font-[var(--font-display)] text-4xl font-semibold tracking-tight text-[var(--text-primary)] md:text-5xl">
-                Start the assessment one question at a time.
+              <p className="text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">Assessment</p>
+              <h1 className="font-[var(--font-display)] text-4xl font-black leading-[1.1] tracking-tight text-[var(--text-primary)] md:text-5xl">
+                Start the assessment <span className="italic text-[var(--swire-red)]">one question</span> at a time.
               </h1>
               <p className="text-base leading-8 text-[var(--text-secondary)] md:text-lg">
                 Capture the respondent profile first, then move through each workbook question in a focused wizard flow with autosave and final review intact.
@@ -653,7 +653,7 @@ export function AssessmentPage() {
                 {status.message}
               </div>
             </div>
-          </SurfaceCard>
+          </div>
         </section>
       ) : currentQuestion ? (
         <section className="mx-auto flex w-full max-w-6xl flex-col gap-4">
@@ -804,11 +804,15 @@ export function AssessmentPage() {
         </section>
       ) : (
         <section id="results-section" className="mx-auto flex w-full max-w-6xl flex-col gap-6">
-          <SectionHeading
-            eyebrow="Live Results"
-            title="Assessment review and submission"
-            description="Review the computed dashboard, submit when ready, or jump back to the question flow to refine scores and notes."
-          />
+          <div className="space-y-2">
+            <p className="text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">Live Results</p>
+            <h2 className="font-[var(--font-display)] text-4xl font-black tracking-tight text-[var(--text-primary)]">
+              Assessment review and <span className="italic text-[var(--swire-red)]">submission</span>
+            </h2>
+            <p className="text-base leading-7 text-[var(--text-secondary)]">
+              Review the computed dashboard, submit when ready, or jump back to the question flow to refine scores and notes.
+            </p>
+          </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-[22px] border border-[var(--border-soft)] bg-[var(--surface-muted)] px-4 py-3 text-sm text-[var(--text-secondary)]">
             <span>

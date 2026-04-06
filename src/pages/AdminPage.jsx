@@ -1,13 +1,15 @@
 import { Link2, ShieldCheck, Workflow } from "lucide-react";
 import { useState } from "react";
-import { Button, Eyebrow, SectionHeading, SurfaceCard } from "../components/ui.jsx";
+import { SurfaceCard } from "../components/ui.jsx";
 import { readCustomEndpoint, saveCustomEndpoint } from "../lib/browser-storage.js";
 import { getSubmissionModeLabel } from "../lib/submission.js";
 
 export function AdminPage() {
   const [endpoint, setEndpoint] = useState(() => readCustomEndpoint());
   const [status, setStatus] = useState(
-    endpoint ? "A browser-specific Apps Script URL override is currently active." : "No browser-specific override is set.",
+    endpoint
+      ? "A browser-specific Apps Script URL override is currently active."
+      : "No browser-specific override is set.",
   );
 
   function handleSave() {
@@ -22,101 +24,127 @@ export function AdminPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-5 py-8 md:px-8 md:py-12">
-      <section className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <div className="space-y-4">
-          <Eyebrow>Admin Setup</Eyebrow>
-          <h1 className="font-[var(--font-display)] text-4xl font-semibold tracking-tight text-[var(--text-primary)] md:text-5xl">
-            Keep configuration close to operations, not inside the respondent flow.
+    <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-20 px-8 py-12 pb-24 md:px-12">
+
+      {/* ── Hero ──────────────────────────────────────────────── */}
+      <section className="flex flex-col items-end justify-between gap-8 md:flex-row">
+        <div className="max-w-2xl space-y-4">
+          <p className="text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">
+            Admin Setup
+          </p>
+          <h1 className="font-[var(--font-display)] text-5xl font-black leading-[1.08] tracking-tight text-[var(--text-primary)] md:text-6xl">
+            Keep configuration close to <span className="italic text-[var(--swire-red)]">operations</span>, not inside the respondent flow.
           </h1>
-          <p className="max-w-2xl text-lg leading-8 text-[var(--text-secondary)]">
-            The assessment page now stays focused on completion. Endpoint setup, deployment notes, and fallback options live here instead.
+          <p className="text-lg font-light leading-relaxed text-[var(--text-secondary)]">
+            Endpoint setup, deployment notes, and fallback options live here so the assessment page stays focused on completion.
           </p>
         </div>
 
-        <SurfaceCard className="rounded-[28px] p-8">
-          <div className="grid gap-5">
-            <div className="flex items-center gap-3">
-              <span className="flex size-12 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
-                <Workflow className="size-5" aria-hidden="true" />
-              </span>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
-                  Active Submission Path
-                </p>
-                <p className="text-lg font-semibold text-[var(--text-primary)]">{getSubmissionModeLabel()}</p>
-              </div>
+        {/* Active path card */}
+        <div className="w-full shrink-0 rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-6 shadow-[var(--shadow-card)] md:w-80">
+          <div className="flex items-center gap-3">
+            <span className="flex size-11 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
+              <Workflow className="size-5" aria-hidden="true" />
+            </span>
+            <div>
+              <p className="text-[0.65rem] font-black uppercase tracking-widest text-[var(--text-secondary)]">
+                Active Submission Path
+              </p>
+              <p className="text-base font-bold text-[var(--text-primary)]">{getSubmissionModeLabel()}</p>
             </div>
-            <p className="text-sm leading-7 text-[var(--text-secondary)]">
-              In Vercel preview or production, the app can route draft saves and submissions through `/api/assessment`. If you want a browser-specific override, paste the Apps Script URL here.
-            </p>
           </div>
-        </SurfaceCard>
+          <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)]">
+            In Vercel preview or production, the app routes submissions through <code className="rounded bg-[var(--surface-muted)] px-1 py-0.5 text-xs font-mono">/api/assessment</code>. Use the override below for local testing.
+          </p>
+        </div>
       </section>
 
+      {/* ── Main grid ──────────────────────────────────────────── */}
       <section className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-        <SurfaceCard className="rounded-[28px] p-8">
-          <SectionHeading
-            eyebrow="Browser Override"
-            title="Set or clear a direct Apps Script URL for this browser."
-            description="This is useful for local testing or emergency bypasses when the Vercel proxy is not configured yet."
-          />
 
-          <div className="mt-6 grid gap-4">
-            <label className="grid gap-2 text-sm font-medium text-[var(--text-primary)]">
-              Apps Script Web App URL
-              <input
-                value={endpoint}
-                onChange={(event) => setEndpoint(event.target.value)}
-                placeholder="https://script.google.com/macros/s/.../exec"
-                className="h-12 rounded-2xl border border-[var(--border-soft)] bg-white px-4 text-sm text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
-              />
-            </label>
-
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <Button onClick={handleSave} aria-label="Save Apps Script URL override">
-                Save Endpoint
-              </Button>
-              <Button tone="secondary" onClick={handleClear} aria-label="Clear Apps Script URL override">
-                Clear Override
-              </Button>
-            </div>
-
-            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-muted)] px-4 py-3 text-sm text-[var(--text-secondary)]">
-              {status}
-            </div>
+        {/* Endpoint input */}
+        <div className="rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-8 shadow-[var(--shadow-card)] space-y-6">
+          <div>
+            <p className="mb-2 text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">Browser Override</p>
+            <h2 className="font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--text-primary)]">
+              Set or clear a direct Apps Script URL for this browser.
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
+              Useful for local testing or emergency bypasses when the Vercel proxy is not yet configured.
+            </p>
           </div>
-        </SurfaceCard>
 
+          <label className="grid gap-2 text-sm font-bold text-[var(--text-primary)]">
+            Apps Script Web App URL
+            <input
+              value={endpoint}
+              onChange={(e) => setEndpoint(e.target.value)}
+              placeholder="https://script.google.com/macros/s/.../exec"
+              className="h-12 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-muted)] px-4 text-sm text-[var(--text-primary)] outline-none transition focus:border-[rgba(225,38,28,0.45)] focus:bg-white focus:ring-2 focus:ring-[rgba(225,38,28,0.16)]"
+            />
+          </label>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              onClick={handleSave}
+              aria-label="Save Apps Script URL override"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[var(--swire-red)] px-5 text-sm font-bold text-white shadow-[0_8px_20px_rgba(225,38,28,0.24)] transition hover:bg-[#ca2118]"
+            >
+              Save Endpoint
+            </button>
+            <button
+              onClick={handleClear}
+              aria-label="Clear Apps Script URL override"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-[var(--border-soft)] bg-[var(--surface-muted)] px-5 text-sm font-semibold text-[var(--text-primary)] transition hover:bg-[var(--surface-container-high,#e4e9ed)]"
+            >
+              Clear Override
+            </button>
+          </div>
+
+          <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-muted)] px-4 py-3 text-sm text-[var(--text-secondary)]">
+            {status}
+          </div>
+        </div>
+
+        {/* Info cards */}
         <div className="grid gap-4">
-          <SurfaceCard className="rounded-[24px] p-6">
-            <div className="flex items-start gap-3">
+          <SurfaceCard className="rounded-3xl p-7">
+            <div className="flex items-start gap-4">
               <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                 <ShieldCheck className="size-5" aria-hidden="true" />
               </span>
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)]">Recommended deployment path</h3>
+                <h3 className="text-base font-bold text-[var(--text-primary)]">Recommended deployment path</h3>
                 <p className="text-sm leading-6 text-[var(--text-secondary)]">
-                  Store `APPS_SCRIPT_URL` as a Vercel environment variable so the assessment uses the proxy route instead of exposing the endpoint in client code.
+                  Store <code className="rounded bg-[var(--surface-muted)] px-1 py-0.5 text-xs font-mono">APPS_SCRIPT_URL</code> as a Vercel environment variable so the assessment uses the proxy route instead of exposing the endpoint in client code.
                 </p>
               </div>
             </div>
           </SurfaceCard>
 
-          <SurfaceCard className="rounded-[24px] p-6">
-            <div className="flex items-start gap-3">
+          <SurfaceCard className="rounded-3xl p-7">
+            <div className="flex items-start gap-4">
               <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
                 <Link2 className="size-5" aria-hidden="true" />
               </span>
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)]">Keep respondents in flow</h3>
+                <h3 className="text-base font-bold text-[var(--text-primary)]">Keep respondents in flow</h3>
                 <p className="text-sm leading-6 text-[var(--text-secondary)]">
-                  The assessment page now links back here only through a secondary utility path, so the main task remains completion-first.
+                  The assessment page links back here only through a secondary utility path, so the main task remains completion-first.
                 </p>
               </div>
             </div>
           </SurfaceCard>
+
+          <div className="rounded-3xl border-l-4 border-[var(--swire-red)] bg-[var(--surface-container-lowest,#fff)] px-6 py-5 shadow-[var(--shadow-soft)]">
+            <p className="text-[0.65rem] font-black uppercase tracking-widest text-[var(--text-secondary)]">Submission Mode</p>
+            <p className="mt-1 text-xl font-black text-[var(--text-primary)]">{getSubmissionModeLabel()}</p>
+            <p className="mt-1 text-xs text-[var(--text-secondary)]">
+              {endpoint ? "Using browser-specific override URL" : "Using environment default or Vercel proxy"}
+            </p>
+          </div>
         </div>
+
       </section>
     </div>
   );

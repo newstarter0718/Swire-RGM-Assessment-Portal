@@ -5,6 +5,7 @@ import {
   ClipboardList,
   Home,
   LayoutPanelTop,
+  LogOut,
   Menu,
   Orbit,
   ScanSearch,
@@ -23,7 +24,7 @@ const navItems = [
   { label: "Assessment", to: "/assessment", icon: ClipboardList, end: false },
 ];
 
-export function AppShell({ children }) {
+export function AppShell({ children, onLogout, loggingOut = false }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const close = () => setMobileOpen(false);
 
@@ -50,12 +51,25 @@ export function AppShell({ children }) {
           </Link>
         </div>
 
-        <Link to="/assessment">
-          <button className="hidden items-center gap-2 rounded-lg bg-[var(--swire-red)] px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(225,38,28,0.24)] transition hover:bg-[#ca2118] md:inline-flex">
-            Open Assessment
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </button>
-        </Link>
+        <div className="flex items-center gap-2">
+          {onLogout ? (
+            <button
+              type="button"
+              onClick={onLogout}
+              disabled={loggingOut}
+              className="hidden items-center gap-2 rounded-lg border border-[var(--border-soft)] bg-white px-4 py-2 text-sm font-semibold text-[var(--text-primary)] transition hover:bg-[var(--surface-muted)] disabled:cursor-not-allowed disabled:opacity-60 md:inline-flex"
+            >
+              <LogOut className="size-4" aria-hidden="true" />
+              {loggingOut ? "Signing out..." : "Logout"}
+            </button>
+          ) : null}
+          <Link to="/assessment">
+            <button className="hidden items-center gap-2 rounded-lg bg-[var(--swire-red)] px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(225,38,28,0.24)] transition hover:bg-[#ca2118] md:inline-flex">
+              Open Assessment
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </button>
+          </Link>
+        </div>
       </header>
 
       {mobileOpen ? <div className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden" onClick={close} /> : null}
@@ -129,6 +143,17 @@ export function AppShell({ children }) {
             <ShieldCheck className="size-4 shrink-0" aria-hidden="true" />
             Annual Certification Model
           </div>
+          {onLogout ? (
+            <button
+              type="button"
+              onClick={onLogout}
+              disabled={loggingOut}
+              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition hover:bg-[rgba(23,28,31,0.05)] hover:text-[var(--text-primary)] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <LogOut className="size-4 shrink-0" aria-hidden="true" />
+              {loggingOut ? "Signing out..." : "Logout"}
+            </button>
+          ) : null}
         </div>
       </aside>
 

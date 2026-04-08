@@ -1,11 +1,15 @@
+import { getAuthConfig, isAuthenticated } from "./_auth.js";
+
 export default async function handler(request, response) {
   const endpoint = process.env.APPS_SCRIPT_URL;
+  const auth = getAuthConfig();
 
   if (request.method === "GET") {
     return response.status(200).json({
       ok: true,
       mode: "vercel-proxy",
       endpointConfigured: Boolean(endpoint),
+      authConfigured: auth.configured,
     });
   }
 
@@ -20,6 +24,20 @@ export default async function handler(request, response) {
     return response.status(503).json({
       ok: false,
       message: "APPS_SCRIPT_URL is not configured in Vercel environment variables.",
+    });
+  }
+
+  if (!auth.configured) {
+    return response.status(503).json({
+      ok: false,
+      message: "APP_LOGIN_PASSWORD and APP_LOGIN_SESSION_SECRET must be configured in Vercel.",
+    });
+  }
+
+  if (!isAuthenticated(request, auth.secret)) {
+    return response.status(401).json({
+      ok: false,
+      message: "Authentication required.",
     });
   }
 

@@ -1,249 +1,207 @@
-import { ArrowRight, BarChart3, ClipboardCheck, LayoutPanelTop, TrendingUp } from "lucide-react";
+import { ArrowRight, Building2, GitBranchPlus, Radar, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroSystemOverview from "../../assets/images/hero-system-overview.svg";
+import { Button, Eyebrow, SectionHeading, SurfaceCard } from "../components/ui.jsx";
 import { assessmentData } from "../lib/assessment-data.js";
 
-const pillars = [
+const whyShiftMatters = [
   {
-    number: "01",
-    title: "OBPPC",
-    subtitle: "Build margin through portfolio differentiation",
-    description: "Match consumer and shopper needs to the right Occasion, Brand, Pack, Price and Channel to create differentiated value across the portfolio.",
-    icon: LayoutPanelTop,
+    title: "Not a one-off survey",
+    body: "The assessment becomes the first step in a broader capability system rather than a one-time diagnostic snapshot.",
+    icon: Radar,
   },
   {
-    number: "02",
-    title: "Pricing",
-    subtitle: "Make every customer investment work harder",
-    description: "Manage price realization, ex-factory discipline, and long-term price direction to maximize P&L impact across channels and customers.",
-    icon: TrendingUp,
+    title: "Common enterprise standard",
+    body: "Markets work against one shared RGM capability standard across pillars, stages, and enablers.",
+    icon: Building2,
   },
   {
-    number: "03",
-    title: "Promotion Spend",
-    subtitle: "Know what you give and what you get",
-    description: "Plan, track and manage trade promotions with clear ROI discipline, guardrails, and reallocation logic toward higher-return opportunities.",
-    icon: BarChart3,
+    title: "Evidence-backed certification",
+    body: "Self-assessment is only one input. Validation, interviews, and evidence make the outcome credible.",
+    icon: ShieldCheck,
   },
   {
-    number: "04",
-    title: "DFR / Trade Investment",
-    subtitle: "Protect net margin through structured trade terms",
-    description: "Define commercial terms, funding logic, and gross-to-net discipline so every customer investment is tied to clear conditions and value.",
-    icon: ClipboardCheck,
+    title: "Annual improvement cycle",
+    body: "Outputs feed directly into remediation plans, capability investment choices, and the next cycle.",
+    icon: GitBranchPlus,
   },
 ];
 
-const stages = [
+const referenceModels = [
   {
-    number: "1",
-    label: "Identify the Opportunity",
-    description: "Knowing where the growth pools are",
-    highlight: false,
+    title: "Simon-Kucher",
+    body: "Detailed lever-level question design and maturity logic.",
   },
   {
-    number: "2",
-    label: "Shape the Strategy",
-    description: "Building strategy around those opportunities",
-    highlight: false,
+    title: "China Enterprise Certification",
+    body: "Governance, scoring discipline, and recurring review cadence.",
   },
   {
-    number: "3",
-    label: "Set Commercial Policy",
-    description: "Translating strategy into clear commercial policy",
-    highlight: true,
+    title: "Global IE",
+    body: "Strategic framing, opportunity mapping, and forward-looking capability logic.",
   },
-  {
-    number: "4",
-    label: "Win In-Market",
-    description: "Tracking return on every investment made",
-    highlight: false,
-  },
-  {
-    number: "5",
-    label: "Build for the Future",
-    description: "Planning forward with a value growth mindset",
-    highlight: false,
-  },
+];
+
+const leadershipOutcomes = [
+  "A Swire RGM capability standard",
+  "A standardized assessment and scoring model",
+  "A formal certification outcome",
+  "A required improvement roadmap",
+  "A repeatable annual cycle",
 ];
 
 export function HomePage() {
-  return (
-    <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-0 px-8 py-12 md:px-12">
+  const metrics = [
+    { label: "Pillars", value: assessmentData.meta.pillarCount, sub: "Core commercial levers" },
+    { label: "Stages", value: assessmentData.meta.stageCount, sub: "Capability chain" },
+    { label: "Enablers", value: assessmentData.meta.enablerCount, sub: "Cross-cutting drivers" },
+    { label: "Main Questions", value: assessmentData.meta.mainQuestionCount, sub: "Assessment architecture" },
+    { label: "Sub-items", value: assessmentData.meta.subItemCount, sub: "Evidence-backed scoring units" },
+  ];
 
-      {/* ── Hero ──────────────────────────────────────────────── */}
-      <section className="mb-20 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div className="space-y-8">
-          <div>
-            <p className="mb-3 text-[0.72rem] font-black uppercase tracking-[0.3em] text-[var(--swire-red)]">
-              Assessment Portal
-            </p>
-            <h1 className="font-[var(--font-display)] text-5xl font-black leading-[1.08] tracking-tight text-[var(--text-primary)] md:text-6xl">
-              Know Where to Play.<br />
-              <span className="text-[var(--swire-red)]">Know How to Win.</span>
-            </h1>
-          </div>
-          <p className="max-w-xl text-lg font-light leading-8 text-[var(--text-secondary)]">
-            48 questions across 4 commercial pillars — pinpoint the capability gaps that are costing margin.
+  return (
+    <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-16 px-8 py-12 pb-24 md:px-12">
+      <section className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-end">
+        <div className="space-y-5">
+          <Eyebrow>Enterprise Capability Standard</Eyebrow>
+          <h1 className="max-w-4xl font-[var(--font-display)] text-5xl font-black leading-[1.02] tracking-tight text-[var(--text-primary)] md:text-7xl">
+            From Assessment to <span className="text-[var(--swire-red)]">Certification</span>.
+          </h1>
+          <p className="max-w-3xl text-lg leading-8 text-[var(--text-secondary)]">
+            Swire is building an annual RGM certification program that sets a common capability standard,
+            assesses current maturity, validates evidence, identifies priority gaps, and links outcomes to
+            market improvement planning and long-range capability investment.
           </p>
 
           <div className="flex flex-wrap gap-3">
-            <Link to="/assessment">
-              <button className="inline-flex items-center gap-2 rounded-xl bg-[var(--swire-red)] px-6 py-3 text-sm font-bold text-white shadow-[0_14px_30px_rgba(225,38,28,0.28)] transition hover:bg-[#ca2118] hover:shadow-[0_18px_36px_rgba(225,38,28,0.34)]">
-                Start Assessment
+            <Link to="/architecture">
+              <Button>
+                Review Architecture
                 <ArrowRight className="size-4" aria-hidden="true" />
-              </button>
+              </Button>
             </Link>
-            <Link to="/framework">
-              <button className="inline-flex items-center gap-2 rounded-xl border border-[var(--border-strong)] bg-white px-6 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:bg-[var(--surface-muted)]">
-                Review Framework
-              </button>
+            <Link to="/assessment">
+              <Button tone="secondary">Open Assessment Flow</Button>
             </Link>
           </div>
+        </div>
 
-          {/* Stat tiles */}
-          <div className="grid grid-cols-3 gap-4">
-            {[
-              { label: "Pillars",   value: assessmentData.meta.pillarCount,   sub: "Commercial levers" },
-              { label: "Stages",    value: assessmentData.meta.stageCount,    sub: "Capability chain" },
-              { label: "Questions", value: assessmentData.meta.questionCount, sub: "Maturity signals" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-4 shadow-[var(--shadow-soft)]"
-              >
-                <p className="text-[0.65rem] font-black uppercase tracking-[0.22em] text-[var(--text-secondary)]">{stat.label}</p>
-                <strong className="mt-1 block text-3xl font-black text-[var(--text-primary)]">
-                  {String(stat.value).padStart(2, "0")}
-                </strong>
-                <p className="mt-0.5 text-[11px] text-[var(--text-secondary)]">{stat.sub}</p>
-              </div>
+        <SurfaceCard className="rounded-[32px] bg-[linear-gradient(180deg,rgba(0,26,72,0.98)_0%,rgba(0,45,114,0.96)_100%)] p-8 text-white">
+          <div className="space-y-6">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Program Structure</p>
+              <h2 className="mt-3 font-[var(--font-display)] text-3xl font-bold leading-tight">
+                One model. Multiple management views.
+              </h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {metrics.map((item) => (
+                <div key={item.label} className="rounded-[24px] bg-white/8 px-5 py-5 backdrop-blur-sm">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/58">{item.label}</p>
+                  <p className="mt-3 text-4xl font-black">{String(item.value).padStart(2, "0")}</p>
+                  <p className="mt-2 text-sm leading-6 text-white/72">{item.sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SurfaceCard>
+      </section>
+
+      <section className="space-y-8">
+        <SectionHeading
+          eyebrow="Why This Shift Matters"
+          title="The assessment becomes an operating system."
+          description="The ambition is to move from one-off diagnostics toward a structured, repeatable enterprise capability cycle."
+        />
+
+        <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
+          {whyShiftMatters.map((item) => {
+            const Icon = item.icon;
+            return (
+              <SurfaceCard key={item.title} className="rounded-[26px] p-6">
+                <span className="flex size-11 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
+                  <Icon className="size-5" aria-hidden="true" />
+                </span>
+                <h3 className="mt-5 text-lg font-semibold text-[var(--text-primary)]">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">{item.body}</p>
+              </SurfaceCard>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
+        <div className="space-y-8">
+          <SectionHeading
+            eyebrow="Reference Models"
+            title="Built from three reference models"
+            description="The final design is not copied from any single source. It is a Swire-specific synthesis."
+          />
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {referenceModels.map((item) => (
+              <SurfaceCard key={item.title} className="rounded-[24px] p-5">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                  {item.title}
+                </p>
+                <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">{item.body}</p>
+              </SurfaceCard>
             ))}
           </div>
         </div>
 
-        {/* Hero image */}
-        <div className="relative rounded-3xl bg-[var(--surface-glass)] p-4 shadow-[var(--shadow-card)] backdrop-blur-xl">
-          <img
-            src={heroSystemOverview}
-            alt="System view of pillars, stages, and enablers in the Swire RGM assessment"
-            className="w-full rounded-[20px] bg-white"
+        <SurfaceCard className="rounded-[30px] border border-[rgba(225,38,28,0.14)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(249,249,253,0.96)_100%)] p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">Swire-specific synthesis</p>
+          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold leading-tight text-[var(--text-primary)]">
+            Diagnostic detail + governance logic + strategic direction.
+          </h2>
+          <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
+            The architecture preserves detailed question design, adds formal enterprise governance, and keeps
+            the model oriented toward future value pools rather than short-term process compliance alone.
+          </p>
+        </SurfaceCard>
+      </section>
+
+      <section className="grid gap-8 xl:grid-cols-[0.95fr_1.05fr]">
+        <div className="space-y-6">
+          <SectionHeading
+            eyebrow="Leadership Outcomes"
+            title="What leadership gets"
+            description="The outcome is a management mechanism, not only a questionnaire."
           />
-          <div className="absolute -bottom-4 -left-4 rounded-2xl border border-[var(--border-soft)] bg-white px-5 py-3 shadow-[var(--shadow-card)]">
-            <p className="text-[0.65rem] font-black uppercase tracking-[0.22em] text-[var(--text-secondary)]">Target Stage</p>
-            <p className="text-2xl font-black text-[var(--text-primary)]">Stage 3</p>
+
+          <div className="grid gap-4">
+            {leadershipOutcomes.map((item, index) => (
+              <SurfaceCard key={item} className="rounded-[24px] p-5">
+                <div className="flex items-start gap-4">
+                  <span className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-base font-semibold leading-7 text-[var(--text-primary)]">{item}</p>
+                </div>
+              </SurfaceCard>
+            ))}
           </div>
-          <div className="absolute -right-4 -top-4 rounded-2xl border border-[var(--border-soft)] bg-white px-5 py-3 shadow-[var(--shadow-card)]">
-            <p className="text-[0.65rem] font-black uppercase tracking-[0.22em] text-[var(--text-secondary)]">Active Pillars</p>
-            <p className="text-2xl font-black text-[var(--text-primary)]">04</p>
+        </div>
+
+        <SurfaceCard className="rounded-[32px] bg-[linear-gradient(180deg,rgba(0,26,72,0.96)_0%,rgba(0,45,114,0.94)_100%)] p-8 text-white">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Next move</p>
+          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold leading-tight">
+            Review the architecture, then open the assessment flow.
+          </h2>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-white/76">
+            The site now needs to orient users around the 5 by 5 architecture, the certification model, and
+            the annual operating cycle before they move into the assessment workflow itself.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/architecture">
+              <Button>Review Architecture</Button>
+            </Link>
+            <Link to="/assessment">
+              <Button tone="secondary">Open Assessment Flow</Button>
+            </Link>
           </div>
-        </div>
+        </SurfaceCard>
       </section>
-
-      {/* ── Divider ───────────────────────────────────────────── */}
-      <div className="mb-16 flex items-center gap-6">
-        <div className="h-px flex-1 bg-[var(--border-soft)]" />
-        <span className="text-[0.65rem] font-black uppercase tracking-[0.3em] text-[var(--text-secondary)]">The 04 Pillars</span>
-        <div className="h-px flex-1 bg-[var(--border-soft)]" />
-      </div>
-
-      {/* ── 4 Pillars ──────────────────────────────────────────── */}
-      <section className="mb-20 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-        {pillars.map((p) => {
-          const Icon = p.icon;
-          return (
-            <div
-              key={p.number}
-              className="group relative overflow-hidden rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-8 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(23,28,31,0.1)]"
-            >
-              <span className="absolute right-5 top-4 select-none text-6xl font-black leading-none text-[var(--surface-container-highest,#dfe3e7)] transition-colors duration-300 group-hover:text-[rgba(225,38,28,0.07)]">
-                {p.number}
-              </span>
-              <div className="relative">
-                <span className="mb-4 flex size-11 items-center justify-center rounded-2xl bg-[var(--surface-muted)] text-[var(--swire-red)]">
-                  <Icon className="size-5" aria-hidden="true" />
-                </span>
-                <h3 className="mb-1 font-[var(--font-display)] text-xl font-black text-[var(--text-primary)]">{p.title}</h3>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--swire-red)]">{p.subtitle}</p>
-                <p className="text-sm leading-6 text-[var(--text-secondary)]">{p.description}</p>
-              </div>
-            </div>
-          );
-        })}
-      </section>
-
-      {/* ── Divider ───────────────────────────────────────────── */}
-      <div className="mb-16 flex items-center gap-6">
-        <div className="h-px flex-1 bg-[var(--border-soft)]" />
-        <span className="text-[0.65rem] font-black uppercase tracking-[0.3em] text-[var(--text-secondary)]">Capability Chain</span>
-        <div className="h-px flex-1 bg-[var(--border-soft)]" />
-      </div>
-
-      {/* ── 5-Stage Capability Chain ───────────────────────────── */}
-      <section className="mb-20">
-        <div className="mb-8 max-w-2xl">
-          <h2 className="font-[var(--font-display)] text-4xl font-black tracking-tight text-[var(--text-primary)]">
-            Five stages from <span className="italic text-[var(--swire-red)]">Identify</span> to Build
-          </h2>
-          <p className="mt-4 text-base leading-7 text-[var(--text-secondary)]">
-            Each stage represents a step-change in commercial capability — from diagnosing growth pools to embedding a value growth mindset across the organisation.
-          </p>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-5">
-          {stages.map((s) => (
-            <div
-              key={s.number}
-              className={[
-                "relative rounded-2xl border p-6 transition-all duration-200",
-                s.highlight
-                  ? "border-[var(--swire-red)] bg-[rgba(225,38,28,0.04)] shadow-[0_0_0_1px_rgba(225,38,28,0.15),var(--shadow-card)]"
-                  : "border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] shadow-[var(--shadow-soft)]",
-              ].join(" ")}
-            >
-              {s.highlight && (
-                <span className="absolute -top-2.5 left-4 rounded-full bg-[var(--swire-red)] px-2.5 py-0.5 text-[0.6rem] font-black uppercase tracking-widest text-white">
-                  Target
-                </span>
-              )}
-              <p className={[
-                "text-4xl font-black leading-none",
-                s.highlight ? "text-[var(--swire-red)]" : "text-[var(--surface-container-highest,#dfe3e7)]",
-              ].join(" ")}>{s.number}</p>
-              <p className="mt-3 text-sm font-bold text-[var(--text-primary)]">{s.label}</p>
-              <p className="mt-1 text-[11px] leading-5 text-[var(--text-secondary)]">{s.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Why it exists ──────────────────────────────────────── */}
-      <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-8 shadow-[var(--shadow-card)]">
-          <p className="mb-3 text-[0.72rem] font-black uppercase tracking-[0.26em] text-[var(--swire-red)]">Why It Exists</p>
-          <h2 className="font-[var(--font-display)] text-3xl font-bold tracking-tight text-[var(--text-primary)]">
-            Turn commercial complexity into a decision-ready operating view.
-          </h2>
-          <p className="mt-4 text-base leading-7 text-[var(--text-secondary)]">
-            The portal reduces completion friction while preserving the workbook's structure, anchor logic, and reporting outputs for leadership review.
-          </p>
-        </div>
-
-        <div className="grid gap-4 rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-container-lowest,#fff)] p-8 shadow-[var(--shadow-card)] md:grid-cols-3">
-          {[
-            { title: "See the gaps",      body: "Understand where capability sits relative to target — by pillar, stage, and enabler." },
-            { title: "Score with rigor",  body: "A structured 1–5 maturity scale anchored to workbook logic, with autosave and progress tracking." },
-            { title: "Act with priority", body: "A weighted priority list surfaces the issues that matter most to the operating model." },
-          ].map((item) => (
-            <div key={item.title} className="space-y-2">
-              <div className="h-1 w-8 rounded-full bg-[var(--swire-red)]" />
-              <h3 className="text-base font-bold text-[var(--text-primary)]">{item.title}</h3>
-              <p className="text-sm leading-6 text-[var(--text-secondary)]">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
     </div>
   );
 }

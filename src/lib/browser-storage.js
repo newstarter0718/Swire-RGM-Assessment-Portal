@@ -1,4 +1,4 @@
-export const STORAGE_KEY = "swire-rgm-assessment-draft-v2";
+export const STORAGE_KEY = "swire-rgm-certification-draft-v3";
 export const ENDPOINT_STORAGE_KEY = "swire-rgm-apps-script-url";
 
 export function readDraftState() {

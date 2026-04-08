@@ -4,6 +4,7 @@ import argparse
 import json
 import re
 import zipfile
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -13,42 +14,6 @@ from xml.etree import ElementTree as ET
 NS_MAIN = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
 NS_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 NS = {"x": NS_MAIN}
-
-PILLAR_SHEETS = [
-    "Pricing",
-    "OBPPC",
-    "Promotion_Spend",
-    "DFR_Trade_Investment",
-]
-
-PILLAR_LABELS = {
-    "Pricing": "Pricing",
-    "OBPPC": "OBPPC",
-    "Promotion_Spend": "Promotion Spend",
-    "DFR_Trade_Investment": "DFR / Trade Investment",
-}
-
-PILLAR_DESCRIPTIONS = {
-    "Pricing": "Price realization, architecture, ex-factory discipline, P&L impact, and long-term price direction.",
-    "OBPPC": "Revenue architecture across occasions, brands, packs, price points, and channels.",
-    "Promotion Spend": "Promotion role, spend efficiency, guardrails, ROI discipline, and reallocation logic.",
-    "DFR / Trade Investment": "Commercial terms, funding logic, gross-to-net discipline, and customer investment structure.",
-}
-
-STAGE_DESCRIPTIONS = {
-    "1. Opportunity Understanding": "Whether the market can diagnose value pools, market realities, and performance gaps with fact-based clarity.",
-    "2. Strategy Design": "Whether the market can convert insight into a coherent pillar strategy and clear prioritization.",
-    "3. Policy Translation": "Whether strategy is translated into rules, guardrails, commercial policy, and operating logic.",
-    "4. Execution Management": "Whether the market manages implementation through tools, data, routines, and closed-loop review.",
-    "5. Capability & Forward Planning": "Whether the market can sustain improvement through people, governance, roadmap thinking, and future scenario planning.",
-}
-
-ENABLER_DESCRIPTIONS = {
-    "Governance": "Decision rights, review cadence, escalation, KPI reviews, and cross-functional working routines.",
-    "Digital / Data / Tools": "Dashboards, tool adoption, data availability, analytics maturity, and workflow support.",
-    "People & Capability Development": "Role clarity, team capability, RGM literacy, leadership profile, training, and certification.",
-    "Forward-looking": "Long-term roadmap thinking, scenario planning, future profit pools, and reallocation discipline.",
-}
 
 
 def clean_text(value: Any) -> str:
@@ -69,9 +34,14 @@ def as_int(value: Any) -> int:
         return 0
 
 
-def stage_order(stage_label: str) -> int:
-    match = re.match(r"(\d+)", stage_label or "")
+def stage_order(stage_code: str) -> int:
+    match = re.search(r"(\d+)", stage_code or "")
     return int(match.group(1)) if match else 0
+
+
+def column_letters(reference: str) -> str:
+    match = re.match(r"([A-Z]+)", reference or "")
+    return match.group(1) if match else ""
 
 
 @dataclass
@@ -84,31 +54,32 @@ class WorkbookReader:
         self.sheet_targets = self._load_sheet_targets()
 
     def _load_shared_strings(self) -> list[str]:
-        shared_strings: list[str] = []
         if "xl/sharedStrings.xml" not in self.archive.namelist():
-            return shared_strings
+            return []
 
         root = ET.fromstring(self.archive.read("xl/sharedStrings.xml"))
+        items: list[str] = []
+
         for item in root.findall(f"{{{NS_MAIN}}}si"):
-            text = "".join(node.text or "" for node in item.iter(f"{{{NS_MAIN}}}t"))
-            shared_strings.append(text)
-        return shared_strings
+            items.append("".join(node.text or "" for node in item.iter(f"{{{NS_MAIN}}}t")))
+
+        return items
 
     def _load_sheet_targets(self) -> dict[str, str]:
         workbook_root = ET.fromstring(self.archive.read("xl/workbook.xml"))
         rels_root = ET.fromstring(self.archive.read("xl/_rels/workbook.xml.rels"))
         rel_map = {rel.attrib["Id"]: rel.attrib["Target"] for rel in rels_root}
-        sheet_targets: dict[str, str] = {}
+        targets: dict[str, str] = {}
 
         for sheet in workbook_root.find(f"{{{NS_MAIN}}}sheets"):
-            sheet_name = sheet.attrib["name"]
+            name = sheet.attrib["name"]
             rel_id = sheet.attrib[f"{{{NS_REL}}}id"]
             target = rel_map[rel_id].lstrip("/")
             if not target.startswith("xl/"):
                 target = f"xl/{target}"
-            sheet_targets[sheet_name] = target
+            targets[name] = target
 
-        return sheet_targets
+        return targets
 
     def _read_cell_value(self, cell: ET.Element) -> Any:
         cell_type = cell.attrib.get("t")
@@ -122,7 +93,8 @@ class WorkbookReader:
 
         raw_value = value_node.text or ""
         if cell_type == "s":
-            return self.shared_strings[int(raw_value)]
+            index = as_int(raw_value)
+            return self.shared_strings[index] if 0 <= index < len(self.shared_strings) else raw_value
         if cell_type == "b":
             return raw_value == "1"
         return raw_value
@@ -136,14 +108,13 @@ class WorkbookReader:
             data: dict[str, Any] = {"_row": row_number}
 
             for cell in row.findall(f"{{{NS_MAIN}}}c"):
-                reference = cell.attrib.get("r", "")
-                match = re.match(r"([A-Z]+)", reference)
-                if not match:
+                column = column_letters(cell.attrib.get("r", ""))
+                if not column:
                     continue
-                column = match.group(1)
                 data[column] = self._read_cell_value(cell)
 
-            rows.append(data)
+            if len(data) > 1:
+                rows.append(data)
 
         return rows
 
@@ -151,150 +122,219 @@ class WorkbookReader:
         self.archive.close()
 
 
-def build_pillars(reader: WorkbookReader) -> list[dict[str, Any]]:
-    rows = reader.read_sheet_rows("Scoring_Summary")
-    pillars: list[dict[str, Any]] = []
+def build_architecture(reader: WorkbookReader) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
+    rows = reader.read_sheet_rows("Assessment_Architecture")
+    pillars: dict[str, dict[str, Any]] = {}
+    stages: dict[str, dict[str, Any]] = {}
+    enablers: dict[str, dict[str, Any]] = {}
 
     for row in rows:
-        label = clean_text(row.get("A", ""))
-        if not label or label == "Core Pillar":
+        dimension_type = clean_text(row.get("A", ""))
+        code = clean_text(row.get("B", ""))
+        name = clean_text(row.get("C", ""))
+        definition = clean_text(row.get("D", ""))
+        if not dimension_type or dimension_type == "Dimension_Type":
             continue
-        if label not in PILLAR_DESCRIPTIONS:
+
+        record = {
+            "id": code,
+            "code": code,
+            "label": name,
+            "description": definition,
+            "includedInOfficialScore": clean_text(row.get("E", "")) == "Y",
+            "diagnosticOnly": clean_text(row.get("F", "")) == "Y",
+        }
+
+        if dimension_type == "Pillar":
+            pillars[code] = record
+        elif dimension_type == "Stage":
+            record["order"] = stage_order(code)
+            stages[code] = record
+        elif dimension_type == "Enabler":
+            enablers[code] = record
+
+    return pillars, stages, enablers
+
+
+def build_templates(reader: WorkbookReader) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
+    pillar_templates = {}
+    for row in reader.read_sheet_rows("Scoring_Summary_Template"):
+        code = clean_text(row.get("A", ""))
+        if not code or code == "Pillar_Code":
             continue
+        pillar_templates[code] = {
+            "weightPoints": as_number(row.get("C")),
+            "threshold": as_number(row.get("G")),
+            "target": as_number(row.get("H")),
+        }
+
+    stage_templates = {}
+    for row in reader.read_sheet_rows("Stage_Summary_Template"):
+        code = clean_text(row.get("A", ""))
+        if not code or code == "Stage_Code":
+            continue
+        stage_templates[code] = {
+            "threshold": as_number(row.get("F")),
+            "target": as_number(row.get("G")),
+        }
+
+    enabler_templates = {}
+    for row in reader.read_sheet_rows("Enabler_Summary_Template"):
+        code = clean_text(row.get("A", ""))
+        if not code or code == "Enabler_Code":
+            continue
+        enabler_templates[code] = {
+            "threshold": as_number(row.get("F")),
+            "target": as_number(row.get("G")),
+        }
+
+    return pillar_templates, stage_templates, enabler_templates
+
+
+def build_questions(reader: WorkbookReader) -> tuple[list[dict[str, Any]], dict[str, list[dict[str, Any]]]]:
+    main_rows = reader.read_sheet_rows("Main_Question_Anchors")
+    sub_rows = reader.read_sheet_rows("Sub_Item_Bank")
+
+    sub_items_by_question: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in sub_rows:
+        question_id = clean_text(row.get("A", ""))
+        sub_item_id = clean_text(row.get("B", ""))
+        if not question_id or question_id == "Main_Q_ID" or not sub_item_id:
+            continue
+        sub_items_by_question[question_id].append(
+            {
+                "id": sub_item_id,
+                "text": clean_text(row.get("J", "")),
+                "boundaryNote": clean_text(row.get("K", "")),
+                "coreOrOptional": clean_text(row.get("L", "")),
+                "officialScoreFlag": clean_text(row.get("M", "")) == "Y",
+                "stageScoreFlag": clean_text(row.get("N", "")) == "Y",
+                "enablerScoreFlag": clean_text(row.get("O", "")) == "Y",
+            }
+        )
+
+    questions: list[dict[str, Any]] = []
+    for row in main_rows:
+        question_id = clean_text(row.get("A", ""))
+        if not question_id or question_id == "Main_Q_ID":
+            continue
+
+        stage_code = clean_text(row.get("D", ""))
+        question = {
+            "id": question_id,
+            "pillarCode": clean_text(row.get("B", "")),
+            "pillar": clean_text(row.get("C", "")),
+            "stageCode": stage_code,
+            "stage": clean_text(row.get("E", "")),
+            "stageOrder": stage_order(stage_code),
+            "enablerCode": clean_text(row.get("F", "")),
+            "enabler": clean_text(row.get("G", "")),
+            "text": clean_text(row.get("H", "")),
+            "coreOrOptional": clean_text(row.get("I", "")),
+            "anchors": {
+                "1": clean_text(row.get("J", "")),
+                "2": clean_text(row.get("K", "")),
+                "3": clean_text(row.get("L", "")),
+                "4": clean_text(row.get("M", "")),
+                "5": clean_text(row.get("N", "")),
+            },
+            "subItems": sub_items_by_question.get(question_id, []),
+        }
+        question["subItemCount"] = len(question["subItems"])
+        questions.append(question)
+
+    return questions, sub_items_by_question
+
+
+def build_payload(reader: WorkbookReader, source_name: str) -> dict[str, Any]:
+    pillars_map, stages_map, enablers_map = build_architecture(reader)
+    pillar_templates, stage_templates, enabler_templates = build_templates(reader)
+    questions, sub_items_by_question = build_questions(reader)
+
+    question_counts_by_pillar = Counter(question["pillarCode"] for question in questions)
+    question_counts_by_stage = Counter(question["stageCode"] for question in questions)
+    question_counts_by_enabler = Counter(question["enablerCode"] for question in questions)
+
+    sub_item_counts_by_pillar = Counter()
+    sub_item_counts_by_stage = Counter()
+    sub_item_counts_by_enabler = Counter()
+    for question in questions:
+        count = len(question["subItems"])
+        sub_item_counts_by_pillar[question["pillarCode"]] += count
+        sub_item_counts_by_stage[question["stageCode"]] += count
+        sub_item_counts_by_enabler[question["enablerCode"]] += count
+
+    pillars = []
+    for code, pillar in pillars_map.items():
+        template = pillar_templates.get(code, {})
         pillars.append(
             {
-                "id": label,
-                "label": label,
-                "weight": as_number(row.get("B")),
-                "questionCount": as_int(row.get("C")),
-                "target": as_number(row.get("E")),
-                "threshold": as_number(row.get("F")),
-                "description": PILLAR_DESCRIPTIONS[label],
+                **pillar,
+                "weight": as_number(template.get("weightPoints")) / 100 if template else 0,
+                "weightPoints": as_number(template.get("weightPoints")),
+                "questionCount": question_counts_by_pillar[code],
+                "subItemCount": sub_item_counts_by_pillar[code],
+                "threshold": as_number(template.get("threshold")),
+                "target": as_number(template.get("target")),
             }
         )
 
-    pillars.sort(key=lambda item: list(PILLAR_DESCRIPTIONS.keys()).index(item["label"]))
-    return pillars
-
-
-def build_stages(reader: WorkbookReader) -> list[dict[str, Any]]:
-    rows = reader.read_sheet_rows("Stage_Summary")
-    stages: list[dict[str, Any]] = []
-
-    for row in rows:
-        label = clean_text(row.get("A", ""))
-        if not label or label == "Capability Stage":
-            continue
-        if label not in STAGE_DESCRIPTIONS:
-            continue
+    stages = []
+    for code, stage in sorted(stages_map.items(), key=lambda item: item[1]["order"]):
+        template = stage_templates.get(code, {})
         stages.append(
             {
-                "id": label,
-                "label": label,
-                "order": stage_order(label),
-                "questionCount": as_int(row.get("B")),
-                "target": as_number(row.get("D")),
-                "threshold": as_number(row.get("E")),
-                "prioritySignal": clean_text(row.get("H", "")),
-                "description": STAGE_DESCRIPTIONS[label],
+                **stage,
+                "questionCount": question_counts_by_stage[code],
+                "subItemCount": sub_item_counts_by_stage[code],
+                "threshold": as_number(template.get("threshold")),
+                "target": as_number(template.get("target")),
             }
         )
 
-    stages.sort(key=lambda item: item["order"])
-    return stages
-
-
-def build_enablers(reader: WorkbookReader) -> list[dict[str, Any]]:
-    rows = reader.read_sheet_rows("Cross_Cutting_Enablers")
-    enablers: list[dict[str, Any]] = []
-
-    for row in rows:
-        label = clean_text(row.get("A", ""))
-        if not label or label == "Enabler":
-            continue
-        if label not in ENABLER_DESCRIPTIONS:
-            continue
+    enablers = []
+    for code, enabler in enablers_map.items():
+        template = enabler_templates.get(code, {})
         enablers.append(
             {
-                "id": label,
-                "label": label,
-                "questionCount": as_int(row.get("B")),
-                "target": as_number(row.get("D")),
-                "threshold": as_number(row.get("E")),
-                "implication": clean_text(row.get("I", "")),
-                "description": ENABLER_DESCRIPTIONS[label],
+                **enabler,
+                "questionCount": question_counts_by_enabler[code],
+                "subItemCount": sub_item_counts_by_enabler[code],
+                "threshold": as_number(template.get("threshold")),
+                "target": as_number(template.get("target")),
             }
         )
-
-    return enablers
-
-
-def build_questions(reader: WorkbookReader) -> list[dict[str, Any]]:
-    questions: list[dict[str, Any]] = []
-
-    for sheet_name in PILLAR_SHEETS:
-        rows = reader.read_sheet_rows(sheet_name)
-        pillar_label = PILLAR_LABELS[sheet_name]
-
-        for row in rows:
-            question_code = clean_text(row.get("C", ""))
-            question_text = clean_text(row.get("F", ""))
-            if not question_code or not question_text:
-                continue
-            if question_code == "Q Code" or question_text == "Question / Assessment Area":
-                continue
-
-            questions.append(
-                {
-                    "id": question_code,
-                    "pillar": pillar_label,
-                    "sheet": sheet_name,
-                    "stage": clean_text(row.get("A", "")),
-                    "stageOrder": stage_order(clean_text(row.get("A", ""))),
-                    "sequence": as_int(row.get("B")),
-                    "enabler": clean_text(row.get("D", "")),
-                    "subDimension": clean_text(row.get("E", "")),
-                    "text": question_text,
-                    "evidencePrompt": clean_text(row.get("G", "")),
-                    "anchors": {
-                        "1": clean_text(row.get("H", "")),
-                        "2": clean_text(row.get("I", "")),
-                        "3": clean_text(row.get("J", "")),
-                        "4": clean_text(row.get("K", "")),
-                        "5": clean_text(row.get("L", "")),
-                    },
-                    "weight": as_number(row.get("M")),
-                    "target": as_number(row.get("N")),
-                }
-            )
-
-    questions.sort(
-        key=lambda item: (
-            list(PILLAR_LABELS.values()).index(item["pillar"]),
-            item["stageOrder"],
-            item["sequence"],
-            item["id"],
-        )
-    )
-    return questions
-
-
-def build_payload(reader: WorkbookReader, workbook_name: str) -> dict[str, Any]:
-    pillars = build_pillars(reader)
-    stages = build_stages(reader)
-    enablers = build_enablers(reader)
-    questions = build_questions(reader)
 
     return {
         "meta": {
-            "title": "Swire RGM Enterprise Assessment",
-            "version": "v1-web-core",
-            "sourceWorkbook": workbook_name,
+            "title": "Swire RGM Certification Program",
+            "version": "v2-certification-portal",
+            "sourceWorkbook": source_name,
             "questionCount": len(questions),
+            "mainQuestionCount": len(questions),
+            "subItemCount": sum(len(items) for items in sub_items_by_question.values()),
             "pillarCount": len(pillars),
             "stageCount": len(stages),
             "enablerCount": len(enablers),
-            "assessmentFocus": "Core maturity assessment with dashboard outputs by pillar, stage, and enabler.",
+            "assessmentFocus": "Annual certification model with official pillar scoring and diagnostic stage and enabler views.",
+            "scoreModel": {
+                "subItemScale": [
+                    {"value": 0, "label": "Not yet in place"},
+                    {"value": 0.5, "label": "Partially in place"},
+                    {"value": 1, "label": "Clearly in place"},
+                ],
+                "officialScoreMax": 100,
+                "pillarScoreMax": 20,
+                "diagnosticScoreMax": 100,
+                "gatingRule": "If any pillar score is below 10 / 20, the highest possible overall certification is Established.",
+            },
+            "certificationTiers": [
+                {"label": "Leading", "min": 85, "max": 100},
+                {"label": "Advanced", "min": 70, "max": 84},
+                {"label": "Established", "min": 55, "max": 69},
+                {"label": "Developing", "min": 40, "max": 54},
+                {"label": "Emerging", "min": 0, "max": 39},
+            ],
         },
         "pillars": pillars,
         "stages": stages,
@@ -303,27 +343,20 @@ def build_payload(reader: WorkbookReader, workbook_name: str) -> dict[str, Any]:
     }
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Extract Swire RGM workbook data to JSON.")
-    parser.add_argument("--workbook", required=True, help="Path to the source XLSX workbook.")
-    parser.add_argument("--output", required=True, help="Path to the output JSON file.")
-    return parser.parse_args()
-
-
 def main() -> None:
-    args = parse_args()
-    workbook_path = Path(args.workbook).resolve()
-    output_path = Path(args.output).resolve()
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description="Extract Swire RGM certification workbook data into JSON.")
+    parser.add_argument("--workbook", required=True, type=Path)
+    parser.add_argument("--output", required=True, type=Path)
+    args = parser.parse_args()
 
-    reader = WorkbookReader(workbook_path)
+    reader = WorkbookReader(args.workbook)
     try:
-        payload = build_payload(reader, workbook_path.name)
+        payload = build_payload(reader, args.workbook.name)
     finally:
         reader.close()
 
-    output_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    print(f"Wrote {output_path}")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":
